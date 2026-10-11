@@ -1,31 +1,36 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
-import ServiceCard from '../components/ServiceCard.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
 import PostWalkReport from '../components/PostWalkReport.astro';
-import TrustSection from '../components/TrustSection.astro';
 
-const pageTitle = "Happy Paws — Paseos Premium y Cuidado Personalizado para Perros";
-const pageDesc = "Paseos individuales y grupales para perros en zonas residenciales. Atención dedicada, comunicación constante y reporte detallado tras cada salida.";
+const pageTitle = "Happy Paws — Paseos Caninos Exclusivos en Foresta Dream Lagoons";
+const pageDesc = "Servicio de paseo y bienestar para perros exclusivo en Foresta Dream Lagoons. Atención dedicada, exploración a su ritmo y reporte directo por WhatsApp.";
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} currentPath="/">
-  <!-- ================= 1. HERO SECTION ================= -->
-  <section class="hero-section" id="inicio">
-    <div class="container hero-container">
-      <div class="hero-content">
-        <span class="badge badge-orange hero-badge">
-          🐾 Paseos Caninos Residenciales en Poniente CDMX
-        </span>
-        <h1 class="hero-title">
-          Su paseo, nuestra atención. <br />
-          <span class="text-highlight">Tu tranquilidad, nuestra prioridad.</span>
+  <!-- ================= 1. HERO SECTION (Limpio y directo como Petme) ================= -->
+  <section class="hero-clean" id="inicio">
+    <div class="container hero-clean-container">
+      <div class="hero-clean-content">
+        <div class="location-chip">
+          <svg class="chip-pin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span>Exclusivo en Foresta Dream Lagoons</span>
+        </div>
+
+        <h1 class="hero-clean-title">
+          El paseo que tu perro necesita. <br />
+          <span class="text-highlight">La tranquilidad que tú buscas.</span>
         </h1>
-        <p class="hero-subtitle">
-          Paseos individuales y grupales para que tu perro disfrute de su tiempo al aire libre, con atención personalizada y comunicación contigo en cada salida.
+
+        <p class="hero-clean-subtitle">
+          Paseos dedicados y seguros dentro de Foresta Dream Lagoons. Atención personalizada, exploración a su ritmo y reporte directo en tu teléfono en cada salida.
         </p>
 
-        <div class="hero-ctas">
+        <div class="hero-clean-ctas">
           <WhatsAppButton
             context="main"
             text="Quiero conocer el servicio"
@@ -34,273 +39,272 @@ const pageDesc = "Paseos individuales y grupales para perros en zonas residencia
             id="hero-primary-cta"
             ariaLabel="Solicitar información de Happy Paws por WhatsApp"
           />
-          <a href="/paseos" class="btn btn-secondary btn-lg" id="hero-secondary-cta">
-            Conoce nuestros paseos
+          <a href="#como-funciona" class="btn btn-secondary btn-lg" id="hero-secondary-cta">
+            Cómo funciona
           </a>
         </div>
 
-        <!-- Trust highlights bar -->
-        <div class="hero-trust-bar">
-          <div class="trust-item">
-            <span class="trust-check">✓</span>
-            <span>Atención dedicada y cariñosa</span>
+        <div class="hero-clean-trust">
+          <div class="trust-point">
+            <span class="check-bullet"></span>
+            <span>100% dentro del fraccionamiento</span>
           </div>
-          <div class="trust-item">
-            <span class="trust-check">✓</span>
-            <span>Grupos de máx. 3-4 perros</span>
+          <div class="trust-point">
+            <span class="check-bullet"></span>
+            <span>Atención 1 a 1 o grupos máx. 3-4 perros</span>
           </div>
-          <div class="trust-item">
-            <span class="trust-check">✓</span>
-            <span>Reporte directo por WhatsApp</span>
+          <div class="trust-point">
+            <span class="check-bullet"></span>
+            <span>Reporte al finalizar cada paseo</span>
           </div>
         </div>
       </div>
 
-      <div class="hero-media">
-        <div class="hero-image-card">
+      <div class="hero-clean-media">
+        <div class="hero-frame">
           <img
             src="/images/hero-walk.jpg"
-            alt="Perro paseando tranquilamente con correa junto a su cuidador en un parque residencial arbolado"
-            class="hero-img"
+            alt="Perro paseando con correa de forma tranquila en áreas verdes de Foresta Dream Lagoons"
+            class="hero-clean-img"
             loading="eager"
             fetchpriority="high"
           />
-          <div class="hero-float-card">
-            <div class="float-avatar">🐕</div>
-            <div class="float-info">
-              <strong>Paseos con propósito</strong>
-              <span>Exploración olfativa y ritmo natural</span>
+          <div class="hero-clean-badge">
+            <span class="badge-tag">Atención Vecinal</span>
+            <span class="badge-title">Senderos y áreas verdes de Foresta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 2. BENEFICIOS PARA LA MASCOTA (DISEÑO MÁS AMPLIO - Estilo Petme) ================= -->
+  <section class="section-wrapper section-surface benefits-expanded-section" id="beneficios">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-orange">Bienestar para tu Mascota</span>
+        <h2>Mucho más que una salida: salud física y equilibrio mental</h2>
+        <p>
+          Inspirado en las verdaderas necesidades biológicas de tu perro. Caminar por las áreas verdes de Foresta reduce el estrés, previene conductas destructivas y le devuelve su calma natural.
+        </p>
+      </div>
+
+      <!-- Tarjetas Amplias Editoriales de Beneficios -->
+      <div class="benefits-wide-grid">
+        <!-- Bloque Amplio 1: Estimulación Olfativa -->
+        <article class="wide-benefit-card">
+          <div class="wide-card-media">
+            <img
+              src="/images/individual-walk.jpg"
+              alt="Perro explorando y oliendo con calma en un paseo individual atento"
+              loading="lazy"
+            />
+          </div>
+          <div class="wide-card-content">
+            <span class="benefit-kicker">Estimulación Cognitiva</span>
+            <h3 class="wide-card-title">Olfato libre y reducción real de estrés</h3>
+            <p class="wide-card-text">
+              El olfato es la ventana principal a través de la cual los perros procesan el mundo. En Happy Paws no hacemos caminatas apresuradas con tirones constantes. Permitimos pausas de olfato guiadas que estimulan su cerebro, reducen los niveles de cortisol y disminuyen la ansiedad acumulada en casa.
+            </p>
+            <div class="benefit-tags">
+              <span class="b-tag">Pausas a su ritmo</span>
+              <span class="b-tag">Baja niveles de ansiedad</span>
+              <span class="b-tag">Cero tirones de correa</span>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        </article>
 
-  <!-- ================= 2. SERVICIOS PRINCIPALES ================= -->
-  <section class="section-wrapper section-surface" id="servicios">
-    <div class="container">
-      <div class="section-header">
-        <span class="badge badge-orange">Modalidades de Paseo</span>
-        <h2>Diseñadas para las necesidades reales de tu perro</h2>
-        <p>
-          No todos los perros necesitan el mismo tipo de salida. Por eso ofrecemos dos modalidades claras, adaptadas a su temperamento, edad y estilo de vida.
-        </p>
-      </div>
-
-      <div class="grid-2">
-        <!-- Servicio Individual -->
-        <ServiceCard
-          type="individual"
-          badge="1 a 1 Exclusivo"
-          title="Paseo Individual"
-          tagline="100% de atención enfocada en tu perro"
-          description="Diseñado para perros que requieren calma, cachorros en aprendizaje, perros senior que caminan despacio o aquellos que prefieren no interactuar con otros perros."
-          idealFor="Perros tímidos, reactivos, senior, cachorros o familias que buscan atención totalmente exclusiva."
-          features={[
-            'Paseador dedicado exclusivamente a tu mascota',
-            'Ritmo y paradas de olfato 100% a su medida',
-            'Ruta tranquila en tu entorno residencial',
-            'Reporte fotográfico y de hidratación al finalizar'
-          ]}
-          imageSrc="/images/individual-walk.jpg"
-          imageAlt="Perro disfrutando de un paseo individual atento en banqueta residencial"
-          ctaText="Consultar Paseo Individual"
-        />
-
-        <!-- Servicio Grupal -->
-        <ServiceCard
-          type="group"
-          badge="Grupos Pequeños"
-          title="Paseo Grupal Controlado"
-          tagline="Socialización armónica y ejercicio compartido"
-          description="Una experiencia enriquecedora en grupos pequeños y previamente evaluados para perros sociables que disfrutan caminar junto a otros amigos perrunos."
-          idealFor="Perros sociables y equilibrados con energía media a alta que disfrutan la convivencia en manada."
-          features={[
-            'Grupos estrictamente reducidos (máx. 3 a 4 perros)',
-            'Evaluación previa obligatoria de temperamento y tamaño',
-            'Caminata coordinada con correas desenredadas',
-            'Pausas de descanso conjunto y reporte post-paseo'
-          ]}
-          imageSrc="/images/group-walk.jpg"
-          imageAlt="Grupo pequeño de perros caminando juntos de manera relajada en parque"
-          ctaText="Consultar Paseo Grupal"
-          featured={true}
-        />
-      </div>
-
-      <div class="services-more-cta">
-        <p>
-          ¿No tienes claro cuál es el más conveniente para tu perrito? Te asesoramos en minutos sin compromiso.
-        </p>
-        <a href="/paseos" class="btn btn-outline">
-          Ver detalles completos y comparativa de paseos →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 3. BENEFICIOS Y BIENESTAR ================= -->
-  <section class="section-wrapper" id="beneficios">
-    <div class="container">
-      <div class="section-header">
-        <span class="badge badge-orange">Bienestar Integral</span>
-        <h2>Salud para tu perro, total tranquilidad para ti</h2>
-        <p>
-          Un paseo de calidad es mucho más que salir a hacer del baño: es estimulación física y mental indispensable para su equilibrio.
-        </p>
-      </div>
-
-      <div class="grid-2 benefits-columns">
-        <!-- Beneficios para el perro -->
-        <div class="card benefit-card">
-          <div class="benefit-header">
-            <span class="benefit-badge-dog">Para tu Perro</span>
-            <h3>Bienestar físico y emocional</h3>
+        <!-- Bloque Amplio 2: Ejercicio y Salud Física -->
+        <article class="wide-benefit-card wide-card-reverse">
+          <div class="wide-card-media">
+            <img
+              src="/images/group-walk.jpg"
+              alt="Perros sociables caminando coordinadamente en pasto sin tirones"
+              loading="lazy"
+            />
           </div>
-          <ul class="benefit-checklist">
-            <li>
-              <strong>Estimulación olfativa consciente:</strong>
-              <span>Oler el entorno reduce los niveles de cortisol y calma la ansiedad acumulada en casa.</span>
-            </li>
-            <li>
-              <strong>Actividad física adaptada a su edad:</strong>
-              <span>Ejercicio moderado que protege sus articulaciones sin sobreexigir su resistencia.</span>
-            </li>
-            <li>
-              <strong>Socialización sana y positiva:</strong>
-              <span>Aprende a convivir con otros estímulos urbanos y personas de manera respetuosa.</span>
-            </li>
-            <li>
-              <strong>Prevención de conductas destructivas:</strong>
-              <span>Un perro estimulado mentalmente descansa plácidamente mientras tú trabajas.</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Beneficios para el dueño -->
-        <div class="card benefit-card">
-          <div class="benefit-header">
-            <span class="benefit-badge-owner">Para Ti (Dueño)</span>
-            <h3>Tu tranquilidad garantizada</h3>
+          <div class="wide-card-content">
+            <span class="benefit-kicker">Salud Física y Socialización</span>
+            <h3 class="wide-card-title">Actividad adaptada a su energía y edad</h3>
+            <p class="wide-card-text">
+              Ejercicio moderado en los senderos arbolados de Foresta que cuida sus articulaciones y fortalece su sistema cardiovascular. Si tu perro es sociable, convive en manadas pequeñas de máximo 3 a 4 perros con temperamentos compatibles; si es tímido o senior, disfruta de una caminata individual 100% a su ritmo.
+            </p>
+            <div class="benefit-tags">
+              <span class="b-tag">Cuidado de almohadillas</span>
+              <span class="b-tag">Paseo individual o grupal reducido</span>
+              <span class="b-tag">Socialización armónica</span>
+            </div>
           </div>
-          <ul class="benefit-checklist">
-            <li>
-              <strong>Cero preocupaciones en tu jornada:</strong>
-              <span>Tu perro cumple su rutina de salidas sin importar lo ocupado que esté tu día de trabajo.</span>
-            </li>
-            <li>
-              <strong>Avisos de recogida y entrega:</strong>
-              <span>Sabes exactamente cuándo salimos y cuándo regresamos con él a casa.</span>
-            </li>
-            <li>
-              <strong>Reporte honesto con foto autorizada:</strong>
-              <span>Ver cómo disfrutó su paseo y saber que hizo del baño te da paz mental absoluta.</span>
-            </li>
-            <li>
-              <strong>Atención humana y accesible:</strong>
-              <span>Hablas directamente por WhatsApp con quien cuida a tu perro, sin intermediarios impersonales.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 4. EL PROCESO (CÓMO FUNCIONA) ================= -->
-  <section class="section-wrapper section-alt" id="como-funciona">
-    <div class="container">
-      <div class="section-header">
-        <span class="badge badge-orange">Paso a Paso</span>
-        <h2>Cómo funciona nuestro servicio</h2>
-        <p>
-          Un proceso claro y transparente desde el primer mensaje hasta que tu perro descansa feliz en tu hogar.
-        </p>
+        </article>
       </div>
 
-      <div class="process-steps-grid">
-        <!-- Paso 1 -->
-        <div class="step-card">
-          <div class="step-number">01</div>
-          <h3 class="step-title">Primer Contacto y Conocer a tu Perro</h3>
-          <p class="step-desc">
-            Nos escribes por WhatsApp. Te preguntamos su nombre, edad, nivel de energía, temperamento y las indicaciones especiales que debamos conocer.
+      <!-- Strip de 3 Pilares Adicionales de Bienestar (Estilo Petme vp-trust-strip) -->
+      <div class="benefits-strip-grid">
+        <div class="strip-card">
+          <div class="strip-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <h4>Descanso profundo en el hogar</h4>
+          <p>
+            Un perro con sus necesidades de ejercicio y olfato satisfechas llega a casa a descansar. Menos ladridos por aburrimiento, menos hiperactividad y mayor concentración para ti mientras trabajas.
           </p>
+        </div>
+
+        <div class="strip-card">
+          <div class="strip-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h4>Manejo respetuoso y seguro</h4>
+          <p>
+            Solo usamos correas seguras y arnés ergonómico provisto por su familia. Monitoreamos constantemente el lenguaje corporal de tu perro para prevenir tensiones innecesarias con otros perros.
+          </p>
+        </div>
+
+        <div class="strip-card">
+          <div class="strip-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <h4>Rutina consistente y predecible</h4>
+          <p>
+            Puntualidad en puerta acordada. Tu perro cumple su rutina diaria sin importar lo ocupado que esté tu día de trabajo o tus compromisos familiares en Foresta.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. CÓMO FUNCIONA HAPPY PAWS (Estilo Petme hiw-steps) ================= -->
+  <section class="section-wrapper section-alt hiw-clean-section" id="como-funciona">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-orange">Proceso Sencillo</span>
+        <h2>Cómo funciona Happy Paws en Foresta Dream Lagoons</h2>
+        <p>
+          Tres pasos claros y sin complicaciones para comenzar a pasear a tu perro con total confianza.
+        </p>
+      </div>
+
+      <div class="hiw-steps-row">
+        <!-- Paso 1 -->
+        <div class="hiw-step-col">
+          <div class="hiw-step-num-wrap">
+            <span class="hiw-step-num">1</span>
+          </div>
+          <div class="hiw-step-content">
+            <h3 class="hiw-step-heading">Escríbenos por WhatsApp</h3>
+            <p class="hiw-step-text">
+              Nos cuentas sobre tu perro: nombre, edad, nivel de energía, necesidades específicas y los horarios en que requieres el paseo dentro de Foresta.
+            </p>
+          </div>
         </div>
 
         <!-- Paso 2 -->
-        <div class="step-card">
-          <div class="step-number">02</div>
-          <h3 class="step-title">Coordinación de Horario y Zona</h3>
-          <p class="step-desc">
-            Acordamos los días, la franja horaria idónea y confirmamos la disponibilidad en tu condominio o calle residencial.
-          </p>
+        <div class="hiw-step-col">
+          <div class="hiw-step-num-wrap">
+            <span class="hiw-step-num">2</span>
+          </div>
+          <div class="hiw-step-content">
+            <h3 class="hiw-step-heading">Charla de conocimiento</h3>
+            <p class="hiw-step-text">
+              Acudimos a tu domicilio en Foresta para conocer a tu mascota en un entorno de confianza, revisar su arnés y acordar la modalidad ideal (individual o grupal).
+            </p>
+          </div>
         </div>
 
         <!-- Paso 3 -->
-        <div class="step-card">
-          <div class="step-number">03</div>
-          <h3 class="step-title">Paseo Consciente y Seguro</h3>
-          <p class="step-desc">
-            Recogemos a tu perro puntualmente. Caminamos con arnés adecuado, ritmo sereno, pausas de hidratación y cuidado continuo del entorno.
-          </p>
-        </div>
-
-        <!-- Paso 4 -->
-        <div class="step-card">
-          <div class="step-number">04</div>
-          <h3 class="step-title">Regreso y Reporte Detallado</h3>
-          <p class="step-desc">
-            Lo dejamos seguro en casa, le servimos agua fresca y te enviamos su reporte por WhatsApp con duración, observaciones y foto (con tu permiso).
-          </p>
+        <div class="hiw-step-col">
+          <div class="hiw-step-num-wrap">
+            <span class="hiw-step-num">3</span>
+          </div>
+          <div class="hiw-step-content">
+            <h3 class="hiw-step-heading">Paseo seguro y reporte directo</h3>
+            <p class="hiw-step-text">
+              Recogida puntual en puerta, caminata atenta por áreas verdes y entrega con reporte en tu teléfono con duración, hidratación y foto del recorrido.
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="process-bottom-cta">
+      <div class="hiw-cta-center">
         <WhatsAppButton
           context="process"
           text="Iniciar proceso por WhatsApp"
           variant="whatsapp"
           size="lg"
-          id="process-cta"
+          id="how-it-works-cta"
         />
       </div>
     </div>
   </section>
 
-  <!-- ================= 5. ELEMENTOS DE CONFIANZA ================= -->
-  <TrustSection />
-
-  <!-- ================= 6. REPORTE POST-PASEO ================= -->
+  <!-- ================= 4. REPORTE POST-PASEO (Mockup limpio) ================= -->
   <PostWalkReport />
 
-  <!-- ================= 7. CTA FINAL DESTACADO ================= -->
-  <section class="section-wrapper final-cta-section" id="contacto">
+  <!-- ================= 5. PREGUNTAS FRECUENTES ================= -->
+  <section class="section-wrapper section-surface faq-clean-section" id="faq">
     <div class="container">
-      <div class="final-cta-card">
-        <div class="cta-inner-content">
-          <span class="badge badge-orange">Conversación Directa</span>
-          <h2 class="final-cta-title">
-            Dale a tu perro el paseo que merece y a ti la tranquilidad que necesitas
+      <div class="section-header">
+        <span class="badge badge-orange">Preguntas Frecuentes</span>
+        <h2>Dudas comunes de los residentes de Foresta</h2>
+        <p>
+          Respuestas transparentes sobre dinámica, tiempos, seguridad y reservas en Happy Paws.
+        </p>
+      </div>
+
+      <FAQAccordion />
+
+      <div class="faq-footer-helper">
+        <p>¿Tienes otra pregunta sobre tu perro o tus horarios?</p>
+        <WhatsAppButton
+          context="faq"
+          text="Pregúntanos por WhatsApp"
+          variant="outline"
+          size="md"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6. CTA FINAL DESTACADO (Estilo Petme fcta-card) ================= -->
+  <section class="section-wrapper final-cta-clean-section" id="contacto">
+    <div class="container">
+      <div class="fcta-banner">
+        <div class="fcta-content-side">
+          <span class="badge badge-orange">Atención Inmediata</span>
+          <h2 class="fcta-title">
+            Dale a tu perro su momento favorito del día en Foresta
           </h2>
-          <p class="final-cta-desc">
-            Sin formularios interminables ni aplicaciones complejas. Escríbenos directamente por WhatsApp, cuéntanos sobre tu perro y coordinemos su primer paseo.
+          <p class="fcta-description">
+            Sin registros complejos ni intermediarios. Conversa directamente por WhatsApp con quien cuidará a tu mascota y coordinemos su primera salida.
           </p>
-          <div class="cta-buttons-wrap">
+          <div class="fcta-actions">
             <WhatsAppButton
               context="main"
               text="Quiero conocer el servicio"
               variant="primary"
               size="lg"
-              id="final-whatsapp-cta"
+              id="final-section-cta"
             />
-            <a href="/paseos" class="btn btn-secondary btn-lg">
-              Preguntas Frecuentes y Paseos
-            </a>
           </div>
-          <p class="final-cta-disclaimer">
-            📍 Zona de atención: Poniente CDMX y comunidades residenciales seleccionadas.
-          </p>
+          <span class="fcta-note">
+            Servicio exclusivo para la comunidad de Foresta Dream Lagoons.
+          </span>
+        </div>
+
+        <div class="fcta-image-side">
+          <img
+            src="/images/care-checkin.jpg"
+            alt="Paseador de Happy Paws atendiendo a un perro con cariño antes de salir"
+            loading="lazy"
+          />
         </div>
       </div>
     </div>
@@ -308,51 +312,64 @@ const pageDesc = "Paseos individuales y grupales para perros en zonas residencia
 </BaseLayout>
 
 <style>
-  /* HERO SECTION */
-  .hero-section {
+  /* ================= HERO CLEAN ================= */
+  .hero-clean {
     padding-top: var(--space-12);
     padding-bottom: var(--space-16);
     background: linear-gradient(180deg, #FAF7F2 0%, #FFF9F4 100%);
-    position: relative;
-    overflow: hidden;
   }
 
-  .hero-container {
+  .hero-clean-container {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: var(--space-12);
     align-items: center;
   }
 
-  .hero-content {
+  .hero-clean-content {
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
   }
 
-  .hero-badge {
-    align-self: flex-start;
+  .location-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--color-primary-light);
+    border: 1px solid var(--color-primary-border);
+    color: var(--color-primary);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.825rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    width: fit-content;
   }
 
-  .hero-title {
-    font-size: clamp(2.25rem, 4vw, 3.4rem);
+  .chip-pin {
+    color: var(--color-primary);
+  }
+
+  .hero-clean-title {
+    font-size: clamp(2.3rem, 4.2vw, 3.5rem);
+    line-height: 1.15;
     color: var(--color-text-title);
     letter-spacing: -0.03em;
-    line-height: 1.15;
   }
 
   .text-highlight {
     color: var(--color-primary);
   }
 
-  .hero-subtitle {
+  .hero-clean-subtitle {
     font-size: clamp(1.1rem, 1.8vw, 1.25rem);
     line-height: 1.6;
     color: var(--color-text-muted);
     max-width: 580px;
   }
 
-  .hero-ctas {
+  .hero-clean-ctas {
     display: flex;
     gap: var(--space-4);
     align-items: center;
@@ -360,35 +377,36 @@ const pageDesc = "Paseos individuales y grupales para perros en zonas residencia
     margin-top: var(--space-2);
   }
 
-  .hero-trust-bar {
+  .hero-clean-trust {
     display: flex;
-    gap: var(--space-5);
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: var(--space-2);
     padding-top: var(--space-4);
     border-top: 1px solid var(--color-border);
     margin-top: var(--space-2);
   }
 
-  .trust-item {
+  .trust-point {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
-    font-size: 0.9rem;
+    gap: var(--space-3);
+    font-size: 0.925rem;
     font-weight: 600;
     color: var(--color-text);
   }
 
-  .trust-check {
-    color: var(--color-success);
-    font-weight: 800;
+  .check-bullet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
   }
 
-  /* HERO MEDIA */
-  .hero-media {
+  .hero-clean-media {
     position: relative;
   }
 
-  .hero-image-card {
+  .hero-frame {
     position: relative;
     border-radius: var(--radius-xl);
     overflow: hidden;
@@ -397,7 +415,7 @@ const pageDesc = "Paseos individuales y grupales para perros en zonas residencia
     background: #FFFFFF;
   }
 
-  .hero-img {
+  .hero-clean-img {
     width: 100%;
     height: 480px;
     object-fit: cover;
@@ -405,259 +423,357 @@ const pageDesc = "Paseos individuales y grupales para perros en zonas residencia
     border-radius: calc(var(--radius-xl) - 4px);
   }
 
-  .hero-float-card {
+  .hero-clean-badge {
     position: absolute;
     bottom: 20px;
     left: 20px;
     right: 20px;
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: 12px 18px;
     display: flex;
-    align-items: center;
-    gap: 14px;
+    flex-direction: column;
     box-shadow: var(--shadow-lg);
   }
 
-  .float-avatar {
-    font-size: 1.8rem;
-    background-color: var(--color-primary-light);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .float-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .float-info strong {
-    font-size: 0.95rem;
-    color: var(--color-text-title);
-  }
-
-  .float-info span {
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-  }
-
-  /* SERVICES EXTRA CTA */
-  .services-more-cta {
-    margin-top: var(--space-12);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-4);
-  }
-
-  .services-more-cta p {
-    font-size: 1.05rem;
-  }
-
-  /* BENEFITS */
-  .benefits-columns {
-    align-items: stretch;
-  }
-
-  .benefit-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-  }
-
-  .benefit-header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-
-  .benefit-badge-dog {
-    align-self: flex-start;
-    background: #FFF4EC;
+  .badge-tag {
+    font-size: 0.725rem;
+    font-weight: 700;
+    text-transform: uppercase;
     color: var(--color-primary);
-    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-title {
+    font-size: 0.95rem;
     font-weight: 700;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: var(--radius-full);
-  }
-
-  .benefit-badge-owner {
-    align-self: flex-start;
-    background: #F0FDF4;
-    color: #15803D;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: var(--radius-full);
-  }
-
-  .benefit-checklist {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .benefit-checklist li {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding-left: 20px;
-    position: relative;
-  }
-
-  .benefit-checklist li::before {
-    content: '🐾';
-    position: absolute;
-    left: 0;
-    top: 2px;
-    font-size: 0.8rem;
-  }
-
-  .benefit-checklist strong {
     color: var(--color-text-title);
-    font-size: 1rem;
   }
 
-  .benefit-checklist span {
-    font-size: 0.925rem;
-    color: var(--color-text-muted);
+  /* ================= BENEFICIOS AMPLIOS (Estilo Petme) ================= */
+  .benefits-expanded-section {
+    background-color: var(--color-surface);
   }
 
-  /* PROCESS STEPS */
-  .process-steps-grid {
+  .benefits-wide-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    margin-bottom: var(--space-16);
+  }
+
+  .wide-benefit-card {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-6);
-  }
-
-  .step-card {
-    background: var(--color-surface);
+    grid-template-columns: 1fr 1fr;
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
-    padding: var(--space-6);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    position: relative;
+    overflow: hidden;
     box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
   }
 
-  .step-number {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--color-primary-subtle);
-    line-height: 1;
-  }
-
-  .step-title {
-    font-size: 1.15rem;
-    color: var(--color-text-title);
-  }
-
-  .step-desc {
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: var(--color-text-muted);
-  }
-
-  .process-bottom-cta {
-    margin-top: var(--space-12);
-    display: flex;
-    justify-content: center;
-  }
-
-  /* FINAL CTA */
-  .final-cta-section {
-    padding-bottom: var(--space-20);
-  }
-
-  .final-cta-card {
-    background: linear-gradient(135deg, #FFF6EE 0%, #FFE9D9 100%);
-    border: 2px solid var(--color-primary-border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-16) var(--space-8);
-    text-align: center;
+  .wide-benefit-card:hover {
+    transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
   }
 
-  .cta-inner-content {
-    max-width: 760px;
-    margin: 0 auto;
+  .wide-card-reverse .wide-card-media {
+    order: 2;
+  }
+
+  .wide-card-reverse .wide-card-content {
+    order: 1;
+  }
+
+  .wide-card-media {
+    height: 380px;
+    overflow: hidden;
+  }
+
+  .wide-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-smooth);
+  }
+
+  .wide-benefit-card:hover .wide-card-media img {
+    transform: scale(1.03);
+  }
+
+  .wide-card-content {
+    padding: var(--space-10);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--space-5);
-  }
-
-  .final-cta-title {
-    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-    color: var(--color-text-title);
-  }
-
-  .final-cta-desc {
-    font-size: 1.15rem;
-    color: var(--color-text);
-    line-height: 1.6;
-  }
-
-  .cta-buttons-wrap {
-    display: flex;
-    gap: var(--space-4);
-    flex-wrap: wrap;
     justify-content: center;
-    margin-top: var(--space-3);
+    gap: var(--space-4);
   }
 
-  .final-cta-disclaimer {
-    font-size: 0.85rem;
-    color: var(--color-text-subtle);
+  .benefit-kicker {
+    font-size: 0.775rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-primary);
+  }
+
+  .wide-card-title {
+    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+    color: var(--color-text-title);
+    line-height: 1.25;
+  }
+
+  .wide-card-text {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  .benefit-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-top: var(--space-2);
   }
 
-  /* RESPONSIVE */
+  .b-tag {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  /* Strip de 3 Cards */
+  .benefits-strip-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .strip-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .strip-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-2);
+  }
+
+  .strip-card h4 {
+    font-size: 1.15rem;
+    color: var(--color-text-title);
+  }
+
+  .strip-card p {
+    font-size: 0.925rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  /* ================= CÓMO FUNCIONA (Estilo Petme) ================= */
+  .hiw-clean-section {
+    background-color: #FAF7F2;
+  }
+
+  .hiw-steps-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+  }
+
+  .hiw-step-col {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .hiw-step-num-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.25rem;
+  }
+
+  .hiw-step-heading {
+    font-size: 1.25rem;
+    color: var(--color-text-title);
+    margin-bottom: var(--space-2);
+  }
+
+  .hiw-step-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .hiw-cta-center {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-12);
+  }
+
+  /* ================= FAQ FOOTER HELPER ================= */
+  .faq-clean-section {
+    background-color: #FFFFFF;
+  }
+
+  .faq-footer-helper {
+    margin-top: var(--space-8);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .faq-footer-helper p {
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+
+  /* ================= FINAL CTA CLEAN (Estilo Petme) ================= */
+  .final-cta-clean-section {
+    padding-bottom: var(--space-20);
+  }
+
+  .fcta-banner {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    background: linear-gradient(135deg, #FFF6EE 0%, #FFEADA 100%);
+    border: 2px solid var(--color-primary-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .fcta-content-side {
+    padding: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .fcta-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--color-text-title);
+    line-height: 1.2;
+  }
+
+  .fcta-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    max-width: 540px;
+  }
+
+  .fcta-actions {
+    margin-top: var(--space-2);
+  }
+
+  .fcta-note {
+    font-size: 0.825rem;
+    color: var(--color-text-subtle);
+  }
+
+  .fcta-image-side {
+    height: 100%;
+    min-height: 320px;
+  }
+
+  .fcta-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ================= RESPONSIVE ================= */
   @media (max-width: 992px) {
-    .hero-container {
+    .hero-clean-container {
       grid-template-columns: 1fr;
-      text-align: left;
     }
-    .hero-img {
-      height: 380px;
+    .hero-clean-img {
+      height: 360px;
     }
-    .process-steps-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .wide-benefit-card {
+      grid-template-columns: 1fr;
+    }
+    .wide-card-reverse .wide-card-media {
+      order: 1;
+    }
+    .wide-card-reverse .wide-card-content {
+      order: 2;
+    }
+    .wide-card-media {
+      height: 280px;
+    }
+    .benefits-strip-grid {
+      grid-template-columns: 1fr;
+    }
+    .hiw-steps-row {
+      grid-template-columns: 1fr;
+    }
+    .fcta-banner {
+      grid-template-columns: 1fr;
+    }
+    .fcta-image-side {
+      height: 240px;
     }
   }
 
   @media (max-width: 640px) {
-    .hero-img {
+    .hero-clean-img {
       height: 280px;
     }
-    .hero-ctas {
+    .hero-clean-ctas {
       flex-direction: column;
       width: 100%;
     }
-    .hero-ctas .btn {
+    .hero-clean-ctas .btn {
       width: 100%;
     }
-    .process-steps-grid {
-      grid-template-columns: 1fr;
+    .wide-card-content {
+      padding: var(--space-6);
     }
-    .cta-buttons-wrap {
-      flex-direction: column;
+    .fcta-content-side {
+      padding: var(--space-6);
+    }
+    .fcta-actions {
       width: 100%;
     }
-    .cta-buttons-wrap .btn {
+    .fcta-actions .btn {
       width: 100%;
     }
   }

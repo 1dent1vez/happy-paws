@@ -1,6 +1,7 @@
 /**
- * Centralized Configuration for Happy Paws
- * Centralizes brand info, coverage area, schedule, and WhatsApp conversion logic.
+ * Configuración Centralizada de Happy Paws
+ * Zona exclusiva: Foresta Dream Lagoons (Metepec)
+ * Canal de conversión: WhatsApp
  */
 
 export interface SiteConfig {
@@ -14,7 +15,7 @@ export interface SiteConfig {
     title: string;
     description: string;
     note: string;
-    areas: string[];
+    community: string;
   };
   schedule: {
     days: string;
@@ -27,19 +28,18 @@ export interface SiteConfig {
     isConfigured: boolean;
     messages: {
       main: string;
+      header: string;
+      floating: string;
       individual: string;
       group: string;
       process: string;
       faq: string;
       general: string;
       paseosPage: string;
-      header: string;
-      floating: string;
     };
   };
 }
 
-// Fallback demo phone if not provided via environment variable
 const envPhone = typeof process !== 'undefined' ? process.env?.PUBLIC_WHATSAPP_PHONE : undefined;
 const envPhoneDisplay = typeof process !== 'undefined' ? process.env?.PUBLIC_WHATSAPP_PHONE_DISPLAY : undefined;
 
@@ -49,54 +49,46 @@ const isConfigured = Boolean(envPhone && envPhone !== '525500000000');
 export const siteConfig: SiteConfig = {
   name: 'Happy Paws',
   legalName: 'Happy Paws Paseos Residenciales',
-  tagline: 'Paseos dedicados y atención personalizada para perros en comunidades residenciales',
-  description: 'Servicio de paseos individuales y grupales para perros. Priorizamos el bienestar animal, la exploración consciente y la comunicación transparente con cada dueño.',
+  tagline: 'Paseos caninos dedicados en Foresta Dream Lagoons',
+  description: 'Servicio de paseo y bienestar canino exclusivo para residentes de Foresta Dream Lagoons. Cuidado atento, exploración a su ritmo y reporte directo en tu teléfono.',
   url: 'https://happypaws.mx',
   locale: 'es-MX',
   coverage: {
-    title: 'Zona de Cobertura Residencial',
-    description: 'Atendemos comunidades residenciales del poniente de la Ciudad de México y área metropolitana.',
-    note: 'Verificamos la ruta y disponibilidad exacta de tu condominio o calle directamente en la primera conversación.',
-    areas: [
-      'Bosques de las Lomas',
-      'Santa Fe residencial',
-      'Interlomas y Bosque Real',
-      'Lomas de Chapultepec',
-      'Cuajimalpa residencial',
-      'Tecamachalco y La Herradura'
-    ]
+    title: 'Zona Exclusiva',
+    description: 'Servicio disponible exclusivamente para residentes de Foresta Dream Lagoons.',
+    note: 'Paseos seguros y tranquilos dentro del fraccionamiento.',
+    community: 'Foresta Dream Lagoons'
   },
   schedule: {
     days: 'Lunes a Sábado',
     hours: '7:00 a 19:00 hrs',
-    note: 'Paseos programados con antelación en franjas acordadas para evitar prisas.'
+    note: 'Horarios programados con previa cita.'
   },
   whatsapp: {
     phoneRaw: rawPhone,
     phoneFormatted: envPhoneDisplay || (isConfigured ? rawPhone : '+52 55 0000 0000 (Pendiente de configurar)'),
     isConfigured,
     messages: {
-      main: 'Hola, quiero conocer los paseos de Happy Paws y saber si tienen disponibilidad en mi zona.',
-      header: 'Hola, me gustaría información general sobre los paseos de Happy Paws.',
-      floating: 'Hola, quiero consultar la disponibilidad para pasear a mi perro con Happy Paws.',
-      individual: 'Hola, me interesa el paseo individual para mi perro. ¿Me comparten cómo funciona y sus tarifas?',
-      group: 'Hola, quiero información sobre los paseos grupales de Happy Paws y cómo evalúan la compatibilidad entre perros.',
-      process: 'Hola, me gustaría saber cómo coordinar la primera charla para que conozcan a mi perro.',
-      faq: 'Hola, tengo una pregunta sobre la dinámica y seguridad de los paseos de Happy Paws.',
-      general: 'Hola, quiero platicar con el equipo de Happy Paws sobre sus paseos.',
-      paseosPage: 'Hola, estuve revisando los detalles en su página de paseos y quisiera agendar una evaluación para mi perro.'
+      main: 'Hola, quiero conocer los paseos de Happy Paws en Foresta Dream Lagoons y consultar disponibilidad.',
+      header: 'Hola, me interesa solicitar informes sobre los paseos de Happy Paws en Foresta.',
+      floating: 'Hola, quiero consultar la disponibilidad para pasear a mi perro en Foresta Dream Lagoons.',
+      individual: 'Hola, me interesa el paseo individual para mi perro en Foresta. Me comparten tarifas y funcionamiento?',
+      group: 'Hola, quiero información sobre los paseos grupales y cómo evalúan la compatibilidad entre perros en Foresta.',
+      process: 'Hola, me gustaría agendar la charla de conocimiento inicial para mi perro en Foresta.',
+      faq: 'Hola, tengo una pregunta sobre el servicio de paseos en Foresta Dream Lagoons.',
+      general: 'Hola, quiero platicar con el equipo de Happy Paws sobre sus paseos en Foresta.',
+      paseosPage: 'Hola, estuve revisando los detalles de sus paseos y quisiera agendar una evaluación para mi perro en Foresta.'
     }
   }
 };
 
 /**
- * Generates an official WhatsApp click-to-chat URL with properly encoded message.
+ * Genera el enlace oficial de WhatsApp sin caracteres especiales ni emojis
  */
 export function getWhatsAppUrl(
   context: keyof typeof siteConfig.whatsapp.messages = 'main',
   customMessage?: string
 ): string {
-  // Clean phone to only digits
   const cleanPhone = siteConfig.whatsapp.phoneRaw.replace(/\D/g, '');
   const messageText = customMessage || siteConfig.whatsapp.messages[context] || siteConfig.whatsapp.messages.main;
   const encodedText = encodeURIComponent(messageText);

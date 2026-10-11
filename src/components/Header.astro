@@ -1,19 +1,16 @@
 ---
-import { siteConfig } from '../config/site';
 import WhatsAppButton from './WhatsAppButton.astro';
 
 interface Props {
   currentPath?: string;
 }
-
-const { currentPath = '/' } = Astro.props;
 ---
 
 <header class="site-header" id="site-header">
   <div class="container header-container">
-    <a href="/" class="brand-logo" aria-label="Happy Paws - Ir al inicio">
-      <div class="logo-icon" aria-hidden="true">
-        <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+    <a href="/" class="brand-logo" aria-label="Happy Paws - Inicio">
+      <div class="logo-mark" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
           <rect width="32" height="32" rx="8" fill="#EE5D1A"/>
           <path d="M16 23.5C12.8 23.5 11 21.2 11 18.8C11 16.5 13.2 15.2 16 15.2C18.8 15.2 21 16.5 21 18.8C21 21.2 19.2 23.5 16 23.5Z" fill="#FFFFFF"/>
           <circle cx="9.5" cy="13.2" r="2" fill="#FFFFFF"/>
@@ -22,68 +19,44 @@ const { currentPath = '/' } = Astro.props;
           <circle cx="22.5" cy="13.2" r="2" fill="#FFFFFF"/>
         </svg>
       </div>
-      <div class="brand-text">
+      <div class="brand-title-wrap">
         <span class="brand-name">Happy Paws</span>
-        <span class="brand-sub">Paseos Residenciales</span>
+        <span class="location-badge">Foresta Dream Lagoons</span>
       </div>
     </a>
 
-    <!-- Desktop Navigation -->
+    <!-- Minimal Clean Navigation -->
     <nav class="desktop-nav" aria-label="Navegación principal">
       <ul class="nav-list">
         <li>
-          <a
-            href="/"
-            class={`nav-link ${currentPath === '/' ? 'active' : ''}`}
-            aria-current={currentPath === '/' ? 'page' : undefined}
-          >
-            Inicio
-          </a>
+          <a href="/#beneficios" class="nav-link">Beneficios</a>
         </li>
         <li>
-          <a
-            href="/paseos"
-            class={`nav-link ${currentPath === '/paseos' ? 'active' : ''}`}
-            aria-current={currentPath === '/paseos' ? 'page' : undefined}
-          >
-            Nuestros Paseos
-          </a>
+          <a href="/#como-funciona" class="nav-link">Cómo Funciona</a>
         </li>
         <li>
-          <a href="/#como-funciona" class="nav-link">
-            Cómo Funciona
-          </a>
-        </li>
-        <li>
-          <a href="/#beneficios" class="nav-link">
-            Beneficios
-          </a>
-        </li>
-        <li>
-          <a href="/paseos#faq" class="nav-link">
-            Preguntas Frecuentes
-          </a>
+          <a href="/#faq" class="nav-link">Preguntas Frecuentes</a>
         </li>
       </ul>
     </nav>
 
-    <!-- Header Action -->
+    <!-- Header Direct Action -->
     <div class="header-action">
       <WhatsAppButton
         context="header"
         text="WhatsApp"
         size="sm"
         id="header-cta"
-        ariaLabel="Contactar a Happy Paws por WhatsApp desde el menú"
+        ariaLabel="Contactar a Happy Paws por WhatsApp"
       />
-      <!-- Mobile Menu Toggle Button -->
+      <!-- Mobile Menu Button -->
       <button
         type="button"
         class="mobile-menu-toggle"
         id="mobile-toggle"
         aria-expanded="false"
         aria-controls="mobile-nav"
-        aria-label="Abrir menú de navegación"
+        aria-label="Abrir menú"
       >
         <span class="hamburger-bar"></span>
         <span class="hamburger-bar"></span>
@@ -92,14 +65,12 @@ const { currentPath = '/' } = Astro.props;
     </div>
   </div>
 
-  <!-- Mobile Drawer Navigation -->
+  <!-- Mobile Clean Drawer -->
   <div class="mobile-nav-drawer" id="mobile-nav" aria-hidden="true">
     <nav class="mobile-nav-links" aria-label="Navegación móvil">
-      <a href="/" class={`mobile-link ${currentPath === '/' ? 'active' : ''}`}>Inicio</a>
-      <a href="/paseos" class={`mobile-link ${currentPath === '/paseos' ? 'active' : ''}`}>Nuestros Paseos</a>
+      <a href="/#beneficios" class="mobile-link">Beneficios para tu Mascota</a>
       <a href="/#como-funciona" class="mobile-link">Cómo Funciona</a>
-      <a href="/#beneficios" class="mobile-link">Beneficios</a>
-      <a href="/paseos#faq" class="mobile-link">Preguntas Frecuentes</a>
+      <a href="/#faq" class="mobile-link">Preguntas Frecuentes</a>
       <div class="mobile-cta-box">
         <WhatsAppButton
           context="header"
@@ -107,16 +78,15 @@ const { currentPath = '/' } = Astro.props;
           size="md"
           className="w-full"
         />
-        <p class="mobile-schedule-hint">
-          {siteConfig.schedule.days} • {siteConfig.schedule.hours}
-        </p>
+        <span class="mobile-location-tag">
+          Servicio exclusivo en Foresta Dream Lagoons
+        </span>
       </div>
     </nav>
   </div>
 </header>
 
 <script>
-  // Simple accessible mobile menu script
   const toggleBtn = document.getElementById('mobile-toggle');
   const mobileNav = document.getElementById('mobile-nav');
 
@@ -129,7 +99,6 @@ const { currentPath = '/' } = Astro.props;
       toggleBtn.classList.toggle('is-active', !isExpanded);
     });
 
-    // Close when clicking mobile links
     mobileNav.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         toggleBtn.setAttribute('aria-expanded', 'false');
@@ -146,11 +115,10 @@ const { currentPath = '/' } = Astro.props;
     position: sticky;
     top: 0;
     z-index: 90;
-    background-color: rgba(250, 247, 242, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(250, 247, 242, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--color-border);
-    transition: all var(--transition-normal);
   }
 
   .header-container {
@@ -165,20 +133,15 @@ const { currentPath = '/' } = Astro.props;
     align-items: center;
     gap: var(--space-3);
     text-decoration: none;
-    transition: transform var(--transition-fast);
   }
 
-  .brand-logo:hover {
-    transform: translateY(-1px);
-  }
-
-  .logo-icon {
+  .logo-mark {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .brand-text {
+  .brand-title-wrap {
     display: flex;
     flex-direction: column;
   }
@@ -191,12 +154,12 @@ const { currentPath = '/' } = Astro.props;
     line-height: 1.1;
   }
 
-  .brand-sub {
-    font-size: 0.725rem;
-    font-weight: 600;
+  .location-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
     color: var(--color-primary);
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 
   .desktop-nav {
@@ -206,7 +169,7 @@ const { currentPath = '/' } = Astro.props;
   .nav-list {
     display: flex;
     align-items: center;
-    gap: var(--space-6);
+    gap: var(--space-8);
     list-style: none;
   }
 
@@ -214,28 +177,11 @@ const { currentPath = '/' } = Astro.props;
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--color-text-muted);
-    padding: var(--space-2) var(--space-1);
-    position: relative;
     transition: color var(--transition-fast);
   }
 
   .nav-link:hover {
     color: var(--color-primary);
-  }
-
-  .nav-link.active {
-    color: var(--color-primary);
-  }
-
-  .nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--color-primary);
-    border-radius: var(--radius-full);
   }
 
   .header-action {
@@ -255,7 +201,6 @@ const { currentPath = '/' } = Astro.props;
     border-radius: var(--radius-md);
     cursor: pointer;
     padding: 8px;
-    box-shadow: var(--shadow-sm);
   }
 
   .hamburger-bar {
@@ -282,7 +227,7 @@ const { currentPath = '/' } = Astro.props;
     display: none;
   }
 
-  @media (max-width: 890px) {
+  @media (max-width: 860px) {
     .desktop-nav {
       display: none;
     }
@@ -301,7 +246,7 @@ const { currentPath = '/' } = Astro.props;
     }
 
     .mobile-nav-drawer.is-open {
-      max-height: 400px;
+      max-height: 340px;
     }
 
     .mobile-nav-links {
@@ -312,21 +257,20 @@ const { currentPath = '/' } = Astro.props;
     }
 
     .mobile-link {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--color-text);
       padding: var(--space-3) var(--space-4);
       border-radius: var(--radius-md);
-      transition: background-color var(--transition-fast);
     }
 
-    .mobile-link:hover, .mobile-link.active {
+    .mobile-link:hover {
       background-color: var(--color-primary-light);
       color: var(--color-primary);
     }
 
     .mobile-cta-box {
-      margin-top: var(--space-4);
+      margin-top: var(--space-3);
       padding-top: var(--space-4);
       border-top: 1px solid var(--color-border);
       display: flex;
@@ -334,10 +278,14 @@ const { currentPath = '/' } = Astro.props;
       gap: var(--space-2);
     }
 
-    .mobile-schedule-hint {
-      font-size: 0.8rem;
+    .mobile-location-tag {
+      font-size: 0.775rem;
       color: var(--color-text-subtle);
       text-align: center;
     }
+  }
+
+  .w-full {
+    width: 100%;
   }
 </style>

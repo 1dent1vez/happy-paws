@@ -12,43 +12,61 @@ import WhatsAppButton from './WhatsAppButton.astro';
           Qué recibes después de cada salida con Happy Paws
         </h2>
         <p class="lead">
-          Sabemos lo importante que es tu tranquilidad. Al concluir cada paseo, te enviamos un reporte conciso y honesto directamente por WhatsApp con el resumen de la salida de tu perro.
+          Sabemos lo importante que es tu tranquilidad. Al concluir cada paseo en Foresta, te enviamos un reporte conciso y honesto directamente por WhatsApp con el resumen de la salida de tu perro.
         </p>
 
         <ul class="report-points">
           <li>
-            <div class="point-icon">⏱️</div>
+            <div class="point-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
             <div>
               <strong>Hora y duración verificadas</strong>
               <p>Confirmación exacta de cuándo inició la caminata y a qué hora regresó a casa.</p>
             </div>
           </li>
           <li>
-            <div class="point-icon">💧</div>
+            <div class="point-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              </svg>
+            </div>
             <div>
               <strong>Hidratación y necesidades fisiológicas</strong>
               <p>Registro de pausas para tomar agua fresca y si hizo pipí o popó con normalidad.</p>
             </div>
           </li>
           <li>
-            <div class="point-icon">🐾</div>
+            <div class="point-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+            </div>
             <div>
               <strong>Comportamiento y nivel de energía</strong>
               <p>Cómo interactuó con el entorno, si disfrutó el olfato o si mostró algún signo de fatiga.</p>
             </div>
           </li>
           <li>
-            <div class="point-icon">📸</div>
+            <div class="point-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </div>
             <div>
               <strong>Fotografía o clip corto (con previa autorización)</strong>
-              <p>Una foto espontánea de su momento feliz al aire libre para que veas cómo disfrutó.</p>
+              <p>Una foto espontánea de su momento al aire libre para que veas cómo disfrutó.</p>
             </div>
           </li>
         </ul>
 
         <div class="report-cta-box">
           <p class="small-text">
-            ¿Quieres probar el servicio con tu perro? Platiquemos por WhatsApp para coordinar una primera salida.
+            ¿Quieres probar el servicio con tu perro en Foresta? Platiquemos por WhatsApp para coordinar una primera salida.
           </p>
           <WhatsAppButton
             context="main"
@@ -67,21 +85,21 @@ import WhatsAppButton from './WhatsAppButton.astro';
               <span>HP</span>
             </div>
             <div class="chat-info">
-              <span class="chat-name">Happy Paws • Paseador</span>
+              <span class="chat-name">Happy Paws • Paseador Foresta</span>
               <span class="chat-status">Reporte del día • Hoy 10:45 AM</span>
             </div>
           </div>
 
           <div class="chat-bubble">
-            <div class="bubble-tag">REPORTE DE PASEO 🐶</div>
+            <div class="bubble-tag">REPORTE DE PASEO</div>
             
             <div class="bubble-image">
               <img
                 src="/images/report-moment.jpg"
-                alt="Perro feliz descansando en pasto durante el paseo"
+                alt="Perro relajado descansando en pasto durante el paseo"
                 loading="lazy"
               />
-              <span class="photo-auth-note">Foto enviada con autorización del dueño</span>
+              <span class="photo-auth-note">Foto enviada con autorización previa</span>
             </div>
 
             <div class="bubble-details">
@@ -95,11 +113,11 @@ import WhatsAppButton from './WhatsAppButton.astro';
               </div>
               <div class="detail-row">
                 <span class="detail-label">Ruta:</span>
-                <span class="detail-val">Sendero arbolado y parque local</span>
+                <span class="detail-val">Senderos y áreas verdes de Foresta</span>
               </div>
               <div class="detail-row">
                 <span class="detail-label">Hidratación:</span>
-                <span class="detail-val">✅ 2 tomas de agua fresca</span>
+                <span class="detail-val">2 tomas de agua fresca</span>
               </div>
               <div class="detail-row">
                 <span class="detail-label">Necesidades:</span>
@@ -110,7 +128,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
               </div>
             </div>
 
-            <div class="bubble-time">10:46 AM • Entregado ✓✓</div>
+            <div class="bubble-time">10:46 AM • Entregado</div>
           </div>
         </div>
       </div>
@@ -151,11 +169,11 @@ import WhatsAppButton from './WhatsAppButton.astro';
     align-items: flex-start;
   }
 
-  .point-icon {
-    font-size: 1.5rem;
+  .point-icon-box {
+    width: 42px;
+    height: 42px;
     background-color: var(--color-primary-light);
-    width: 44px;
-    height: 44px;
+    color: var(--color-primary);
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
