@@ -1,0 +1,305 @@
+---
+import { siteConfig } from '../config/site';
+import WhatsAppButton from './WhatsAppButton.astro';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Col 1: Brand Info -->
+      <div class="footer-col brand-col">
+        <div class="footer-logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect width="32" height="32" rx="8" fill="#EE5D1A"/>
+            <path d="M16 23.5C12.8 23.5 11 21.2 11 18.8C11 16.5 13.2 15.2 16 15.2C18.8 15.2 21 16.5 21 18.8C21 21.2 19.2 23.5 16 23.5Z" fill="#FFFFFF"/>
+            <circle cx="9.5" cy="13.2" r="2" fill="#FFFFFF"/>
+            <circle cx="13.8" cy="10.5" r="2" fill="#FFFFFF"/>
+            <circle cx="18.2" cy="10.5" r="2" fill="#FFFFFF"/>
+            <circle cx="22.5" cy="13.2" r="2" fill="#FFFFFF"/>
+          </svg>
+          <span class="footer-brand-name">Happy Paws</span>
+        </div>
+        <p class="footer-bio">
+          Paseos conscientes, seguros y personalizados para perros en comunidades residenciales. Bienestar animal, comunicación honesta y tranquilidad en cada salida.
+        </p>
+        <div class="footer-cta-wrap">
+          <WhatsAppButton
+            context="general"
+            text="Escríbenos por WhatsApp"
+            size="sm"
+            variant="whatsapp"
+            id="footer-cta"
+          />
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation Links -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/paseos">Servicio de Paseos</a></li>
+          <li><a href="/paseos#individual">Paseo Individual</a></li>
+          <li><a href="/paseos#grupal">Paseo Grupal</a></li>
+          <li><a href="/#como-funciona">El Proceso</a></li>
+          <li><a href="/#reporte">Reporte Post-Paseo</a></li>
+          <li><a href="/paseos#faq">Preguntas Frecuentes</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Service & Coverage -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Zona de Atención</h4>
+        <p class="footer-meta-text">
+          {siteConfig.coverage.description}
+        </p>
+        <ul class="area-tags">
+          {siteConfig.coverage.areas.map((area) => (
+            <li>{area}</li>
+          ))}
+        </ul>
+        <p class="footer-zone-note">
+          📍 {siteConfig.coverage.note}
+        </p>
+      </div>
+
+      <!-- Col 4: Schedule & Commitment -->
+      <div class="footer-col">
+        <h4 class="footer-heading">Horarios y Atención</h4>
+        <div class="schedule-card">
+          <p class="schedule-days"><strong>Días:</strong> {siteConfig.schedule.days}</p>
+          <p class="schedule-hours"><strong>Horario:</strong> {siteConfig.schedule.hours}</p>
+          <p class="schedule-note">{siteConfig.schedule.note}</p>
+        </div>
+        <div class="contact-card">
+          <p class="contact-label">Canal directo:</p>
+          <p class="contact-val">WhatsApp: {siteConfig.whatsapp.phoneFormatted}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transparency Disclaimer -->
+    <div class="footer-transparency">
+      <div class="transparency-badge">Transparencia y Cuidado Responsable</div>
+      <p>
+        Happy Paws es un servicio de paseo, recreación y estimulación canina al aire libre. No ofrecemos diagnóstico médico veterinario ni modificación conductual clínica. Cada paseo se realiza respetando las indicaciones de su familia humana y enviando un reporte verídico de lo observado.
+      </p>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p class="copyright">
+        © {new Date().getFullYear()} Happy Paws. Todos los derechos reservados.
+      </p>
+      <div class="legal-links">
+        <a href="#aviso-privacidad" id="link-privacidad">Aviso de Privacidad</a>
+        <span class="sep">•</span>
+        <a href="#terminos-servicio" id="link-terminos">Términos del Servicio</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: #211D1A;
+    color: #E6DFD7;
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-8);
+    margin-top: auto;
+    border-top: 1px solid #36302B;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.3fr 1.2fr;
+    gap: var(--space-10);
+    margin-bottom: var(--space-12);
+  }
+
+  .brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .footer-brand-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+  }
+
+  .footer-bio {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #B5ABA0;
+  }
+
+  .footer-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer-links a {
+    color: #B5ABA0;
+    font-size: 0.95rem;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links a:hover {
+    color: var(--color-primary);
+  }
+
+  .footer-meta-text {
+    font-size: 0.9rem;
+    color: #B5ABA0;
+    margin-bottom: var(--space-3);
+  }
+
+  .area-tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: var(--space-3);
+  }
+
+  .area-tags li {
+    font-size: 0.8rem;
+    background-color: #2E2925;
+    color: #D6CBC0;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid #3E3731;
+  }
+
+  .footer-zone-note {
+    font-size: 0.825rem;
+    color: #9E948A;
+    font-style: italic;
+  }
+
+  .schedule-card, .contact-card {
+    background-color: #2E2925;
+    border: 1px solid #3E3731;
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+
+  .schedule-days, .schedule-hours {
+    font-size: 0.875rem;
+    color: #E6DFD7;
+    margin-bottom: 2px;
+  }
+
+  .schedule-note {
+    font-size: 0.775rem;
+    color: #A3988D;
+    margin-top: 4px;
+  }
+
+  .contact-label {
+    font-size: 0.775rem;
+    color: #A3988D;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .contact-val {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #25D366;
+  }
+
+  .footer-transparency {
+    background-color: #28231F;
+    border: 1px solid #3E3630;
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+
+  .transparency-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #FDBA74;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-2);
+  }
+
+  .footer-transparency p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #A89E93;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #36302B;
+    padding-top: var(--space-6);
+    font-size: 0.85rem;
+    color: #8C8276;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .legal-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .legal-links a {
+    color: #8C8276;
+    transition: color var(--transition-fast);
+  }
+
+  .legal-links a:hover {
+    color: #FFFFFF;
+  }
+
+  .sep {
+    color: #554D46;
+  }
+
+  @media (max-width: 992px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

@@ -1,0 +1,125 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+const faqs: FAQItem[] = [
+  {
+    question: '¿Cuánto tiempo dura cada paseo?',
+    answer: 'Nuestros paseos habituales tienen una duración efectiva de 45 a 60 minutos en caminata y estimulación olfativa, sin contar el tiempo de recogida y entrega. La duración específica se adapta a la edad, condición física y necesidades de tu perro.'
+  },
+  {
+    question: '¿En qué horarios realizan los paseos?',
+    answer: 'Operamos de lunes a sábado entre las 7:00 y las 19:00 hrs. Los paseos se organizan en bloques matutinos y vespertinos para evitar las horas pico de calor y cuidar sus almohadillas.'
+  },
+  {
+    question: '¿Cómo eligen entre paseo individual o grupal para mi perro?',
+    answer: 'En la consulta inicial por WhatsApp y charla de conocimiento evaluamos su reactividad, nivel de energía y si convive amigablemente con otros perros. Si tu perro es tímido, de edad avanzada, cachorrito o reactivo con correa, recomendamos iniciar con paseo individual.'
+  },
+  {
+    question: '¿Cuántos perros van juntos en el paseo grupal?',
+    answer: 'Mantenemos grupos estrictamente reducidos: un máximo de 3 a 4 perros por paseador. Esto garantiza control total, correas desenredadas y atención personalizada a cada uno.'
+  },
+  {
+    question: '¿En qué colonias o zonas residenciales tienen servicio?',
+    answer: 'Cubrimos comunidades del poniente de CDMX y área metropolitana (Bosques de las Lomas, Santa Fe, Interlomas, Lomas de Chapultepec, Cuajimalpa y zonas residenciales cercanas). Te confirmamos si llegamos a tu condominio exacto al escribirnos.'
+  },
+  {
+    question: '¿Qué información solicitan antes de la primera salida?',
+    answer: 'Solicitamos esquema de vacunación básico al día, información sobre arnés o pechera, datos de contacto de emergencia, veterinario de cabecera y cualquier detalle sobre su temperamento (si le teme a truenos, motos o si come cosas del suelo).'
+  },
+  {
+    question: '¿Qué pasa si llueve fuerte o hay calor extremo?',
+    answer: 'La seguridad y bienestar de tu perro están primero. Ante lluvia torrencial o asfalto excesivamente caliente, te contactamos para pausar el recorrido, buscar sombra y zonas techadas o reagendar la franja horaria según acordemos contigo.'
+  },
+  {
+    question: '¿Cómo solicito cotización o reservo?',
+    answer: 'Solo debes pulsar cualquiera de nuestros botones de WhatsApp. Te responderemos directamente para conocer a tu perrito, responder dudas y brindarte las opciones de frecuencia y costo.'
+  }
+];
+---
+
+<div class="faq-accordion" id="faq-list">
+  {faqs.map((faq, index) => (
+    <details class="faq-item" id={`faq-${index + 1}`}>
+      <summary class="faq-question">
+        <span>{faq.question}</span>
+        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </summary>
+      <div class="faq-answer">
+        <p>{faq.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 840px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-primary-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-question {
+    padding: var(--space-5) var(--space-6);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text-title);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question:hover {
+    color: var(--color-primary);
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    color: var(--color-primary);
+    transition: transform var(--transition-normal);
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 var(--space-6) var(--space-6) var(--space-6);
+    color: var(--color-text-muted);
+    font-size: 0.975rem;
+    line-height: 1.65;
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: var(--space-4);
+  }
+
+  .faq-answer p {
+    margin: 0;
+  }
+</style>

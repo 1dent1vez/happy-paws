@@ -1,0 +1,139 @@
+---
+import { siteConfig } from '../config/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentPath?: string;
+  ogImage?: string;
+}
+
+const {
+  title = `${siteConfig.name} — ${siteConfig.tagline}`,
+  description = siteConfig.description,
+  currentPath = '/',
+  ogImage = '/images/hero-walk.jpg'
+} = Astro.props;
+
+const canonicalUrl = new URL(currentPath, siteConfig.url).href;
+const fullOgImageUrl = new URL(ogImage, siteConfig.url).href;
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  'name': siteConfig.name,
+  'description': siteConfig.description,
+  'url': siteConfig.url,
+  'telephone': siteConfig.whatsapp.phoneFormatted,
+  'areaServed': siteConfig.coverage.areas.map((area) => ({
+    '@type': 'AdministrativeArea',
+    'name': area
+  })),
+  'openingHoursSpecification': [
+    {
+      '@type': 'OpeningHoursSpecification',
+      'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      'opens': '07:00',
+      'closes': '19:00'
+    }
+  ],
+  'priceRange': '$$',
+  'image': fullOgImageUrl
+};
+---
+
+<!DOCTYPE html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImageUrl} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content="es_MX" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImageUrl} />
+
+    <!-- Typography (Google Fonts - Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+  </head>
+  <body>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+    <!-- Demo Notice if phone is not configured -->
+    {!siteConfig.whatsapp.isConfigured && (
+      <div class="demo-banner" role="status" aria-live="polite">
+        <span>🐕 <strong>Modo Demostración:</strong> El WhatsApp actual es de prueba ({siteConfig.whatsapp.phoneFormatted}). Para producción, define <code>PUBLIC_WHATSAPP_PHONE</code> en tu archivo de entorno o edita <code>src/config/site.ts</code>.</span>
+      </div>
+    )}
+
+    <!-- Global Header -->
+    <Header currentPath={currentPath} />
+
+    <!-- Main Content Landmark -->
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <!-- Global Footer -->
+    <Footer />
+
+    <!-- Floating WhatsApp conversion button for mobile / quick access -->
+    <WhatsAppButton
+      context="floating"
+      text="Pide informes"
+      variant="whatsapp"
+      className="floating-whatsapp"
+      id="floating-cta"
+      ariaLabel="Pedir informes por WhatsApp en cualquier momento"
+    />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -50px;
+    left: 10px;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 10px 16px;
+    z-index: 999;
+    font-weight: 700;
+    border-radius: var(--radius-md);
+    transition: top var(--transition-fast);
+  }
+
+  .skip-link:focus {
+    top: 10px;
+  }
+</style>

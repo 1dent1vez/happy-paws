@@ -1,0 +1,343 @@
+---
+import { siteConfig } from '../config/site';
+import WhatsAppButton from './WhatsAppButton.astro';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+---
+
+<header class="site-header" id="site-header">
+  <div class="container header-container">
+    <a href="/" class="brand-logo" aria-label="Happy Paws - Ir al inicio">
+      <div class="logo-icon" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="#EE5D1A"/>
+          <path d="M16 23.5C12.8 23.5 11 21.2 11 18.8C11 16.5 13.2 15.2 16 15.2C18.8 15.2 21 16.5 21 18.8C21 21.2 19.2 23.5 16 23.5Z" fill="#FFFFFF"/>
+          <circle cx="9.5" cy="13.2" r="2" fill="#FFFFFF"/>
+          <circle cx="13.8" cy="10.5" r="2" fill="#FFFFFF"/>
+          <circle cx="18.2" cy="10.5" r="2" fill="#FFFFFF"/>
+          <circle cx="22.5" cy="13.2" r="2" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">Happy Paws</span>
+        <span class="brand-sub">Paseos Residenciales</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      <ul class="nav-list">
+        <li>
+          <a
+            href="/"
+            class={`nav-link ${currentPath === '/' ? 'active' : ''}`}
+            aria-current={currentPath === '/' ? 'page' : undefined}
+          >
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a
+            href="/paseos"
+            class={`nav-link ${currentPath === '/paseos' ? 'active' : ''}`}
+            aria-current={currentPath === '/paseos' ? 'page' : undefined}
+          >
+            Nuestros Paseos
+          </a>
+        </li>
+        <li>
+          <a href="/#como-funciona" class="nav-link">
+            Cómo Funciona
+          </a>
+        </li>
+        <li>
+          <a href="/#beneficios" class="nav-link">
+            Beneficios
+          </a>
+        </li>
+        <li>
+          <a href="/paseos#faq" class="nav-link">
+            Preguntas Frecuentes
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Header Action -->
+    <div class="header-action">
+      <WhatsAppButton
+        context="header"
+        text="WhatsApp"
+        size="sm"
+        id="header-cta"
+        ariaLabel="Contactar a Happy Paws por WhatsApp desde el menú"
+      />
+      <!-- Mobile Menu Toggle Button -->
+      <button
+        type="button"
+        class="mobile-menu-toggle"
+        id="mobile-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Abrir menú de navegación"
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Navigation -->
+  <div class="mobile-nav-drawer" id="mobile-nav" aria-hidden="true">
+    <nav class="mobile-nav-links" aria-label="Navegación móvil">
+      <a href="/" class={`mobile-link ${currentPath === '/' ? 'active' : ''}`}>Inicio</a>
+      <a href="/paseos" class={`mobile-link ${currentPath === '/paseos' ? 'active' : ''}`}>Nuestros Paseos</a>
+      <a href="/#como-funciona" class="mobile-link">Cómo Funciona</a>
+      <a href="/#beneficios" class="mobile-link">Beneficios</a>
+      <a href="/paseos#faq" class="mobile-link">Preguntas Frecuentes</a>
+      <div class="mobile-cta-box">
+        <WhatsAppButton
+          context="header"
+          text="Escríbenos por WhatsApp"
+          size="md"
+          className="w-full"
+        />
+        <p class="mobile-schedule-hint">
+          {siteConfig.schedule.days} • {siteConfig.schedule.hours}
+        </p>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Simple accessible mobile menu script
+  const toggleBtn = document.getElementById('mobile-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  if (toggleBtn && mobileNav) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+      mobileNav.setAttribute('aria-hidden', String(isExpanded));
+      mobileNav.classList.toggle('is-open', !isExpanded);
+      toggleBtn.classList.toggle('is-active', !isExpanded);
+    });
+
+    // Close when clicking mobile links
+    mobileNav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        mobileNav.classList.remove('is-open');
+        toggleBtn.classList.remove('is-active');
+      });
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background-color: rgba(250, 247, 242, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    transition: all var(--transition-normal);
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    text-decoration: none;
+    transition: transform var(--transition-fast);
+  }
+
+  .brand-logo:hover {
+    transform: translateY(-1px);
+  }
+
+  .logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--color-text-title);
+    line-height: 1.1;
+  }
+
+  .brand-sub {
+    font-size: 0.725rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .desktop-nav {
+    display: block;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    list-style: none;
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    padding: var(--space-2) var(--space-1);
+    position: relative;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    color: var(--color-primary);
+  }
+
+  .nav-link.active {
+    color: var(--color-primary);
+  }
+
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-full);
+  }
+
+  .header-action {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 38px;
+    height: 38px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    padding: 8px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .hamburger-bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text-title);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-normal);
+  }
+
+  .mobile-menu-toggle.is-active .hamburger-bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .mobile-menu-toggle.is-active .hamburger-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.is-active .hamburger-bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .mobile-nav-drawer {
+    display: none;
+  }
+
+  @media (max-width: 890px) {
+    .desktop-nav {
+      display: none;
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+    }
+
+    .mobile-nav-drawer {
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      transition: max-height var(--transition-normal) ease-in-out;
+    }
+
+    .mobile-nav-drawer.is-open {
+      max-height: 400px;
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-6) var(--space-4);
+      gap: var(--space-2);
+    }
+
+    .mobile-link {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-text);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      transition: background-color var(--transition-fast);
+    }
+
+    .mobile-link:hover, .mobile-link.active {
+      background-color: var(--color-primary-light);
+      color: var(--color-primary);
+    }
+
+    .mobile-cta-box {
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .mobile-schedule-hint {
+      font-size: 0.8rem;
+      color: var(--color-text-subtle);
+      text-align: center;
+    }
+  }
+</style>

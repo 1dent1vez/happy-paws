@@ -1,0 +1,63 @@
+---
+import { siteConfig, getWhatsAppUrl } from '../config/site';
+
+interface Props {
+  context?: keyof typeof siteConfig.whatsapp.messages;
+  text?: string;
+  variant?: 'primary' | 'secondary' | 'whatsapp' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  id?: string;
+  showIcon?: boolean;
+  ariaLabel?: string;
+}
+
+const {
+  context = 'main',
+  text = 'Escríbenos por WhatsApp',
+  variant = 'whatsapp',
+  size = 'md',
+  className = '',
+  id,
+  showIcon = true,
+  ariaLabel
+} = Astro.props;
+
+const href = getWhatsAppUrl(context);
+const label = ariaLabel || `${text} (abre conversación en WhatsApp)`;
+const sizeClass = size === 'sm' ? 'btn-sm' : size === 'lg' ? 'btn-lg' : '';
+const variantClass = `btn-${variant}`;
+---
+
+<a
+  href={href}
+  id={id}
+  target="_blank"
+  rel="noopener noreferrer"
+  class={`btn ${variantClass} ${sizeClass} ${className}`}
+  aria-label={label}
+>
+  {showIcon && (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      class="whatsapp-icon"
+    >
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.34C9.36 7.34 9.08 7.4 8.84 7.66C8.61 7.92 7.96 8.53 7.96 9.78C7.96 11.03 8.87 12.23 9 12.4C9.13 12.57 10.76 15.08 13.25 16.15C13.84 16.41 14.3 16.56 14.66 16.68C15.26 16.87 15.8 16.84 16.23 16.78C16.71 16.71 17.71 16.17 17.92 15.59C18.13 15 18.13 14.5 18.06 14.39C18 14.28 17.82 14.21 17.55 14.08C17.28 13.94 15.96 13.29 15.71 13.2C15.47 13.11 15.3 13.06 15.12 13.33C14.95 13.59 14.45 14.18 14.3 14.36C14.15 14.53 14 14.55 13.73 14.41C13.46 14.28 12.59 13.99 11.56 13.07C10.75 12.35 10.21 11.46 10.08 11.19C9.94 10.92 10.07 10.77 10.2 10.64C10.32 10.53 10.46 10.34 10.6 10.18C10.74 10.01 10.78 9.89 10.87 9.71C10.96 9.54 10.92 9.38 10.85 9.24C10.78 9.11 10.26 7.82 10.04 7.3C9.83 6.79 9.61 6.86 9.45 6.86L9.53 7.34Z"/>
+    </svg>
+  )}
+  <span>{text}</span>
+</a>
+
+<style>
+  .whatsapp-icon {
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+  }
+  .btn:hover .whatsapp-icon {
+    transform: scale(1.1);
+  }
+</style>
