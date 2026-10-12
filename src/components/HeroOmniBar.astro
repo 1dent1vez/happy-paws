@@ -1,0 +1,790 @@
+---
+import { siteConfig } from '../config/site';
+
+interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+const phoneRaw = siteConfig.whatsapp.phoneRaw.replace(/\D/g, '');
+---
+
+<div class={`hero-omni-wrapper ${className}`} id="hero-omni-wrapper">
+  <div class="hero-omni-bar" role="search" aria-label="Configurar paseo en Foresta Dream Lagoons">
+    
+    <!-- 1. SEGMENTO: SERVICIO -->
+    <div class="omni-segment-wrap" id="segment-servicio-wrap">
+      <button
+        type="button"
+        class="omni-segment"
+        id="btn-segment-servicio"
+        aria-expanded="false"
+        aria-haspopup="dialog"
+        aria-controls="popover-servicio"
+      >
+        <span class="omni-segment-label">Servicio</span>
+        <span class="omni-segment-value" id="val-servicio">Individual</span>
+      </button>
+
+      <!-- Popover Servicio -->
+      <div class="omni-popover" id="popover-servicio" role="dialog" aria-modal="false" aria-hidden="true">
+        <div class="popover-header">
+          <span class="popover-title">Elige la modalidad</span>
+        </div>
+        <div class="service-options-list">
+          <button type="button" class="service-opt-btn is-selected" data-value="Individual">
+            <div class="opt-text">
+              <span class="opt-name">Paseo Individual</span>
+              <span class="opt-desc">Atención 1 a 1 exclusiva, ritmo y olfato a su medida</span>
+            </div>
+            <span class="opt-check" aria-hidden="true">✓</span>
+          </button>
+
+          <button type="button" class="service-opt-btn" data-value="Grupal">
+            <div class="opt-text">
+              <span class="opt-name">Paseo Grupal Controlado</span>
+              <span class="opt-desc">Máximo 3 a 4 perros con temperamentos compatibles</span>
+            </div>
+            <span class="opt-check" aria-hidden="true">✓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="omni-divider" aria-hidden="true"></div>
+
+    <!-- 2. SEGMENTO: FECHA -->
+    <div class="omni-segment-wrap" id="segment-fecha-wrap">
+      <button
+        type="button"
+        class="omni-segment"
+        id="btn-segment-fecha"
+        aria-expanded="false"
+        aria-haspopup="dialog"
+        aria-controls="popover-fecha"
+      >
+        <span class="omni-segment-label">Fecha</span>
+        <span class="omni-segment-value" id="val-fecha">Esta semana</span>
+      </button>
+
+      <!-- Popover Fecha -->
+      <div class="omni-popover popover-calendar" id="popover-fecha" role="dialog" aria-modal="false" aria-hidden="true">
+        <div class="popover-header">
+          <span class="popover-title">¿Cuándo te gustaría comenzar?</span>
+        </div>
+
+        <div class="quick-dates-row">
+          <button type="button" class="quick-date-chip is-active" data-date="Esta semana">Esta semana</button>
+          <button type="button" class="quick-date-chip" data-date="Mañana">Mañana</button>
+          <button type="button" class="quick-date-chip" data-date="Próxima semana">Próxima semana</button>
+        </div>
+
+        <div class="calendar-picker-box">
+          <label for="input-custom-date" class="cal-picker-label">O elige una fecha específica:</label>
+          <input
+            type="date"
+            id="input-custom-date"
+            class="cal-date-input"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="omni-divider" aria-hidden="true"></div>
+
+    <!-- 3. SEGMENTO: MASCOTAS -->
+    <div class="omni-segment-wrap" id="segment-mascotas-wrap">
+      <button
+        type="button"
+        class="omni-segment"
+        id="btn-segment-mascotas"
+        aria-expanded="false"
+        aria-haspopup="dialog"
+        aria-controls="popover-mascotas"
+      >
+        <span class="omni-segment-label">Mascotas</span>
+        <span class="omni-segment-value" id="val-mascotas">1 perro</span>
+      </button>
+
+      <!-- Popover Mascotas -->
+      <div class="omni-popover popover-counter" id="popover-mascotas" role="dialog" aria-modal="false" aria-hidden="true">
+        <div class="counter-row">
+          <div class="counter-info">
+            <span class="counter-label">Perros en casa</span>
+            <span class="counter-sub">Contabiliza cuántas mascotas pasearán</span>
+          </div>
+          <div class="counter-controls">
+            <button
+              type="button"
+              class="counter-btn"
+              id="btn-pet-minus"
+              aria-label="Restar perro"
+              disabled
+            >
+              -
+            </button>
+            <span class="counter-num" id="counter-display">1</span>
+            <button
+              type="button"
+              class="counter-btn"
+              id="btn-pet-plus"
+              aria-label="Agregar perro"
+            >
+              +
+            </button>
+          </div>
+        </div>
+        <div class="counter-footer">
+          <button type="button" class="btn-counter-done" id="btn-counter-done">Listo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTÓN DE BÚSQUEDA / CONVERSIÓN WHATSAPP -->
+    <div class="omni-action-wrap">
+      <button
+        type="button"
+        class="omni-cta-button"
+        id="btn-omni-whatsapp"
+        aria-label="Consultar disponibilidad por WhatsApp con estos datos"
+      >
+        <span class="omni-cta-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.34C9.36 7.34 9.08 7.4 8.84 7.66C8.61 7.92 7.96 8.53 7.96 9.78C7.96 11.03 8.87 12.23 9 12.4C9.13 12.57 10.76 15.08 13.25 16.15C13.84 16.41 14.3 16.56 14.66 16.68C15.26 16.87 15.8 16.84 16.23 16.78C16.71 16.71 17.71 16.17 17.92 15.59C18.13 15 18.13 14.5 18.06 14.39C18 14.28 17.82 14.21 17.55 14.08C17.28 13.94 15.96 13.29 15.71 13.2C15.47 13.11 15.3 13.06 15.12 13.33C14.95 13.59 14.45 14.18 14.3 14.36C14.15 14.53 14 14.55 13.73 14.41C13.46 14.28 12.59 13.99 11.56 13.07C10.75 12.35 10.21 11.46 10.08 11.19C9.94 10.92 10.07 10.77 10.2 10.64C10.32 10.53 10.46 10.34 10.6 10.18C10.74 10.01 10.78 9.89 10.87 9.71C10.96 9.54 10.92 9.38 10.85 9.24C10.78 9.11 10.26 7.82 10.04 7.3C9.83 6.79 9.61 6.86 9.45 6.86L9.53 7.34Z"/>
+          </svg>
+        </span>
+        <span class="omni-cta-text">Consultar</span>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script define:vars={{ phoneRaw }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    // State
+    let selectedService = 'Individual';
+    let selectedDate = 'Esta semana';
+    let petCount = 1;
+
+    // Elements
+    const wrapper = document.getElementById('hero-omni-wrapper');
+    const btnServicio = document.getElementById('btn-segment-servicio');
+    const popoverServicio = document.getElementById('popover-servicio');
+    const valServicio = document.getElementById('val-servicio');
+
+    const btnFecha = document.getElementById('btn-segment-fecha');
+    const popoverFecha = document.getElementById('popover-fecha');
+    const valFecha = document.getElementById('val-fecha');
+    const inputDate = document.getElementById('input-custom-date');
+
+    const btnMascotas = document.getElementById('btn-segment-mascotas');
+    const popoverMascotas = document.getElementById('popover-mascotas');
+    const valMascotas = document.getElementById('val-mascotas');
+    const counterDisplay = document.getElementById('counter-display');
+    const btnMinus = document.getElementById('btn-pet-minus');
+    const btnPlus = document.getElementById('btn-pet-plus');
+    const btnDone = document.getElementById('btn-counter-done');
+
+    const btnSubmit = document.getElementById('btn-omni-whatsapp');
+
+    // Min date for custom picker (today)
+    if (inputDate) {
+      const today = new Date().toISOString().split('T')[0];
+      inputDate.setAttribute('min', today);
+    }
+
+    // Popover toggle helper
+    function closeAllPopovers() {
+      const popovers = [popoverServicio, popoverFecha, popoverMascotas];
+      const buttons = [btnServicio, btnFecha, btnMascotas];
+
+      popovers.forEach(p => {
+        if (p) {
+          p.classList.remove('is-open');
+          p.setAttribute('aria-hidden', 'true');
+        }
+      });
+      buttons.forEach(b => {
+        if (b) {
+          b.setAttribute('aria-expanded', 'false');
+          b.parentElement?.classList.remove('is-active');
+        }
+      });
+    }
+
+    function togglePopover(btn, popover) {
+      const isOpen = popover.classList.contains('is-open');
+      closeAllPopovers();
+
+      if (!isOpen) {
+        popover.classList.add('is-open');
+        popover.setAttribute('aria-hidden', 'false');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.parentElement?.classList.add('is-active');
+      }
+    }
+
+    // Segment Clicks
+    if (btnServicio && popoverServicio) {
+      btnServicio.addEventListener('click', (e) => {
+        e.stopPropagation();
+        togglePopover(btnServicio, popoverServicio);
+      });
+    }
+
+    if (btnFecha && popoverFecha) {
+      btnFecha.addEventListener('click', (e) => {
+        e.stopPropagation();
+        togglePopover(btnFecha, popoverFecha);
+      });
+    }
+
+    if (btnMascotas && popoverMascotas) {
+      btnMascotas.addEventListener('click', (e) => {
+        e.stopPropagation();
+        togglePopover(btnMascotas, popoverMascotas);
+      });
+    }
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (wrapper && !wrapper.contains(e.target)) {
+        closeAllPopovers();
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeAllPopovers();
+      }
+    });
+
+    // Servicio Selection
+    const serviceButtons = popoverServicio?.querySelectorAll('.service-opt-btn');
+    serviceButtons?.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        serviceButtons.forEach(b => b.classList.remove('is-selected'));
+        btn.classList.add('is-selected');
+
+        const val = btn.getAttribute('data-value') || 'Individual';
+        selectedService = val;
+        if (valServicio) valServicio.textContent = val;
+
+        closeAllPopovers();
+      });
+    });
+
+    // Fecha Quick Selection
+    const quickDateChips = popoverFecha?.querySelectorAll('.quick-date-chip');
+    quickDateChips?.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        quickDateChips.forEach(c => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+
+        const dateStr = chip.getAttribute('data-date') || 'Esta semana';
+        selectedDate = dateStr;
+        if (valFecha) valFecha.textContent = dateStr;
+        if (inputDate) inputDate.value = '';
+
+        closeAllPopovers();
+      });
+    });
+
+    // Fecha Custom Picker
+    if (inputDate) {
+      inputDate.addEventListener('change', () => {
+        if (inputDate.value) {
+          const [y, m, d] = inputDate.value.split('-');
+          const formatted = `${d}/${m}/${y}`;
+          selectedDate = formatted;
+          if (valFecha) valFecha.textContent = formatted;
+          quickDateChips?.forEach(c => c.classList.remove('is-active'));
+          closeAllPopovers();
+        }
+      });
+    }
+
+    // Mascotas Counter
+    function updatePetCount(newCount) {
+      petCount = Math.max(1, Math.min(5, newCount));
+      if (counterDisplay) counterDisplay.textContent = String(petCount);
+      if (valMascotas) {
+        valMascotas.textContent = petCount === 1 ? '1 perro' : `${petCount} perros`;
+      }
+      if (btnMinus) btnMinus.disabled = petCount <= 1;
+      if (btnPlus) btnPlus.disabled = petCount >= 5;
+    }
+
+    if (btnMinus) {
+      btnMinus.addEventListener('click', (e) => {
+        e.stopPropagation();
+        updatePetCount(petCount - 1);
+      });
+    }
+
+    if (btnPlus) {
+      btnPlus.addEventListener('click', (e) => {
+        e.stopPropagation();
+        updatePetCount(petCount + 1);
+      });
+    }
+
+    if (btnDone) {
+      btnDone.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeAllPopovers();
+      });
+    }
+
+    // Submit Action to WhatsApp
+    if (btnSubmit) {
+      btnSubmit.addEventListener('click', () => {
+        const petText = petCount === 1 ? '1 perro' : `${petCount} perros`;
+        const message = `Hola, quiero consultar disponibilidad en Foresta Dream Lagoons.\n• Modalidad: Paseo ${selectedService}\n• Fecha tentativa: ${selectedDate}\n• Mascotas: ${petText}`;
+        const encoded = encodeURIComponent(message);
+        const url = `https://wa.me/${phoneRaw}?text=${encoded}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
+    }
+  });
+</script>
+
+<style>
+  .hero-omni-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto;
+    z-index: 50;
+  }
+
+  .hero-omni-bar {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 16px 40px -8px rgba(28, 25, 23, 0.22), 0 2px 8px rgba(0, 0, 0, 0.04);
+    border-radius: var(--radius-full);
+    padding: 6px 8px 6px 12px;
+    transition: all var(--transition-normal);
+  }
+
+  .hero-omni-bar:hover {
+    box-shadow: 0 20px 48px -6px rgba(28, 25, 23, 0.3), 0 4px 12px rgba(0, 0, 0, 0.06);
+    background: #FFFFFF;
+  }
+
+  .omni-segment-wrap {
+    position: relative;
+    flex: 1;
+  }
+
+  .omni-segment {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 10px 18px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    text-align: left;
+    transition: background-color var(--transition-fast);
+  }
+
+  .omni-segment:hover {
+    background-color: rgba(238, 93, 26, 0.08);
+  }
+
+  .omni-segment-wrap.is-active .omni-segment {
+    background-color: var(--color-surface);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .omni-segment-label {
+    font-size: 0.725rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-title);
+    line-height: 1.1;
+  }
+
+  .omni-segment-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 170px;
+  }
+
+  .omni-segment-wrap.is-active .omni-segment-value {
+    color: var(--color-primary);
+  }
+
+  .omni-divider {
+    width: 1px;
+    height: 32px;
+    background-color: var(--color-border);
+    flex-shrink: 0;
+  }
+
+  /* Popovers */
+  .omni-popover {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 0;
+    z-index: 100;
+    background: #FFFFFF;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 48px -6px rgba(28, 25, 23, 0.25), 0 8px 16px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    width: 320px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity var(--transition-normal), transform var(--transition-normal), visibility var(--transition-normal);
+  }
+
+  .omni-popover.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .popover-header {
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 8px;
+  }
+
+  .popover-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-text-title);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* Servicio Options */
+  .service-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .service-opt-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 12px 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .service-opt-btn:hover {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary-border);
+  }
+
+  .service-opt-btn.is-selected {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary);
+  }
+
+  .opt-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .opt-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-title);
+  }
+
+  .opt-desc {
+    font-size: 0.775rem;
+    color: var(--color-text-muted);
+    line-height: 1.35;
+  }
+
+  .opt-check {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all var(--transition-fast);
+  }
+
+  .service-opt-btn.is-selected .opt-check {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Fecha Options */
+  .popover-calendar {
+    width: 320px;
+  }
+
+  .quick-dates-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .quick-date-chip {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .quick-date-chip:hover {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary-border);
+    color: var(--color-primary);
+  }
+
+  .quick-date-chip.is-active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #FFFFFF;
+  }
+
+  .calendar-picker-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px dashed var(--color-border);
+    padding-top: 12px;
+  }
+
+  .cal-picker-label {
+    font-size: 0.775rem;
+    font-weight: 600;
+    color: var(--color-text-subtle);
+  }
+
+  .cal-date-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.9rem;
+  }
+
+  .cal-date-input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+  }
+
+  /* Counter Mascotas */
+  .popover-counter {
+    width: 290px;
+    right: 0;
+    left: auto;
+  }
+
+  .counter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0 16px 0;
+  }
+
+  .counter-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .counter-label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-title);
+  }
+
+  .counter-sub {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .counter-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .counter-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-title);
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .counter-btn:hover:not(:disabled) {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .counter-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .counter-num {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-text-title);
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .counter-footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: 10px;
+  }
+
+  .btn-counter-done {
+    background: var(--color-primary);
+    color: #FFFFFF;
+    border: none;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+  }
+
+  .btn-counter-done:hover {
+    background: var(--color-primary-hover);
+  }
+
+  /* Submit Action Button */
+  .omni-action-wrap {
+    flex-shrink: 0;
+    padding-left: 6px;
+  }
+
+  .omni-cta-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 12px 22px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 6px 16px -2px rgba(238, 93, 26, 0.4);
+    transition: all var(--transition-normal);
+  }
+
+  .omni-cta-button:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px -3px rgba(238, 93, 26, 0.5);
+  }
+
+  .omni-cta-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Responsive Mobile Layout */
+  @media (max-width: 768px) {
+    .hero-omni-bar {
+      flex-direction: column;
+      border-radius: var(--radius-xl);
+      padding: 12px;
+      gap: 8px;
+      background: #FFFFFF;
+    }
+
+    .omni-segment-wrap {
+      width: 100%;
+    }
+
+    .omni-segment {
+      padding: 10px 14px;
+      background: var(--color-bg);
+    }
+
+    .omni-segment-value {
+      max-width: 100%;
+    }
+
+    .omni-divider {
+      display: none;
+    }
+
+    .omni-popover {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      width: 90vw;
+      max-width: 360px;
+    }
+
+    .omni-popover.is-open {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .omni-action-wrap {
+      width: 100%;
+      padding-left: 0;
+      margin-top: 4px;
+    }
+
+    .omni-cta-button {
+      width: 100%;
+      justify-content: center;
+      padding: 14px;
+    }
+  }
+</style>

@@ -1,78 +1,58 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroOmniBar from '../components/HeroOmniBar.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
 import PostWalkReport from '../components/PostWalkReport.astro';
 
-const pageTitle = "Happy Paws — Paseos Caninos Exclusivos en Foresta Dream Lagoons";
-const pageDesc = "Servicio de paseo y bienestar para perros exclusivo en Foresta Dream Lagoons. Atención dedicada, exploración a su ritmo y reporte directo por WhatsApp.";
+const pageTitle = "Happy Paws — Paseos Caninos en Foresta Dream Lagoons";
+const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. Atención 1 a 1 o grupos pequeños con reporte directo en tu teléfono.";
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} currentPath="/">
-  <!-- ================= 1. HERO SECTION (Limpio y directo como Petme) ================= -->
-  <section class="hero-clean" id="inicio">
-    <div class="container hero-clean-container">
-      <div class="hero-clean-content">
-        <div class="location-chip">
-          <svg class="chip-pin" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+  <!-- ================= 1. FULL-SCREEN HERO (Estilo Petme con Omni-bar al centro) ================= -->
+  <section class="hero-fullscreen" id="inicio">
+    <div class="hero-bg-container" aria-hidden="true">
+      <img
+        src="/images/hero-walk.jpg"
+        alt=""
+        class="hero-bg-image"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hero-bg-overlay"></div>
+    </div>
+
+    <div class="container hero-fullscreen-content">
+      <div class="hero-center-box">
+        <div class="location-badge-hero">
+          <svg class="pin-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
             <circle cx="12" cy="10" r="3"></circle>
           </svg>
           <span>Exclusivo en Foresta Dream Lagoons</span>
         </div>
 
-        <h1 class="hero-clean-title">
-          El paseo que tu perro necesita. <br />
-          <span class="text-highlight">La tranquilidad que tú buscas.</span>
+        <h1 class="hero-headline">
+          El paseo que tu perro merece.
         </h1>
 
-        <p class="hero-clean-subtitle">
-          Paseos dedicados y seguros dentro de Foresta Dream Lagoons. Atención personalizada, exploración a su ritmo y reporte directo en tu teléfono en cada salida.
+        <p class="hero-microcopy">
+          Atención personalizada, exploración a su ritmo y reporte directo en tu teléfono en cada salida.
         </p>
 
-        <div class="hero-clean-ctas">
-          <WhatsAppButton
-            context="main"
-            text="Quiero conocer el servicio"
-            variant="primary"
-            size="lg"
-            id="hero-primary-cta"
-            ariaLabel="Solicitar información de Happy Paws por WhatsApp"
-          />
-          <a href="#como-funciona" class="btn btn-secondary btn-lg" id="hero-secondary-cta">
-            Cómo funciona
-          </a>
+        <!-- CTA tenue dividido en 3 (servicio / fecha / mascotas) con popovers -->
+        <div class="hero-bar-container">
+          <HeroOmniBar />
         </div>
 
-        <div class="hero-clean-trust">
-          <div class="trust-point">
-            <span class="check-bullet"></span>
-            <span>100% dentro del fraccionamiento</span>
-          </div>
-          <div class="trust-point">
-            <span class="check-bullet"></span>
-            <span>Atención 1 a 1 o grupos máx. 3-4 perros</span>
-          </div>
-          <div class="trust-point">
-            <span class="check-bullet"></span>
-            <span>Reporte al finalizar cada paseo</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-clean-media">
-        <div class="hero-frame">
-          <img
-            src="/images/hero-walk.jpg"
-            alt="Perro paseando con correa de forma tranquila en áreas verdes de Foresta Dream Lagoons"
-            class="hero-clean-img"
-            loading="eager"
-            fetchpriority="high"
-          />
-          <div class="hero-clean-badge">
-            <span class="badge-tag">Atención Vecinal</span>
-            <span class="badge-title">Senderos y áreas verdes de Foresta</span>
-          </div>
+        <!-- Micro-puntos de confianza al centro -->
+        <div class="hero-trust-row">
+          <span>Rutas seguras dentro de Foresta</span>
+          <span class="trust-dot">·</span>
+          <span>Individual o máx. 3-4 perros</span>
+          <span class="trust-dot">·</span>
+          <span>Reporte y foto tras cada salida</span>
         </div>
       </div>
     </div>
@@ -199,9 +179,9 @@ const pageDesc = "Servicio de paseo y bienestar para perros exclusivo en Foresta
             <span class="hiw-step-num">1</span>
           </div>
           <div class="hiw-step-content">
-            <h3 class="hiw-step-heading">Escríbenos por WhatsApp</h3>
+            <h3 class="hiw-step-heading">Elige y consulta</h3>
             <p class="hiw-step-text">
-              Nos cuentas sobre tu perro: nombre, edad, nivel de energía, necesidades específicas y los horarios en que requieres el paseo dentro de Foresta.
+              Selecciona tu modalidad, fecha tentativa y número de mascotas en la barra superior o escríbenos directamente por WhatsApp.
             </p>
           </div>
         </div>
@@ -214,7 +194,7 @@ const pageDesc = "Servicio de paseo y bienestar para perros exclusivo en Foresta
           <div class="hiw-step-content">
             <h3 class="hiw-step-heading">Charla de conocimiento</h3>
             <p class="hiw-step-text">
-              Acudimos a tu domicilio en Foresta para conocer a tu mascota en un entorno de confianza, revisar su arnés y acordar la modalidad ideal (individual o grupal).
+              Acudimos a tu domicilio en Foresta para conocer a tu mascota en un entorno de confianza, revisar su arnés y acordar la ruta ideal.
             </p>
           </div>
         </div>
@@ -225,9 +205,9 @@ const pageDesc = "Servicio de paseo y bienestar para perros exclusivo en Foresta
             <span class="hiw-step-num">3</span>
           </div>
           <div class="hiw-step-content">
-            <h3 class="hiw-step-heading">Paseo seguro y reporte directo</h3>
+            <h3 class="hiw-step-heading">Paseo seguro y reporte</h3>
             <p class="hiw-step-text">
-              Recogida puntual en puerta, caminata atenta por áreas verdes y entrega con reporte en tu teléfono con duración, hidratación y foto del recorrido.
+              Recogida puntual en puerta, caminata atenta por áreas verdes y entrega con reporte en tu teléfono con duración, hidratación y foto.
             </p>
           </div>
         </div>
@@ -312,144 +292,125 @@ const pageDesc = "Servicio de paseo y bienestar para perros exclusivo en Foresta
 </BaseLayout>
 
 <style>
-  /* ================= HERO CLEAN ================= */
-  .hero-clean {
-    padding-top: var(--space-12);
-    padding-bottom: var(--space-16);
-    background: linear-gradient(180deg, #FAF7F2 0%, #FFF9F4 100%);
-  }
-
-  .hero-clean-container {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: var(--space-12);
+  /* ================= FULL-SCREEN HERO (Estilo Petme) ================= */
+  .hero-fullscreen {
+    position: relative;
+    min-height: calc(100vh - var(--header-height));
+    display: flex;
     align-items: center;
+    justify-content: center;
+    padding: var(--space-16) 0 var(--space-20) 0;
+    overflow: hidden;
   }
 
-  .hero-clean-content {
+  .hero-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .hero-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    transform: scale(1.02);
+  }
+
+  .hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(20, 18, 16, 0.48) 0%,
+      rgba(20, 18, 16, 0.68) 50%,
+      rgba(20, 18, 16, 0.85) 100%
+    );
+  }
+
+  .hero-fullscreen-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+  }
+
+  .hero-center-box {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: var(--space-5);
   }
 
-  .location-chip {
+  .location-badge-hero {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background-color: var(--color-primary-light);
-    border: 1px solid var(--color-primary-border);
-    color: var(--color-primary);
-    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #FFFFFF;
+    padding: 6px 16px;
     border-radius: var(--radius-full);
     font-size: 0.825rem;
     font-weight: 700;
-    letter-spacing: 0.02em;
-    width: fit-content;
-  }
-
-  .chip-pin {
-    color: var(--color-primary);
-  }
-
-  .hero-clean-title {
-    font-size: clamp(2.3rem, 4.2vw, 3.5rem);
-    line-height: 1.15;
-    color: var(--color-text-title);
-    letter-spacing: -0.03em;
-  }
-
-  .text-highlight {
-    color: var(--color-primary);
-  }
-
-  .hero-clean-subtitle {
-    font-size: clamp(1.1rem, 1.8vw, 1.25rem);
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    max-width: 580px;
-  }
-
-  .hero-clean-ctas {
-    display: flex;
-    gap: var(--space-4);
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: var(--space-2);
-  }
-
-  .hero-clean-trust {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--color-border);
-    margin-top: var(--space-2);
-  }
-
-  .trust-point {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    font-size: 0.925rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .check-bullet {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--color-primary);
-  }
-
-  .hero-clean-media {
-    position: relative;
-  }
-
-  .hero-frame {
-    position: relative;
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-xl);
-    border: 4px solid #FFFFFF;
-    background: #FFFFFF;
-  }
-
-  .hero-clean-img {
-    width: 100%;
-    height: 480px;
-    object-fit: cover;
-    display: block;
-    border-radius: calc(var(--radius-xl) - 4px);
-  }
-
-  .hero-clean-badge {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 12px 18px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--shadow-lg);
-  }
-
-  .badge-tag {
-    font-size: 0.725rem;
-    font-weight: 700;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--color-primary);
-    letter-spacing: 0.05em;
   }
 
-  .badge-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--color-text-title);
+  .pin-icon {
+    color: #FF8A4C;
+  }
+
+  .hero-headline {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    color: #FFFFFF;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .hero-microcopy {
+    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+    color: #F5EFEB;
+    max-width: 620px;
+    line-height: 1.55;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: var(--space-3);
+  }
+
+  .hero-bar-container {
+    width: 100%;
+    margin-top: var(--space-2);
+  }
+
+  .hero-trust-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    color: #D6CBC0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: var(--space-3);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .trust-dot {
+    opacity: 0.6;
+    font-size: 1.1rem;
   }
 
   /* ================= BENEFICIOS AMPLIOS (Estilo Petme) ================= */
@@ -721,12 +682,6 @@ const pageDesc = "Servicio de paseo y bienestar para perros exclusivo en Foresta
 
   /* ================= RESPONSIVE ================= */
   @media (max-width: 992px) {
-    .hero-clean-container {
-      grid-template-columns: 1fr;
-    }
-    .hero-clean-img {
-      height: 360px;
-    }
     .wide-benefit-card {
       grid-template-columns: 1fr;
     }
@@ -754,15 +709,9 @@ const pageDesc = "Servicio de paseo y bienestar para perros exclusivo en Foresta
   }
 
   @media (max-width: 640px) {
-    .hero-clean-img {
-      height: 280px;
-    }
-    .hero-clean-ctas {
-      flex-direction: column;
-      width: 100%;
-    }
-    .hero-clean-ctas .btn {
-      width: 100%;
+    .hero-fullscreen {
+      min-height: 90vh;
+      padding: var(--space-12) 0 var(--space-16) 0;
     }
     .wide-card-content {
       padding: var(--space-6);
