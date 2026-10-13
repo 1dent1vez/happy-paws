@@ -399,6 +399,21 @@ div[id] {
   font-size: 1.1rem;
 }
 
+/* En movil el texto largo de un CTA nunca debe desbordar su contenedor:
+   se permite el salto de linea y se recorta el padding, que de otro modo
+   suma ~72px al ancho minimo del boton. */
+@media (max-width: 640px) {
+  .btn {
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  .btn-lg {
+    padding: 0.9rem 1.4rem;
+    font-size: 1rem;
+  }
+}
+
 /* Card Styles */
 .card {
   background: var(--color-surface);
