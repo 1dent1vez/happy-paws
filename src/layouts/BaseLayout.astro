@@ -89,12 +89,6 @@ const schemaData = {
     <!-- Skip to main content -->
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-    <!-- Demo Notice if phone is not configured (Clean without emojis) -->
-    {!siteConfig.whatsapp.isConfigured && (
-      <div class="demo-banner" role="status" aria-live="polite">
-        <span><strong>Modo Demostración:</strong> El WhatsApp actual es de prueba ({siteConfig.whatsapp.phoneFormatted}). Para producción, define <code>PUBLIC_WHATSAPP_PHONE</code> en tu archivo .env.</span>
-      </div>
-    )}
 
     <!-- Global Header -->
     <Header currentPath={currentPath} />

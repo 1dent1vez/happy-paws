@@ -1,5 +1,4 @@
 ---
-import WhatsAppButton from './WhatsAppButton.astro';
 
 interface Props {
   currentPath?: string;
@@ -42,13 +41,6 @@ interface Props {
 
     <!-- Header Direct Action -->
     <div class="header-action">
-      <WhatsAppButton
-        context="header"
-        text="WhatsApp"
-        size="sm"
-        id="header-cta"
-        ariaLabel="Contactar a Happy Paws por WhatsApp"
-      />
       <!-- Mobile Menu Button -->
       <button
         type="button"
@@ -71,17 +63,7 @@ interface Props {
       <a href="/#beneficios" class="mobile-link">Beneficios para tu Mascota</a>
       <a href="/#como-funciona" class="mobile-link">Cómo Funciona</a>
       <a href="/#faq" class="mobile-link">Preguntas Frecuentes</a>
-      <div class="mobile-cta-box">
-        <WhatsAppButton
-          context="header"
-          text="Escríbenos por WhatsApp"
-          size="md"
-          className="w-full"
-        />
-        <span class="mobile-location-tag">
-          Servicio exclusivo en Foresta Dream Lagoons
-        </span>
-      </div>
+
     </nav>
   </div>
 </header>
