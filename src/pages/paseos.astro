@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
 import FaqSchema from '../components/FaqSchema.astro';
+import { Image } from 'astro:assets';
+import careCheckin from '../assets/care-checkin.jpg';
 
 const pageTitle = "Servicio de Paseos — Individual y Grupal | Happy Paws Foresta";
 const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grupales en Foresta Dream Lagoons: seguridad, preparación, información previa requerida y preguntas frecuentes.";
@@ -37,11 +39,13 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
       </div>
 
       <div class="page-hero-media">
-        <img
-          src="/images/care-checkin.jpg"
+        <Image
+          src={careCheckin}
           alt="Cuidador de Happy Paws atendiendo a un perro con paciencia antes del paseo"
           class="page-hero-img"
           loading="eager"
+          widths={[careCheckin.width, 800]}
+          sizes="(max-width: 992px) 100vw, 40vw"
         />
       </div>
     </div>

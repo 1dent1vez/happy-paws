@@ -1,5 +1,7 @@
 ---
 import WhatsAppButton from './WhatsAppButton.astro';
+import { Image } from 'astro:assets';
+import reportMoment from '../assets/report-moment.jpg';
 ---
 
 <section class="section-wrapper section-surface" id="reporte">
@@ -94,10 +96,12 @@ import WhatsAppButton from './WhatsAppButton.astro';
             <div class="bubble-tag">REPORTE DE PASEO</div>
             
             <div class="bubble-image">
-              <img
-                src="/images/report-moment.jpg"
+              <Image
+                src={reportMoment}
                 alt="Perro relajado descansando en pasto durante el paseo"
                 loading="lazy"
+                widths={[reportMoment.width, 400]}
+                sizes="(max-width: 900px) 100vw, 30vw"
               />
               <span class="photo-auth-note">Foto enviada con autorización previa</span>
             </div>

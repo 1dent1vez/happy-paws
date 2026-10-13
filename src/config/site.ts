@@ -45,11 +45,44 @@ export interface SiteConfig {
   };
 }
 
-const envPhone = typeof process !== 'undefined' ? process.env?.PUBLIC_WHATSAPP_PHONE : undefined;
-const envPhoneDisplay = typeof process !== 'undefined' ? process.env?.PUBLIC_WHATSAPP_PHONE_DISPLAY : undefined;
+const PLACEHOLDER_PHONE = '525500000000';
 
-const rawPhone = envPhone || '525500000000';
-const isConfigured = Boolean(envPhone && envPhone !== '525500000000');
+/**
+ * Las variables PUBLIC_* se leen con import.meta.env, que es la vía de Astro.
+ *
+ * Antes se leían con process.env: eso funciona en `npm run build` (Astro carga
+ * .env en el proceso de Node) pero NO en el dev server ni en el bundle del
+ * cliente, donde process.env no existe. El resultado era un `astro dev` con
+ * error 500 teniendo .env correctamente configurado. import.meta.env resuelve
+ * en los tres contextos.
+ */
+const envPhone = import.meta.env?.PUBLIC_WHATSAPP_PHONE;
+const envPhoneDisplay = import.meta.env?.PUBLIC_WHATSAPP_PHONE_DISPLAY;
+
+const rawPhone = envPhone || PLACEHOLDER_PHONE;
+const isConfigured = Boolean(envPhone && envPhone !== PLACEHOLDER_PHONE);
+
+/**
+ * Guardia de build: sin PUBLIC_WHATSAPP_PHONE el sitio compilaba igual y se veía
+ * perfecto, pero TODOS los wa.me apuntaban a un número inexistente. Como .env
+ * está en .gitignore, cualquier CI o host que no declare la variable producía
+ * un sitio sin conversión y sin ningún aviso.
+ *
+ * Se rompe el build a propósito: es preferible un deploy fallido y visible que
+ * un sitio en producción que pierde cada lead en silencio.
+ */
+if (!isConfigured) {
+  const detalle = envPhone
+    ? `PUBLIC_WHATSAPP_PHONE sigue con el valor de ejemplo (${envPhone}).`
+    : 'PUBLIC_WHATSAPP_PHONE no está definida.';
+
+  throw new Error(
+    `[Happy Paws] No se puede compilar: ${detalle}\n` +
+      'Copia .env.example a .env y define el número real de WhatsApp, ' +
+      'o declara la variable en el entorno del build.\n' +
+      'Sin ella el sitio compila con un número inexistente y pierde todas las conversiones.'
+  );
+}
 
 export const siteConfig: SiteConfig = {
   name: 'Happy Paws',

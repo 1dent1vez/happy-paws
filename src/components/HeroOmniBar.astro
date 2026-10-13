@@ -7,6 +7,15 @@ interface Props {
 
 const { className = '' } = Astro.props;
 const phoneRaw = siteConfig.whatsapp.phoneRaw.replace(/\D/g, '');
+
+// Mensaje genérico para el href inicial. El script lo reescribe con la
+// configuración elegida, pero sin JS este enlace ya lleva a WhatsApp con un
+// mensaje útil en lugar de no hacer nada.
+const baseWaUrl =
+  'https://wa.me/' +
+  phoneRaw +
+  '?text=' +
+  encodeURIComponent(siteConfig.whatsapp.messages.main);
 ---
 
 <div class={`hero-omni-wrapper ${className}`} id="hero-omni-wrapper">
@@ -149,13 +158,25 @@ const phoneRaw = siteConfig.whatsapp.phoneRaw.replace(/\D/g, '');
     </div>
 
     <!-- CTA WhatsApp -->
+    <!-- Es un <a> con href real, no un <button>: así funciona aunque el JS no
+         cargue o el navegador bloquee window.open. El href apunta al mensaje
+         genérico; si el visitante configura servicio/fecha/mascotas, el script
+         lo reescribe con esos datos antes de navegar. -->
     <div class="omni-cta-wrap">
-      <button type="button" class="omni-cta" id="btn-cta" aria-label="Consultar por WhatsApp">
+      <a
+        href={baseWaUrl}
+        id="btn-cta"
+        class="omni-cta"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-hp-context="omnibar"
+        aria-label="Consultar disponibilidad por WhatsApp"
+      >
         <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l7.25-1.38a9.87 9.87 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.88 9.88 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.22 8.22 0 0 1 2.42 5.82c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.21 8.21 0 0 1-1.25-4.4c0-4.54 3.7-8.21 8.23-8.21zM9.53 7.34l-.08-.01c-.17 0-.45.06-.69.32-.24.26-.89.87-.89 2.12s.91 2.46 1.04 2.63c.13.17 1.76 2.68 4.25 3.75.59.26 1.05.41 1.41.53.6.19 1.14.16 1.57.1.48-.07 1.48-.61 1.69-1.19.21-.59.21-1.09.14-1.2-.07-.11-.25-.18-.52-.31-.27-.13-1.59-.78-1.84-.87-.24-.09-.41-.14-.59.14-.17.27-.67.86-.82 1.04-.15.17-.3.19-.57.06-.27-.13-1.14-.42-2.17-1.34-.8-.72-1.34-1.61-1.5-1.88-.15-.27-.02-.42.11-.55.12-.11.26-.3.4-.46.14-.17.18-.28.27-.46.09-.17.05-.32-.02-.46-.07-.13-.59-1.42-.81-1.94-.22-.51-.44-.44-.6-.44z"/>
         </svg>
         <span>Consultar</span>
-      </button>
+      </a>
     </div>
 
   </div>
@@ -511,6 +532,10 @@ const phoneRaw = siteConfig.whatsapp.phoneRaw.replace(/\D/g, '');
     });
 
     // ── CTA WhatsApp ─────────────────────────────────────
+    // El href ya viene servido con el mensaje genérico, así que este handler
+    // solo lo enriquece con lo que el visitante configuró y deja que el
+    // navegador navegue con normalidad. Nada de window.open: eso lo bloquean
+    // los bloqueadores de popups y no funciona sin JS.
     btnCta && btnCta.addEventListener('click', function() {
       var srvTxt  = selService  ? 'Paseo ' + selService : 'No especificado';
       var dateTxt = selDate
@@ -536,7 +561,10 @@ const phoneRaw = siteConfig.whatsapp.phoneRaw.replace(/\D/g, '');
         timestamp: new Date().toISOString()
       });
 
-      window.open(url, '_blank', 'noopener,noreferrer');
+      // Se reescribe el href solo si hay algo configurado; si no, se deja el
+      // genérico que ya traía el enlace.
+      var configurado = selService || selDate || selHour != null || petCount !== 1;
+      if (configurado) btnCta.setAttribute('href', url);
     });
   }
 
@@ -1077,28 +1105,33 @@ const phoneRaw = siteConfig.whatsapp.phoneRaw.replace(/\D/g, '');
     padding-left: 6px;
   }
 
+  /* Es un <a>, no un <button>: hereda color y subrayado del reset global, así
+     que hay que neutralizarlos aquí o el CTA se ve con texto azul subrayado. */
   .omni-cta {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: var(--color-primary);
-    color: #fff;
+    background: var(--color-whatsapp-strong);
+    color: #FFFFFF;
     border: none;
     border-radius: 9999px;
     padding: 13px 22px;
+    font-family: var(--font-sans);
     font-weight: 700;
     font-size: 0.92rem;
-    font-family: var(--font-sans);
+    line-height: 1.25;
+    text-decoration: none;
     cursor: pointer;
-    box-shadow: 0 6px 18px -2px rgba(238,93,26,0.42);
+    box-shadow: 0 6px 18px -2px rgba(18, 140, 126, 0.42);
     transition: all 0.18s;
     white-space: nowrap;
   }
 
   .omni-cta:hover {
-    background: var(--color-primary-hover);
+    background: var(--color-whatsapp-deep);
     transform: translateY(-1px);
-    box-shadow: 0 10px 24px -3px rgba(238,93,26,0.52);
+    box-shadow: 0 10px 24px -3px rgba(7, 94, 84, 0.5);
+    color: #FFFFFF;
   }
 
   /* ── Mobile ───────────────────────────────────────── */

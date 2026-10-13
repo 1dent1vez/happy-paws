@@ -88,9 +88,9 @@ import WhatsAppButton from './WhatsAppButton.astro';
         © {new Date().getFullYear()} Happy Paws. Todos los derechos reservados.
       </p>
       <div class="legal-links">
-        <a href="#aviso-privacidad" id="link-privacidad">Aviso de Privacidad</a>
+        <a href="/aviso-de-privacidad/">Aviso de Privacidad</a>
         <span class="sep">•</span>
-        <a href="#terminos-servicio" id="link-terminos">Términos del Servicio</a>
+        <a href="/terminos-del-servicio/">Términos del Servicio</a>
       </div>
     </div>
   </div>
@@ -270,7 +270,8 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .legal-links a {
-    color: #8C8276;
+    /* #8C8276 sobre #211D1A daba 4.44:1, apenas por debajo de AA. */
+    color: #A3988D;
     transition: color var(--transition-fast);
   }
 

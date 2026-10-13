@@ -5,6 +5,14 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
 import FaqSchema from '../components/FaqSchema.astro';
 import PostWalkReport from '../components/PostWalkReport.astro';
+// astro:assets optimiza en build: genera WebP/AVIF, declara width/height (con
+// lo que el navegador reserva el espacio y desaparece el CLS) y produce srcset.
+// Las fotos de public/ se servían tal cual: 736 KB de JPEG sin dimensiones.
+import { Image } from 'astro:assets';
+import heroWalk from '../assets/hero-walk.jpg';
+import individualWalk from '../assets/individual-walk.jpg';
+import groupWalk from '../assets/group-walk.jpg';
+import careCheckin from '../assets/care-checkin.jpg';
 
 const pageTitle = "Happy Paws — Paseos Caninos en Foresta Dream Lagoons";
 const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. Atención 1 a 1 o grupos pequeños con reporte directo en tu teléfono.";
@@ -14,12 +22,14 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
   <!-- ================= 1. FULL-SCREEN HERO (Estilo Petme con Omni-bar al centro) ================= -->
   <section class="hero-fullscreen" id="inicio">
     <div class="hero-bg-container" aria-hidden="true">
-      <img
-        src="/images/hero-walk.jpg"
+      <Image
+        src={heroWalk}
         alt=""
         class="hero-bg-image"
         loading="eager"
         fetchpriority="high"
+        widths={[heroWalk.width, 1200, 1600]}
+        sizes="100vw"
       />
       <div class="hero-bg-overlay"></div>
     </div>
@@ -75,10 +85,12 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
         <!-- Bloque Amplio 1: Estimulación Olfativa -->
         <article class="wide-benefit-card">
           <div class="wide-card-media">
-            <img
-              src="/images/individual-walk.jpg"
+            <Image
+              src={individualWalk}
               alt="Perro explorando y oliendo con calma en un paseo individual atento"
               loading="lazy"
+              widths={[individualWalk.width, 800]}
+              sizes="(max-width: 992px) 100vw, 50vw"
             />
           </div>
           <div class="wide-card-content">
@@ -98,10 +110,12 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
         <!-- Bloque Amplio 2: Ejercicio y Salud Física -->
         <article class="wide-benefit-card wide-card-reverse">
           <div class="wide-card-media">
-            <img
-              src="/images/group-walk.jpg"
+            <Image
+              src={groupWalk}
               alt="Perros sociables caminando coordinadamente en pasto sin tirones"
               loading="lazy"
+              widths={[groupWalk.width, 800]}
+              sizes="(max-width: 992px) 100vw, 50vw"
             />
           </div>
           <div class="wide-card-content">
@@ -282,10 +296,12 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
         </div>
 
         <div class="fcta-image-side">
-          <img
-            src="/images/care-checkin.jpg"
+          <Image
+            src={careCheckin}
             alt="Paseador de Happy Paws atendiendo a un perro con cariño antes de salir"
             loading="lazy"
+            widths={[careCheckin.width, 800]}
+            sizes="(max-width: 992px) 100vw, 40vw"
           />
         </div>
       </div>
@@ -320,11 +336,12 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
   }
 
   .hero-bg-image {
+    /* <Image> emite width/height nativos; sin anularlos la foto aparecería
+       con su relación de aspecto original en lugar de cubrir el hero. */
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center 35%;
-    transform: scale(1.02);
   }
 
   .hero-bg-overlay {
@@ -467,6 +484,7 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
     transition: transform var(--transition-smooth);
   }
 
+  /* El zoom al pasar el ratón se aplica a la imagen, no a la tarjula. */
   .wide-benefit-card:hover .wide-card-media img {
     transform: scale(1.03);
   }
