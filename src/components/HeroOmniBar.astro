@@ -523,17 +523,18 @@ const phoneRaw = siteConfig.whatsapp.phoneRaw.replace(/\D/g, '');
       // Instrumentación: el omnibar es el CTA principal de la home, así que
       // además del clic se registra la configuración elegida. Eso permite
       // ver qué modalidad y franja pide la gente, no solo que hizo clic.
+      // Sin el `|| []` este push se perdía cuando el array aún no existía,
+      // que es justo el caso de la primera visita.
       var url = 'https://wa.me/' + phoneRaw + '?text=' + encodeURIComponent(msg);
-      if (window.dataLayer) {
-        window.dataLayer.push({
-          event: 'whatsapp_click',
-          context: 'omnibar',
-          page: window.location.pathname,
-          label: 'Consultar (barra del hero)',
-          detail: [srvTxt, dateTxt + ' ' + hourTxt, petTxt].join(' | '),
-          timestamp: new Date().toISOString()
-        });
-      }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'whatsapp_click',
+        context: 'omnibar',
+        page: window.location.pathname,
+        label: 'Consultar (barra del hero)',
+        detail: [srvTxt, dateTxt + ' ' + hourTxt, petTxt].join(' | '),
+        timestamp: new Date().toISOString()
+      });
 
       window.open(url, '_blank', 'noopener,noreferrer');
     });

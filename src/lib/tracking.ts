@@ -42,6 +42,19 @@ declare global {
   }
 }
 
+/**
+ * Inicializa `window.dataLayer` en cuanto carga la página.
+ *
+ * Sin esto el array no existía hasta el primer clic: `trackConversion` lo
+ * creaba con `window.dataLayer = window.dataLayer || []` en el momento de
+ * empujar. Cualquier herramienta que lea dataLayer al cargar (el patrón
+ * habitual de GTM/GA4) encontraba `undefined`. Declararlo aquí es inocuo si
+ * después se carga el snippet de GA4, que hace exactamente lo mismo.
+ */
+export function ensureDataLayer(): void {
+  window.dataLayer = window.dataLayer || [];
+}
+
 /** Empuja el evento a dataLayer y lo despacha como CustomEvent. */
 export function trackConversion(
   context: ConversionContext,
@@ -69,6 +82,8 @@ export function trackConversion(
  * Se marca el enlace con `data-hp-track` para no depender de atributos frágiles.
  */
 export function initConversionTracking(): void {
+  ensureDataLayer();
+
   document.addEventListener(
     'click',
     (event) => {
