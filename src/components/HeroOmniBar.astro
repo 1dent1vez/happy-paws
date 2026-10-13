@@ -186,13 +186,22 @@ const baseWaUrl =
 (function() {
   // Wait for DOM
   function init() {
-    var MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Octubre','Noviembre','Diciembre'];
+    // Ojo: este array debe tener los 12 meses en orden. Sin 'Septiembre'
+    // todos los meses a partir de ahí se mostraban con el nombre siguiente
+    // (octubre salía como "Noviembre"), y el error se propagaba a la etiqueta
+    // accesible de cada día, al resumen de la fecha y a la franja horaria.
+    var MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 
     // Franja operativa. Debe coincidir con siteConfig.schedule y con el
     // JSON-LD: el servicio corre 7:00-19:00, así que ninguna cita fuera de
     // ese rango es realizable y el lead llegaría pidiendo un hueco imposible.
+    //
+    // LAST_ARRIVAL es la última hora de LLEGADA ofrecida. Un paseo dura 45-60
+    // minutos y el servicio cierra a las 19:00, así que una llegada a las
+    // 19:00 implicaría pasear después del cierre: se ofrece hasta las 18:00,
+    // que es lo que cabe dentro de la franja declarada.
     var OPEN_HOUR = 7;
-    var CLOSE_HOUR = 19;
+    var LAST_ARRIVAL = 18;
 
     // ── State ──────────────────────────────────────────
     var selService = null;
@@ -324,6 +333,7 @@ const baseWaUrl =
           valServicio.textContent = selService === 'Individual' ? 'Paseo Individual' : 'Paseo Grupal';
           valServicio.classList.remove('omni-ph');
         }
+        syncCta();
         setTimeout(function() { closeAll(true); }, 150);
       });
 
@@ -422,6 +432,7 @@ const baseWaUrl =
               // indicar la hora.
               renderCal();
               renderHours();
+              syncCta();
             });
           }
 
@@ -447,12 +458,12 @@ const baseWaUrl =
       var isToday = selDate.getTime() === today.getTime();
       if (label) {
         label.textContent = selDate.getDate() + ' de ' + MONTHS[selDate.getMonth()] +
-          ' · horario de ' + pad(OPEN_HOUR) + ':00 a ' + pad(CLOSE_HOUR) + ':00';
+          ' · llegadas de ' + pad(OPEN_HOUR) + ':00 a ' + pad(LAST_ARRIVAL) + ':00';
       }
 
       list.innerHTML = '';
       var disponibles = 0;
-      for (var h = OPEN_HOUR; h <= CLOSE_HOUR; h++) {
+      for (var h = OPEN_HOUR; h <= LAST_ARRIVAL; h++) {
         (function(hour) {
           // El mismo día ya no admite horas que hayan pasado.
           var past = isToday && hour <= now.getHours();
@@ -469,6 +480,7 @@ const baseWaUrl =
               e.stopPropagation();
               selHour = hour;
               renderHours();
+              syncCta();
             });
           }
           list.appendChild(b);
@@ -476,13 +488,18 @@ const baseWaUrl =
       }
 
       // Si es tarde y ya cerró hoy, el panel no puede quedarse en blanco sin
-      // explicación: se indica y se sugiere el día siguiente.
+      // explicación: se indica y se sugiere el día siguiente. Se salta el
+      // domingo, que está cerrado: sugerirlo dejaría al usuario eligiendo un
+      // día en que nadie va a pasear al perro.
       if (empty) {
         if (disponibles === 0) {
           empty.hidden = false;
           var manana = new Date(today.getTime() + 86400000);
-          empty.textContent = 'Hoy ya no quedan horarios dentro de la franja de ' +
-            pad(OPEN_HOUR) + ':00 a ' + pad(CLOSE_HOUR) + ':00. Puedes elegir el ' +
+          while (manana.getDay() === 0) {
+            manana = new Date(manana.getTime() + 86400000);
+          }
+          empty.textContent = 'Hoy ya no quedan llegadas dentro de la franja de ' +
+            pad(OPEN_HOUR) + ':00 a ' + pad(LAST_ARRIVAL) + ':00. Puedes elegir el ' +
             manana.getDate() + ' de ' + MONTHS[manana.getMonth()] + ' o escribirnos por WhatsApp.';
         } else {
           empty.hidden = true;
@@ -518,6 +535,7 @@ const baseWaUrl =
         valMascota.textContent = petCount === 1 ? '1 perro' : petCount + ' perros';
         valMascota.classList.remove('omni-ph');
       }
+      syncCta();
     }
 
     btnMinus && btnMinus.addEventListener('click', function(e) { e.stopPropagation(); updateCount(petCount - 1); });
@@ -536,36 +554,37 @@ const baseWaUrl =
     // solo lo enriquece con lo que el visitante configuró y deja que el
     // navegador navegue con normalidad. Nada de window.open: eso lo bloquean
     // los bloqueadores de popups y no funciona sin JS.
-    btnCta && btnCta.addEventListener('click', function() {
+    //
+    // El evento de conversión NO se emite aquí: initConversionTracking
+    // (BaseLayout) ya escucha todos los clics a wa.me por delegación. Emitir
+    // también desde aquí duplicaba cada conversión en el dataLayer. Lo que se
+    // hace es publicar la configuración elegida en data-hp-detail en el
+    // momento de elegirla (syncCta), para que el listener delegado la lea.
+
+    function syncCta() {
+      if (!btnCta) return;
       var srvTxt  = selService  ? 'Paseo ' + selService : 'No especificado';
       var dateTxt = selDate
         ? selDate.getDate() + ' de ' + MONTHS[selDate.getMonth()] + ' de ' + selDate.getFullYear()
         : 'No especificada';
       var hourTxt = selHour != null ? pad(selHour) + ':00' : 'Por definir';
       var petTxt  = petCount === 1 ? '1 perro' : petCount + ' perros';
-      var msg = 'Hola, quiero consultar disponibilidad en Foresta Dream Lagoons.\n• Modalidad: ' + srvTxt + '\n• Fecha tentativa: ' + dateTxt + '\n• Hora tentativa: ' + hourTxt + '\n• Mascotas: ' + petTxt;
+      var detail = [srvTxt, dateTxt + ' ' + hourTxt, petTxt].join(' | ');
 
-      // Instrumentación: el omnibar es el CTA principal de la home, así que
-      // además del clic se registra la configuración elegida. Eso permite
-      // ver qué modalidad y franja pide la gente, no solo que hizo clic.
-      // Sin el `|| []` este push se perdía cuando el array aún no existía,
-      // que es justo el caso de la primera visita.
-      var url = 'https://wa.me/' + phoneRaw + '?text=' + encodeURIComponent(msg);
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'whatsapp_click',
-        context: 'omnibar',
-        page: window.location.pathname,
-        label: 'Consultar (barra del hero)',
-        detail: [srvTxt, dateTxt + ' ' + hourTxt, petTxt].join(' | '),
-        timestamp: new Date().toISOString()
-      });
+      btnCta.setAttribute('data-hp-detail', detail);
 
       // Se reescribe el href solo si hay algo configurado; si no, se deja el
       // genérico que ya traía el enlace.
       var configurado = selService || selDate || selHour != null || petCount !== 1;
-      if (configurado) btnCta.setAttribute('href', url);
-    });
+      if (configurado) {
+        var msg = 'Hola, quiero consultar disponibilidad en Foresta Dream Lagoons.\n' +
+          '• Modalidad: ' + srvTxt + '\n' +
+          '• Fecha tentativa: ' + dateTxt + '\n' +
+          '• Hora tentativa: ' + hourTxt + '\n' +
+          '• Mascotas: ' + petTxt;
+        btnCta.setAttribute('href', 'https://wa.me/' + phoneRaw + '?text=' + encodeURIComponent(msg));
+      }
+    }
   }
 
   // Run after DOM is ready
@@ -899,7 +918,8 @@ const baseWaUrl =
   }
 
   .cal-cell.sel {
-    background: var(--color-primary);
+    /* Texto de 0.82rem (no Large): el fondo necesita >= 4.5:1 con blanco. */
+    background: var(--color-primary-action);
     color: #fff;
     font-weight: 700;
   }
@@ -973,8 +993,8 @@ const baseWaUrl =
   }
 
   .hour-cell.sel {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
+    background: var(--color-primary-action);
+    border-color: var(--color-primary-action);
     color: #fff;
   }
 
@@ -1085,7 +1105,8 @@ const baseWaUrl =
   }
 
   .btn-done {
-    background: var(--color-primary);
+    /* Texto de 0.85rem con blanco encima: #EE5D1A da 3.38:1 (FALLA AA). */
+    background: var(--color-primary-action);
     color: #fff;
     border: none;
     padding: 7px 20px;

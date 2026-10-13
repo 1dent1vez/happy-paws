@@ -45,12 +45,23 @@
   --color-whatsapp-bg: #E8F8EE;
 
   /* Verdes accesibles para fondos con texto blanco.
-     #25D366 con blanco da 1.98:1 (FALLA WCAG). Estos tres mantienen la lectura
-     "WhatsApp" y pasan AA: 4.14, 5.08 y 7.67 respectivamente.
+     #25D366 con blanco da 1.98:1 (FALLA WCAG) y #128C7E daba 4.14:1, aún por
+     debajo de AA (4.5). #0F7D70 llega a 5.01:1 manteniendo la lectura verde
+     WhatsApp; el hover sigue en #075E54 (7.67:1).
      --color-whatsapp-strong es el verde de acción del sitio. */
-  --color-whatsapp-strong: #128C7E;
+  --color-whatsapp-strong: #0F7D70;
   --color-whatsapp-accessible: #157F3D;
   --color-whatsapp-deep: #075E54;
+
+  /* Naranja de marca para TEXTO pequeño y fondos de botón con texto blanco.
+     #EE5D1A falla AA en casi todos sus usos: 3.38:1 con blanco encima y 3.16:1
+     como texto sobre el fondo del sitio. #C2410C pasa en todos los contextos
+     (5.18 blanco/blanco, 4.85 sobre el fondo, 4.72 sobre el badge claro). El
+     naranja de marca se conserva para elementos grandes y decorativos, donde
+     basta el umbral AA-large de 3:1. */
+  --color-primary-action: #C2410C;
+  --color-primary-action-hover: #A33806;
+  --color-primary-text: #C2410C;
 
   /* Typography */
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -334,15 +345,19 @@ div[id] {
 }
 
 .btn-primary {
-  background-color: var(--color-primary);
+  /* El naranja de marca (#EE5D1A) con texto blanco da 3.38:1: FALLA AA. El
+     sitio entero convierte por estos botones, así que se usa el naranja de
+     acción #C2410C (5.18:1) en el fondo y se reserva el naranja de marca para
+     acentos grandes, donde el umbral AA-large de 3:1 sí se cumple. */
+  background-color: var(--color-primary-action);
   color: var(--color-text-inverse);
   box-shadow: var(--shadow-orange);
 }
 
 .btn-primary:hover {
-  background-color: var(--color-primary-hover);
+  background-color: var(--color-primary-action-hover);
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px -4px rgba(238, 93, 26, 0.45);
+  box-shadow: 0 10px 24px -4px rgba(194, 65, 12, 0.45);
 }
 
 .btn-primary:active {
@@ -360,7 +375,8 @@ div[id] {
 .btn-secondary:hover {
   background-color: var(--color-primary-light);
   border-color: var(--color-primary-border);
-  color: var(--color-primary);
+  /* #EE5D1A sobre #FFF2EB da 3.03:1 (FALLA AA para texto de 1rem). */
+  color: var(--color-primary-text);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -368,7 +384,7 @@ div[id] {
 .btn-whatsapp {
   background-color: var(--color-whatsapp-strong);
   color: #FFFFFF;
-  box-shadow: 0 6px 16px -2px rgba(18, 140, 126, 0.4);
+  box-shadow: 0 6px 16px -2px rgba(15, 125, 112, 0.4);
 }
 
 .btn-whatsapp:hover {
@@ -380,13 +396,15 @@ div[id] {
 
 .btn-outline {
   background: transparent;
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  /* Texto de 1rem sobre blanco: el naranja de marca da 3.38:1 (FALLA AA). */
+  color: var(--color-primary-text);
+  border-color: var(--color-primary-action);
 }
 
 .btn-outline:hover {
   background: var(--color-primary-light);
   transform: translateY(-2px);
+  color: var(--color-primary-action-hover);
 }
 
 .btn-sm {
@@ -482,7 +500,7 @@ div[id] {
   color: #FFFFFF;
   padding: 12px 20px;
   border-radius: var(--radius-full);
-  box-shadow: 0 8px 24px rgba(18, 140, 126, 0.45);
+  box-shadow: 0 8px 24px rgba(15, 125, 112, 0.45);
   font-weight: 600;
   font-size: 0.95rem;
   transition:

@@ -541,7 +541,8 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--color-primary);
+    /* Texto pequeño sobre blanco: el naranja de marca da 3.16:1 (FALLA AA). */
+    color: var(--color-primary-text);
   }
 
   .wide-card-title {
@@ -641,7 +642,7 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
     height: 44px;
     border-radius: 50%;
     background-color: var(--color-primary-light);
-    color: var(--color-primary);
+    color: var(--color-primary-action);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -773,7 +774,7 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
 
   @media (max-width: 640px) {
     .hero-fullscreen {
-      min-height: 90vh;
+      min-height: 90dvh;
       padding: var(--space-12) 0 var(--space-16) 0;
     }
     .wide-card-content {

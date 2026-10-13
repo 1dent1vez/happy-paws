@@ -429,6 +429,8 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
   }
 
   .text-highlight {
+    /* Forma parte de un h1 (texto grande): el umbral AA-large de 3:1 sí lo
+       cubre, así que aquí se conserva el naranja de marca. */
     color: var(--color-primary);
   }
 
@@ -501,7 +503,8 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
 
   .tag-individual {
     background: #FFF0E6;
-    color: var(--color-primary);
+    /* #EE5D1A sobre #FFF0E6 da 3.03:1 (FALLA AA). */
+    color: var(--color-primary-text);
   }
 
   .tag-group {
@@ -516,7 +519,8 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
 
   .modality-subtitle {
     font-size: 0.95rem;
-    color: var(--color-primary-hover);
+    /* #D94B0B sobre #FFFDFB daba 4.23:1 (FALLA AA). */
+    color: var(--color-primary-text);
     font-weight: 600;
   }
 
@@ -558,7 +562,7 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
 
   .modality-points li::before {
     content: '•';
-    color: var(--color-primary);
+    color: var(--color-primary-action);
     position: absolute;
     left: 4px;
     font-size: 1.2rem;
@@ -630,7 +634,7 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-action);
     color: #fff;
     display: flex;
     align-items: center;
@@ -657,7 +661,8 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: var(--color-primary);
+    /* #EE5D1A sobre blanco da 3.38:1 (FALLA AA). */
+    color: var(--color-primary-text);
     letter-spacing: 0.05em;
   }
 

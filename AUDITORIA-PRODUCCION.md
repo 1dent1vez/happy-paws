@@ -1,124 +1,105 @@
 # Auditoría pre-producción — Happy Paws
 
-_Fecha: 2026-10-12 · Build verificada: `npm run build` OK · `astro check`: 0 errores / 0 warnings_
+_Fecha: 2026-10-12 (ronda 1) · 2026-10-13 (ronda 2) · Build verificada: `npm run build` OK · `astro check`: 0 errores / 0 warnings / 0 hints_
 
-Verificado contra la build de producción (`dist/`) servida con `astro preview`, en desktop y viewport móvil 390px.
+Verificado contra la build de producción (`dist/`) servida con `astro preview`, en desktop (1280px) y viewport móvil 390px. Los ratios de contraste están medidos en el navegador sobre los estilos computados, no estimados.
 
 ---
 
-## BLOQUEANTES — no mandar a producción sin resolver
+## RONDA 2 (2026-10-13) — bugs que la ronda 1 no detectó
 
-### 1. El CTA principal del hero no funciona sin JavaScript
-`HeroOmniBar.astro:135` — el botón "Consultar" es un `<button>` que llama a `window.open()` (línea 372). Sin JS el hero queda **sin ninguna vía de contacto**, y con bloqueador de popups el clic se pierde en silencio.
-- Fix: convertir a `<a href="wa.me/..." target="_blank" rel="noopener">` con el href base, y que el JS solo lo reescriba con los parámetros elegidos.
+La ronda 1 corrigió la conversión sin JS, la guardia del build, imágenes, 404, canonical y la mayoría del contraste. Estos defectos se introdujeron o sobrevivieron a esa ronda.
 
-### 2. El calendario permite agendar domingos (el servicio no opera domingos)
-`HeroOmniBar.astro:295-331` — solo se deshabilitan días pasados. Verificado: noviembre 2026 ofrece los 30 días habilitados, incluyendo domingos 1, 8, 15, 22 y 29. Contradice `siteConfig.schedule.days` ("Lunes a Sábado") y el JSON-LD de `BaseLayout.astro:39`.
-- Fix: deshabilitar `dayDate.getDay() === 0`.
+### 1. Cada conversión se contaba dos veces (bloqueante de métrica)
+El CTA del hero emitía **dos** eventos `whatsapp_click` por clic: el listener delegado de `BaseLayout` (`tracking.ts`) más el `dataLayer.push` manual del handler inline de `HeroOmniBar`. Con el KPI único del sitio siendo "clics a WhatsApp", todas las métricas estaban infladas al 100% y no había forma de saber qué sección convertía.
+- **Resuelto**: eliminado el push manual. La configuración elegida se publica en `data-hp-detail` vía `syncCta()` (llamado al elegir servicio/fecha/hora/mascotas) y el listener delegado la lee. Verificado: 1 evento por clic con detalle completo.
 
-### 3. El build cae en silencio a un número de WhatsApp falso
-`src/config/site.ts:46-47` — si `PUBLIC_WHATSAPP_PHONE` no está en el entorno del build, `rawPhone` = `525500000000` y `isConfigured` = `false`, **sin error**. La web compila, se ve perfecta y todos los `wa.me` apuntan a un número inexistente.
-- Crítico porque `.env` está en `.gitignore` (correcto) → cualquier CI/host que no declare la variable rompe la conversión sin avisar.
-- Fix: lanzar error en el build si la variable falta, o usar una variable obligatoria en el host.
+### 2. El calendario nombraba mal todos los meses desde septiembre (bloqueante funcional)
+El array `MONTHS` de `HeroOmniBar` tenía 11 elementos: faltaba `'Septiembre'`. Octubre se mostraba como "Noviembre", y el desplazamiento se propagaba al `aria-label` de cada día, al resumen de la fecha y al mensaje de WhatsApp pre-rellenado (un lead podía agendar "14 de Noviembre" cuando elegía octubre).
+- **Resuelto**: array completo de 12 meses. Verificado navegando por meses: Octubre 2026 → Febrero 2027 correctos, y los `aria-label` ("2 de Febrero de 2027") cuadran.
 
-### 4. Enlaces legales muertos + obligación LFPDPPP
-`Footer.astro:91,93` — `#aviso-privacidad` y `#terminos-servicio` no existen en ninguna página. Son anchors vacíos.
-- Un negocio mexicano que recaba datos de clientes requiere Aviso de Privacidad conforme la LFPDPPP. Riesgo legal, no solo UX.
+### 3. Ofrecía llegada a las 19:00 en un servicio que cierra a esa hora
+El selector iba de 7:00 a 19:00 inclusive, pero los paseos duran 45-60 minutos: una "llegada" a las 19:00 implicaba pasear fuera de la franja declarada, contradiciendo `siteConfig.schedule` y el JSON-LD.
+- **Resuelto**: `LAST_ARRIVAL = 18`. Ahora se ofrecen 12 franjas (07:00-18:00) con la etiqueta "llegadas de 07:00 a 18:00". Verificado en el DOM.
 
-### 5. Contraste WCAG fallando en el propio CTA de conversión
-| Elemento | Ratio | Estado |
+### 4. El aviso de fin de jornada sugería un domingo cerrado
+Cuando ya no quedaban horas hoy, el mensaje decía "puedes elegir mañana" sin comprobar el día de la semana: si mañana era domingo, mandaba al usuario a un día en que nadie va a pasear al perro.
+- **Resuelto**: el bucle avanza hasta el siguiente día no-domingo.
+
+### 5. Los encabezados de seguridad solo cubrían la portada (bloqueante de host)
+`public/_headers` declaraba los encabezados bajo la ruta `/`. En Netlify y Cloudflare Pages, `/` a secas **solo aplica a la portada**: `/paseos/`, las legales y el 404 se habrían servido sin CSP, HSTS, `X-Content-Type-Options` ni `Permissions-Policy`.
+- **Resuelto**: ruta `/*`. Verificado en el archivo servido.
+
+### 6. Caché inmutable en assets sin hash (bloqueante de despliegue)
+`/images/*` y `/fonts/*` se servían con `max-age=31536000, immutable`. Esos archivos se copian tal cual desde `public/`: **no llevan hash en el nombre**. Con `immutable`, un cambio de vídeo del hero, del `og:image` o de la fuente habría tardado hasta un año en llegar a quienes ya los tenían en caché.
+- **Resuelto**: `max-age=86400, must-revalidate` para esos prefijos; `immutable` se reserva para `/_astro/*`, que sí lleva hash. También se eliminó un header huérfano de `/favicon.svg` (archivo inexistente).
+
+### 7. Contraste: el CTA de conversión seguía fallando AA
+Medición en el navegador (23 elementos):
+
+| Elemento | Antes | Ahora |
 |---|---|---|
-| `.btn-whatsapp` blanco sobre `#25D366` | **1.98:1** | FALLA total |
-| `.btn-primary` blanco sobre `#EE5D1A` | 3.38:1 | FALLA AA |
-| `.badge-orange` `#EE5D1A` sobre `#FFF2EB` | 3.08:1 | FALLA AA |
-| `--color-text-subtle` `#857D75` sobre blanco | 4.05:1 | FALLA AA |
-| `.footer-bottom` `#8C8276` sobre `#211D1A` | 4.44:1 | FALLA AA (marginal) |
+| `.omni-cta` / `.btn-whatsapp` (blanco sobre `#128C7E`) | **4.14:1** FALLA | 5.01:1 (`#0F7D70`) OK |
+| `.btn-primary` (blanco sobre `#EE5D1A`) | **3.38:1** FALLA | 5.18:1 (`#C2410C`) OK |
+| `.badge-orange` | 3.08:1 FALLA | 6.13:1 OK |
+| `--color-text-subtle` sobre blanco | 4.05:1 FALLA | 5.64:1 OK |
+| `.footer-bottom` `#8C8276` sobre `#211D1A` | 4.44:1 FALLA | 5.92:1 OK |
+| `.bubble-time`, `.tag-individual`, `.timeline-step-badge`, `.modality-subtitle`, hovers de nav/FAQ/benefit-kicker | 3.0-4.2:1 FALLA | 4.85-5.18:1 OK |
 
-El verde WhatsApp con texto blanco es el botón más repetido del sitio.
+- **Resuelto** con dos tokens nuevos: `--color-whatsapp-strong: #0F7D70` y `--color-primary-action: #C2410C` (+ `--color-primary-text`), aplicados en las 5 páginas. El naranja de marca `#EE5D1A` se conserva solo donde el umbral AA-large (3:1) lo cubre (h1, iconos grandes, `.text-highlight` dentro de un `h1`).
+- Falso positivo descartado: `.hero-trust-row` medido sobre el fondo del body daba 1.49:1, pero el texto va sobre el vídeo con degradado oscuro. Medido sobre los píxeles reales de una captura: **9.06:1**.
 
-### 6. Imágenes sin optimizar (~620 KB en JPG)
-- `hero-walk.jpg` = **287 KB** servido tal cual, `loading="eager"`, `fetchpriority="high"` → es el LCP.
-- Las 5 imágenes no tienen `width`/`height` → Cumulative Layout Shift.
-- Sin WebP/AVIF, sin `srcset`, sin `astro:assets`. Una imagen de `public/` no lleva hash, así que tampoco es cacheable de forma inmutable.
-- Fix: migrar a `astro:assets` / `<Image>` y exportar a WebP con fallback.
+### 8. Vídeo y póster del hero sin optimizar (4.7 MB en la ruta crítica)
+`hero-walk.mp4` pesaba 4.2 MB (1920×1080, 2.4 Mbps) y el póster 476 KB. El `<video>` tiene `autoplay` y es la primera carga del sitio.
+- **Resuelto**: re-codificado a 1280×720 con bitrate objetivo (1.6 MB, −62%) y póster re-escalado a 1600×900 q78 (370 KB). `dist` total: 6.3 → 3.6 MB. Calidad verificada visualmente bajo el degradado del hero (no se ven bandas ni bloques).
 
-### 7. Sin 404 ni robots.txt
-`dist/` no contiene `404.html` ni `robots.txt`. El host servirá su 404 genérico (roto visualmente, sin salida a WhatsApp).
+### 9. Sin `theme-color` ni manifest
+- **Resuelto**: `<meta name="theme-color" content="#FAF7F2">` y `public/manifest.webmanifest` con iconos `any` y uno `maskable`. Presentes en las 5 páginas, manifest servido con 200 y `Content-Type: application/manifest+json`.
 
----
+### 10. Mockup con dato de cliente ficticio
+`PostWalkReport.astro` mostraba "Rocky (Golden mix)" en el reporte de ejemplo de una web que promete fotografía ética y autorizada.
+- **Resuelto**: "Tu perro", en el nombre y en las observaciones.
 
-## IMPORTANTES — salir a producción con estos lastima conversión o SEO
-
-### 8. Anclas bajo el header sticky
-`Header.astro:97` es `position: sticky` con altura real de 77px. Ninguna sección tiene `scroll-margin-top` (verificado: todas en `0px`). Al pulsar "Beneficios" la sección aterriza a `top: 0`, tapada por el header.
-- Fix: `scroll-margin-top: calc(var(--header-height) + 16px)` en `section[id]`, o `scroll-padding-top` en `html`.
-
-### 9. canonical y sitemap disociados
-- `BaseLayout.astro:22` genera canonical `https://happypaws.mx/paseos` (**sin** slash).
-- El sitemap generado lista `https://happypaws.mx/paseos/` (**con** slash).
-- No hay `trailingSlash` en `astro.config.mjs`. Dos URLs canónicas distintas para la misma página diluyen señales SEO.
-- Fix: fijar `trailingSlash: 'always'` (o `'never'`) explícitamente.
-
-### 10. Cero instrumentación de conversión
-No hay analytics, ni eventos, ni UTMs. El único KPI del sitio es "clics a WhatsApp" y hoy es imposible medirlo. No se puede saber de dónde viene el tráfico ni qué sección convierte.
-
-### 11. Sin encabezados de seguridad ni política de caché
-No existe `public/_headers`, `netlify.toml` ni `vercel.json`.
-- Sin CSP → sin mitigación de inyección.
-- `_astro/*` lleva hash de contenido pero se sirve sin `Cache-Control: immutable` → cada visita revalida assets que nunca cambian.
-- Sin HSTS ni `X-Content-Type-Options`.
-
-### 12. `og:image` en proporción incorrecta
-`BaseLayout.astro:19` apunta a `hero-walk.jpg`, que mide **1200x1798 (2:3 portrait)**. WhatsApp y Facebook esperan 1.91:1 (1200x630) → la tarjeta se recorta justo en el canal por donde se comparte este sitio.
-
-### 13. Accesibilidad del omnibar y del drawer móvil
-- **Drawer**: `aria-hidden="true"` con `max-height: 0`, pero los 3 enlaces siguen siendo focusables por teclado (verificado). Violación ARIA: un lector de pantalla navega a contenido "oculto".
-- **Popovers**: `role="listbox"`/`role="dialog"` sin navegación por flechas, sin mover el foco al abrir, sin atraparlo. `role="search"` en un contenedor que no es formulario de búsqueda.
-- **Sin `prefers-reduced-motion`** en ningún lado, con `scroll-behavior: smooth` global y decenas de transiciones.
-
-### 14. SEO local subexplotado
-- El JSON-LD `LocalBusiness` no tiene `postalAddress` ni `geo` → pierde fuerza en búsquedas "paseos para perros Metepec".
-- Hay 7 FAQs renderizadas y **no hay schema `FAQPage`** (quick win perdido para rich results).
-
-### 15. Sin validación de franja horaria
-El hero captura fecha pero no hora, y acepta el mismo día. El servicio es 7:00-19:00 con cita previa. Un lead puede "agendar" las 23:00.
-
-### 16. Código muerto en el repo
-- `ServiceCard.astro` (261 líneas) y `TrustSection.astro` (153) — **0 usos**.
-- `.demo-banner` en `global.css:452` — nunca renderizado.
-- `Header.astro:4` declara `currentPath` y no lo usa → nunca hay estado activo en la nav.
-- `siteConfig.whatsapp.messages.header` — nunca referenciado.
+### 11. `90vh` en el breakpoint móvil del hero
+El fix de `100vh → 100dvh` de la ronda 1 no llegó al `@media (max-width: 640px)`, que seguía en `90vh`.
+- **Resuelto**: `90dvh`.
 
 ---
 
-## MENORES — higiene
+## RONDA 1 (2026-10-12) — resuelta y verificada entonces
 
-17. **`100vh` en lugar de `100dvh`** (`index.astro:298`) → el hero se desborda con la barra dinámica del navegador móvil.
-18. **Sin `theme-color`, `manifest`, `apple-touch-icon`** → mala integración al añadir a inicio en iOS/Android.
-19. **Google Fonts desde CDN** — dependencia de terceros en la ruta crítica de render, más implicaciones GDPR. Self-hostear sirve los 2 pesos.
-20. **`body { overflow-x: hidden }`** (`global.css:109`) enmascara desbordes reales en vez de corregirlos y puede afectar `sticky`.
-21. **Mockup del reporte con "Rocky (Golden mix)"** (`PostWalkReport.astro:108`) — dato de cliente ficticio en una web que promete "fotografía ética y autorizada".
-22. **Sin tests automatizados.** No es bloqueante en una landing estática, pero no hay red que atrape una regresión de layout.
-23. **`astro ^7.3.8` exige Node ≥ 22.12** (`package.json:6`). Confirmar que el host use Node 22+; varios hosts estáticos siguen en 20 por defecto.
+Mantenido como referencia. Lo confirmado en la ronda 2 sigue en pie:
 
----
-
-## Verificado y correcto
-
-- `npm run build` compila limpio (2 páginas, 808 KB de `dist/`).
-- `astro check`: 0 errores, 0 warnings, 0 hints en 14 archivos.
-- Todos los enlaces `wa.me` llevan `target="_blank"` + `rel="noopener noreferrer"` y mensajes contextuales prellenados.
-- `.env` correctamente gitignado y **nunca commiteado** (0 commits lo tocan).
-- `dist/` gitignored, no trackeado.
-- Sitemap generado con `site` correcto.
-- Skip-link, `lang="es-MX"`, `aria-label` en CTAs, alts descriptivos en todas las imágenes.
-- El omnibar funciona end-to-end: selección de servicio, fecha (bloquea pasados, deshabilita "mes anterior" en el mes actual) y contador de mascotas (1-5) alimentan correctamente el mensaje de WhatsApp.
+- **#1 CTA sin JS** — `<a href>` real al `wa.me` servido; el JS solo reescribe el href. Verificado en el HTML servido: el href apunta al número real.
+- **#2 Domingos agendables** — deshabilitados con clase `.closed` tachada y `aria-label` explicativo.
+- **#3 Build sin variable de WhatsApp** — guardia que aborta con el nombre de la variable. **Verificado de nuevo en la ronda 2 quitando `.env`: el build falla con exit 1.**
+- **#4 Enlaces legales muertos** — `/aviso-de-privacidad/` y `/terminos-del-servicio/` existen, con derechos ARCO, plazos LFPDPPP e INAI.
+- **#6 Imágenes sin optimizar** — migradas a `astro:assets` (WebP + `width`/`height` + `srcset`).
+- **#7 Sin 404 ni robots** — ambos presentes y servidos con 200.
+- **#8 Anclas bajo el header sticky** — `scroll-margin-top: calc(var(--header-height) + 16px)` en `section[id]`.
+- **#9 canonical/sitemap** — canonical normalizado con slash en las 4 URLs, coincidiendo con el sitemap generado.
+- **#10 Instrumentación** — `dataLayer` inicializado al cargar + listener delegado.
+- **#11 Encabezados** — `_headers` (corregido en la ronda 2, ver #5 y #6 de arriba).
+- **#12 og:image** — `og-cover.jpg` 1200×630 (1.91:1) en las 5 páginas.
+- **#13 Accesibilidad omnibar/drawer** — `inert` sincronizado, foco al abrir, devuelto al cerrar con Escape, navegación por flechas en el listbox.
+- **#14 SEO local** — `postalAddress`, `geo`, `areaServed` en el JSON-LD; schema `FAQPage` en las 2 páginas con FAQs.
+- **#15 Franja horaria** — captura de hora (ver #3 de la ronda 2 para el límite de llegada).
+- **#16 Código muerto** — `ServiceCard.astro`, `TrustSection.astro`, `.demo-banner`, `currentPath` sin uso: eliminados.
+- **#17-19, 21-23** — `100dvh`, self-hosting de fuentes, `overflow-x: hidden`, mockup ficticio y `engines.node`: resueltos (#10 y #11 de la ronda 2 completan los que quedaban).
 
 ---
 
-## Orden de ataque sugerido
+## Estado actual
 
-1. Bugs funcionales: #1, #2, #3, #4, #8, #9, #15
-2. Rendimiento y LCP: #6, #19, #11
-3. Cumplimiento: #5 (contraste), #10 (analytics), #14 (schema), #7 (404/robots)
-4. Limpieza: #16, #17-#23
+- `npm run build`: 5 páginas, 3.6 MB de `dist/`.
+- `astro check`: 0 errores, 0 warnings, 0 hints en 18 archivos.
+- HTTP 200 verificado en las 5 páginas + robots, sitemap, manifest, vídeo, fuentes y favicons.
+- Cero desborde horizontal a 390px; drawer con `inert`/`aria-hidden` sincronizados.
+- JSON-LD `LocalBusiness` (con dirección y geo) en las 5 páginas; `FAQPage` donde corresponde.
+
+## Pendiente / no verificado
+
+- **`_headers`**: validado como archivo servido, no como cabeceras HTTP reales — se aplican en el host (Netlify/Cloudflare), no en `astro preview`. Falta confirmarlas tras el primer deploy.
+- **Sin tests automatizados**: no hay red que atrape una regresión de layout. No es bloqueante en una landing estática.
+- **`engines.node >= 22.12`**: confirmar que el host use Node 22+ (varios hosts estáticos siguen en 20).
+- **Analítica real**: los eventos salen al `dataLayer` en formato GA4/GTM, pero no hay snippet de GA4/GTM cargado. Hasta que se cargue uno, los clics se registran en el array sin enviarse a ninguna herramienta.

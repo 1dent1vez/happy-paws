@@ -159,7 +159,8 @@
   .location-badge {
     font-size: 0.72rem;
     font-weight: 700;
-    color: var(--color-primary);
+    /* Texto pequeño sobre el fondo del header: #EE5D1A da 3.16:1 (FALLA AA). */
+    color: var(--color-primary-text);
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
@@ -183,7 +184,8 @@
   }
 
   .nav-link:hover {
-    color: var(--color-primary);
+    /* 0.95rem sobre el fondo del header: #EE5D1A da 3.16:1 (FALLA AA). */
+    color: var(--color-primary-text);
   }
 
   .header-action {

@@ -1,0 +1,31 @@
+{
+  "name": "Happy Paws — Paseos en Foresta Dream Lagoons",
+  "short_name": "Happy Paws",
+  "description": "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. Atención 1 a 1 o grupos pequeños con reporte directo en tu teléfono.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FAF7F2",
+  "theme_color": "#FAF7F2",
+  "lang": "es-MX",
+  "icons": [
+    {
+      "src": "/favicon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logo-mark-square.png",
+      "sizes": "820x820",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

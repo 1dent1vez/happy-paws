@@ -5,13 +5,17 @@
 # Expresa lo que un sitio estático de Astro no puede declarar por sí mismo:
 # CSP, HSTS, sniffing, referrer, permissions y política de caché.
 #
+# Nota de rutas: `/*` es lo que aplica a todo el sitio. `/` a secas solo
+# cubre la portada, así que los encabezados de seguridad deben ir en `/*`
+# o las subpáginas (/paseos/, legales) se servirían sin CSP ni HSTS.
+#
 # Nota de CSP: script-src y style-src incluyen 'unsafe-inline' porque Astro
 # inyecta los <style> con scope y el JSON-LD va inline. No hay formularios ni
 # inputs en el sitio, así que connect-src queda restringido a 'self'.
 # =============================================================================
 
 # --- Seguridad: aplica a todo el sitio ---------------------------------------
-/
+/*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
@@ -24,21 +28,27 @@
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 
-# --- Assets inmutables -------------------------------------------------------
-# El nombre de archivo lleva el hash de contenido, así que pueden cachearse
-# un año. Sin esto cada visita revalida archivos que jamás cambian.
+# --- Assets con hash de contenido: inmutables --------------------------------
+# El nombre de archivo lleva el hash, así que pueden cachearse un año. Sin
+# esto cada visita revalida archivos que jamás cambian.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
+# --- Assets de public/ SIN hash: caché corta ---------------------------------
+# A diferencia de /_astro/, estos archivos se copian tal cual desde public/:
+# hero-walk.mp4, og-cover.jpg o las fuentes NO llevan hash en el nombre. Con
+# `immutable` un cambio de vídeo o de og:image tardaría hasta un año en
+# llegar a quienes ya los tienen en caché. Un día de caché con revalidación
+# mantiene el ahorro de ancho de banda sin el riesgo.
 /images/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=86400, must-revalidate
 
 /fonts/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=86400, must-revalidate
   Access-Control-Allow-Origin: *
 
 /favicon.ico
   Cache-Control: public, max-age=86400
 
-/favicon.svg
+/manifest.webmanifest
   Cache-Control: public, max-age=86400
