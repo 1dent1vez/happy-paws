@@ -1,240 +1,105 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 const pageTitle = 'Términos del Servicio | Happy Paws Foresta';
 const pageDesc =
-  'Términos y condiciones del servicio de paseo canino de Happy Paws en Foresta Dream Lagoons: alcance, requisitos, cancelaciones, limitaciones de responsabilidad y contacto.';
+  'Los acuerdos de Happy Paws para nuestros paseos: cómo trabajamos, la evaluación previa de tu perro, la seguridad durante el recorrido, los paseos grupales, cancelaciones y qué pasa en una emergencia.';
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} currentPath="/terminos-del-servicio/">
   <section class="section-wrapper section-surface legal-page">
     <div class="container legal-container">
       <span class="badge badge-orange">Condiciones del Servicio</span>
-      <h1 class="legal-title">Términos del Servicio</h1>
+      <h1 class="legal-title">Acuerdos para nuestros paseos</h1>
       <p class="legal-updated">Última actualización: octubre de 2026</p>
 
       <div class="legal-body">
-        <h2>1. Aceptación de los términos</h2>
-        <p>
-          El presente documento regula la prestación del servicio de paseo y bienestar
-          canino de <strong>Happy Paws</strong> (en adelante, "el Prestario"), ofrecido
-          exclusivamente a residentes de la comunidad de Foresta Dream Lagoons, municipio
-          de Metepec, Estado de México.
+        <p class="legal-intro">
+          En Happy Paws queremos que cada paseo sea una experiencia segura, agradable y
+          confiable, tanto para tu perro como para ti.
         </p>
+
+        <h2>1. Nuestros paseos</h2>
         <p>
-          Al contratar el servicio, ya sea por WhatsApp o mediante la continuación de los
-          paseos después de la charla de conocimiento inicial, usted declara haber leído,
-          entendido y aceptado estos términos en su totalidad, así como nuestro
+          Ofrecemos paseos individuales y grupales, coordinados directamente por WhatsApp.
+          Los horarios, la duración, el precio y el tipo de paseo se acuerdan antes de cada
+          servicio.
+        </p>
+
+        <h2>2. Conozcamos a tu perro</h2>
+        <p>
+          Antes del primer paseo, necesitamos conocer su personalidad, sus hábitos, cómo se
+          lleva con otros perros y si tiene alguna condición de salud, miedo o comportamiento
+          que debamos considerar.
+        </p>
+
+        <h2>3. Seguridad y cuidado</h2>
+        <p>
+          Durante el paseo, procuramos mantener a tu perro seguro, respetar sus necesidades y
+          seguir las indicaciones que nos compartas. Si consideramos que una situación puede
+          ponerlo en riesgo, podremos adaptar o detener el paseo.
+        </p>
+
+        <h2>4. Paseos grupales</h2>
+        <p>
+          La participación depende de que tu perro pueda convivir de manera segura con los
+          demás. Si detectamos que la dinámica no es adecuada, te lo comunicaremos y podremos
+          proponer un paseo individual.
+        </p>
+
+        <h2>5. Entrega y recepción</h2>
+        <p>
+          Acordaremos contigo el lugar y horario para recibir y entregar a tu perro. Es
+          importante que esté disponible la persona responsable en el momento acordado.
+        </p>
+
+        <h2>6. Cambios y cancelaciones</h2>
+        <p>
+          Si necesitas cancelar o cambiar un paseo, avísanos con la mayor anticipación posible
+          por WhatsApp. Cualquier condición relacionada con anticipación, cobros o
+          recuperación de paseos se te informará antes de contratar.
+        </p>
+
+        <h2>7. Si ocurre una emergencia</h2>
+        <p>
+          Si tu perro presenta algún problema durante el paseo, intentaremos contactarte de
+          inmediato y priorizaremos su seguridad. Por eso necesitamos que nos compartas un
+          teléfono disponible y los datos de contacto que consideres necesarios.
+        </p>
+
+        <h2>8. Fotos y videos</h2>
+        <p>
+          Nos encanta compartir momentos bonitos, pero solo publicaremos fotos o videos de tu
+          perro con tu autorización.
+        </p>
+
+        <h2>9. Comunicación y confianza</h2>
+        <p>
+          Si algo no te convence o necesitas hacer un cambio, puedes hablarlo directamente con
+          nosotros. Queremos construir una relación de confianza con cada familia perruna.
+        </p>
+
+        <p class="legal-note">
+          Al confirmar un paseo, aceptas estos acuerdos y las condiciones específicas que
+          hayamos conversado contigo. Consulta también nuestro
           <a href="/aviso-de-privacidad/">Aviso de Privacidad</a>.
         </p>
 
-        <h2>2. Naturaleza y alcance del servicio</h2>
-        <p>
-          El servicio consiste en el paseo, recreación y bienestar de su perro al aire
-          libre, dentro de las áreas verdes y senderos del fraccionamiento Foresta Dream
-          Lagoons. La duración efectiva de cada salida es de
-          <strong>45 a 60 minutos</strong>, adaptados a la edad, condición física y nivel
-          de energía de su mascota.
-        </p>
-        <p>El horario de operación es de <strong>lunes a sábado, de 7:00 a 19:00 hrs</strong>, con citas programadas con anticipación.</p>
-        <p>Ofrecemos dos modalidades:</p>
-        <ul>
-          <li>
-            <strong>Paseo individual:</strong> atención exclusiva, ritmo personalizado y
-            recorrido sin contacto forzado con otros perros.
-          </li>
-          <li>
-            <strong>Paseo grupal controlado:</strong> grupos reducidos de
-            <strong>3 a 4 perros</strong> como máximo, integrados únicamente tras una
-            evaluación previa de compatibilidad de temperamentos.
-          </li>
-        </ul>
-        <p class="legal-note">
-          Happy Paws es un servicio de paseo, recreación y bienestar canino. No ofrecemos
-          diagnóstico veterinario, tratamiento médico, ni modificación conductual clínica
-          de ningún tipo. Ante cualquier signo de enfermedad o lesión, contactaremos de
-          inmediato a su veterinario de cabecera y a usted.
-        </p>
-
-        <h2>3. Requisitos del cliente y de la mascota</h2>
-        <p>Para que podamos prestar el servicio, usted se compromete a:</p>
-        <ul>
-          <li>
-            Ser residente de Foresta Dream Lagoons, o contar con autorización del
-            residente propietario de la vivienda.
-          </li>
-          <li>
-            Mantener vigente el <strong>esquema básico de vacunación</strong> (rabia y
-            múltiple) y la <strong>desparasitación</strong> de su mascota.
-          </li>
-          <li>
-            Proveer un <strong>arnés o pechera ergonómica</strong> en buen estado, con
-            placa de identificación y teléfono legible.
-          </li>
-          <li>
-            No solicitar el uso de collares de castigo, de púas ni de ningún otro
-            elemento que pueda causar daño o malestar a su mascota.
-          </li>
-          <li>
-            Informarnos con veracidad sobre alergias, medicamentos, historial de
-            reactividad, miedos o cualquier condición relevante de su mascota.
-          </li>
-          <li>
-            Proporcionar un <strong>contacto de emergencia</strong> y el número de su
-            veterinario de cabecera.
-          </li>
-        </ul>
-        <p>
-          La omisión o falsedad de esta información podrá dar lugar a la suspensión
-          inmediata del servicio, sin responsabilidad alguna para el Prestario.
-        </p>
-
-        <h2>4. Proceso de ingreso y evaluación</h2>
-        <p>
-          Todo servicio inicia con una <strong>charla de conocimiento</strong>, en la que
-          acudimos a su domicilio para conocer a su mascota, revisar su equipo y acordar
-          la ruta y modalidad idóneas. Para el paseo grupal se requiere además una sesión
-          de observación previa de compatibilidad con el grupo.
-        </p>
-        <p>
-          Nos reservamos el derecho de admisión: podemos declinar la prestación del
-          servicio, o recomendar exclusivamente la modalidad individual, cuando la
-          seguridad o el bienestar de su mascota, de otros perros o de nuestro equipo así
-          lo requiera. Esta determinación se comunica de forma transparente.
-        </p>
-
-        <h2>5. Tarifas, cobro y pagos</h2>
-        <p>
-          Las tarifas por sesión o paquete mensual se cotizan de forma personalizada por
-          WhatsApp, según la frecuencia requerida y la modalidad elegida.
-        </p>
-        <ul>
-          <li>Los precios se cotizan en pesos mexicanos (MXN) e incluyen IVA cuando aplica.</li>
-          <li>
-            El pago se acuerda previamente entre las partes (por sesión, semanal o
-            mensual).
-          </li>
-          <li>
-            Los paquetes tienen la vigencia y condiciones específicas que se acuerden al
-            contratarlos.
-          </li>
-        </ul>
-
-        <h2>6. Cancelaciones, cambios y reposiciones</h2>
-        <ul>
-          <li>
-            <strong>Cancelación por parte del cliente:</strong> solicitamos aviso con la
-            mayor anticipación posible por WhatsApp para liberar el horario.
-          </li>
-          <li>
-            <strong>Clima adverso:</strong> ante lluvia intensa, tormenta o temperaturas
-            que pongan en riesgo la integridad de su mascota, pausamos el recorrido en
-            zonas cubiertas o coordinamos por WhatsApp el <strong>reagendamiento o la
-            reposición</strong> del tiempo perdido, sin costo adicional para usted.
-          </li>
-          <li>
-            <strong>Prueba de asfalto:</strong> en días soleados realizamos la prueba
-            táctil antes de caminar. Si el pavimento quema, se recorren exclusivamente
-            áreas verdes con sombra o se reprograma a una franja más fresca.
-          </li>
-          <li>
-            <strong>Inasistencia del cliente:</strong> si no es posible localizarlo o
-            acceder a su mascota en la hora acordada, se aplicará la política de
-            cancelación que se haya convenido.
-          </li>
-        </ul>
-
-        <h2>7. Reporte post-paseo y fotografía</h2>
-        <p>
-          Al concluir cada salida le enviaremos por WhatsApp un reporte con hora de
-          inicio y fin, duración, registro de hidratación y necesidades fisiológicas, y
-          observaciones de comportamiento.
-        </p>
-        <p>
-          La <strong>fotografía o video de su mascota requiere su autorización previa y
-          expresa</strong>, la cual puede otorgar o retirar en cualquier momento. Las
-          imágenes son de uso exclusivo para su reporte personal o para los fines que
-          acordemos con usted; no las publicamos ni las usamos con fines promocionales
-          sin su consentimiento por escrito.
-        </p>
-
-        <h2>8. Limitaciones de responsabilidad</h2>
-        <p>Happy Paws no será responsable por:</p>
-        <ul>
-          <li>
-            Daños, lesiones o enfermedades preexistentes que no fueran informadas con
-            veracidad al momento de contratar.
-          </li>
-          <li>
-            Contingencias derivadas de equipo proporcionado por el cliente que se
-            encuentre en mal estado, pese a haber sido reportado en la charla de
-            conocimiento.
-          </li>
-          <li>
-            Retrasos o suspensiones del servicio causados por caso fortuito, fuerza
-            mayor, desastre natural, o restricciones de acceso impuestas por la
-            administración del fraccionamiento o por autoridades.
-          </li>
-          <li>
-            Reacciones de su mascota a estímulos del entorno que no pudieran preverse
-            razonablemente, siempre que se hayan observado nuestras medidas de seguridad
-            y manejo respetuoso.
-          </li>
-        </ul>
-        <p>
-          En caso de presentarse una contingencia durante el paseo, actuaremos con
-          diligencia para garantizar la seguridad de su mascota y le informaremos de
-          inmediato.
-        </p>
-
-        <h2>9. Suspensión y terminación del servicio</h2>
-        <p>
-          Cualquiera de las partes puede dar por terminado el servicio en cualquier
-          momento, con aviso por WhatsApp. Podremos suspender o cancelar el servicio de
-          forma inmediata, sin responsabilidad para el Prestario, en caso de:
-        </p>
-        <ul>
-          <li>Incumplimiento de los requisitos del punto 3.</li>
-          <li>
-            Conductas que pongan en riesgo la integridad de nuestro equipo, de su
-            mascota o de terceros.
-          </li>
-          <li>
-            Información falsa o engañosa sobre el estado de salud o el comportamiento de
-            su mascota.
-          </li>
-        </ul>
-
-        <h2>10. Modificaciones a los términos</h2>
-        <p>
-          Nos reservamos el derecho de actualizar estos términos para reflejar cambios en
-          el servicio o en la normativa aplicable. La versión vigente estará siempre
-          publicada en esta página, y los cambios sustanciales le serán informados por el
-          medio que suele usar para contactarnos.
-        </p>
-
-        <h2>11. Legislación aplicable y jurisdicción</h2>
-        <p>
-          El presente documento se rige por las leyes de los Estados Unidos Mexicanos, en
-          particular la LFPDPPP y el Código Civil Federal y del Estado de México. Para
-          cualquier controversia derivada de la interpretación o cumplimiento de estos
-          términos, las partes se someten a la jurisdicción de los tribunales competentes
-          de Metepec, Estado de México, renunciando a cualquier otro fuero que pudiera
-          corresponderles por razón de sus domicilios presentes o futuros.
-        </p>
-
-        <h2>12. Contacto</h2>
-        <p>
-          Para cualquier aclaración sobre estos términos, escríbenos por
-          <strong>WhatsApp</strong>, el canal oficial de atención de Happy Paws.
+        <p class="legal-signature">
+          <strong>Happy Paws</strong><br />
+          Paseos con cuidado, atención y cariño.
         </p>
       </div>
 
       <div class="legal-cta">
-        <p>¿Tiene alguna duda sobre las condiciones del servicio?</p>
-        <a href="/#contacto" class="btn btn-secondary">
-          Volver al inicio
-        </a>
+        <p>¿Tienes alguna duda sobre estos acuerdos?</p>
+        <WhatsAppButton
+          context="faq"
+          text="Escríbenos por WhatsApp"
+          variant="whatsapp"
+          size="lg"
+        />
       </div>
     </div>
   </section>
@@ -266,6 +131,13 @@ const pageDesc =
     margin-top: var(--space-10);
   }
 
+  .legal-intro {
+    margin-bottom: var(--space-6);
+    font-size: 1.075rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
   .legal-body h2 {
     margin-top: var(--space-10);
     margin-bottom: var(--space-4);
@@ -275,18 +147,6 @@ const pageDesc =
 
   .legal-body p {
     margin-bottom: var(--space-4);
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-  }
-
-  .legal-body ul {
-    margin: 0 0 var(--space-4) 0;
-    padding-left: var(--space-6);
-  }
-
-  .legal-body li {
-    margin-bottom: var(--space-3);
     font-size: 1rem;
     line-height: 1.7;
     color: var(--color-text-muted);
@@ -303,11 +163,20 @@ const pageDesc =
 
   /* Nota aclaratoria: se distingue del cuerpo sin depender solo del color. */
   .legal-note {
+    margin-top: var(--space-10);
     padding: var(--space-4) var(--space-5);
     background-color: var(--color-bg-alt);
     border-left: 3px solid var(--color-primary);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
     font-size: 0.925rem;
+  }
+
+  .legal-signature {
+    margin-top: var(--space-8);
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
   }
 
   .legal-cta {
