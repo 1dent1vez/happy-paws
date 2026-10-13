@@ -9,14 +9,14 @@ import WhatsAppButton from './WhatsAppButton.astro';
       <!-- Col 1: Brand Info -->
       <div class="footer-col brand-col">
         <div class="footer-logo">
-          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <rect width="32" height="32" rx="8" fill="#EE5D1A"/>
-            <path d="M16 23.5C12.8 23.5 11 21.2 11 18.8C11 16.5 13.2 15.2 16 15.2C18.8 15.2 21 16.5 21 18.8C21 21.2 19.2 23.5 16 23.5Z" fill="#FFFFFF"/>
-            <circle cx="9.5" cy="13.2" r="2" fill="#FFFFFF"/>
-            <circle cx="13.8" cy="10.5" r="2" fill="#FFFFFF"/>
-            <circle cx="18.2" cy="10.5" r="2" fill="#FFFFFF"/>
-            <circle cx="22.5" cy="13.2" r="2" fill="#FFFFFF"/>
-          </svg>
+          <img
+            src="/images/logo-mark.png"
+            alt=""
+            width="44"
+            height="20"
+            class="logo-img"
+            aria-hidden="true"
+          />
           <span class="footer-brand-name">Happy Paws</span>
         </div>
         <p class="footer-bio">
@@ -123,6 +123,13 @@ import WhatsAppButton from './WhatsAppButton.astro';
     display: flex;
     align-items: center;
     gap: var(--space-3);
+  }
+
+  .logo-img {
+    height: 30px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
   }
 
   .footer-brand-name {

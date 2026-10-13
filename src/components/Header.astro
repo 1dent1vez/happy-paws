@@ -1,16 +1,14 @@
 <header class="site-header" id="site-header">
   <div class="container header-container">
     <a href="/" class="brand-logo" aria-label="Happy Paws - Inicio">
-      <div class="logo-mark" aria-hidden="true">
-        <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
-          <rect width="32" height="32" rx="8" fill="#EE5D1A"/>
-          <path d="M16 23.5C12.8 23.5 11 21.2 11 18.8C11 16.5 13.2 15.2 16 15.2C18.8 15.2 21 16.5 21 18.8C21 21.2 19.2 23.5 16 23.5Z" fill="#FFFFFF"/>
-          <circle cx="9.5" cy="13.2" r="2" fill="#FFFFFF"/>
-          <circle cx="13.8" cy="10.5" r="2" fill="#FFFFFF"/>
-          <circle cx="18.2" cy="10.5" r="2" fill="#FFFFFF"/>
-          <circle cx="22.5" cy="13.2" r="2" fill="#FFFFFF"/>
-        </svg>
-      </div>
+      <img
+        src="/images/logo-mark.png"
+        alt=""
+        width="52"
+        height="23"
+        class="logo-img"
+        aria-hidden="true"
+      />
       <div class="brand-title-wrap">
         <span class="brand-name">Happy Paws</span>
         <span class="location-badge">Foresta Dream Lagoons</span>
@@ -134,6 +132,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  /* El logo oficial es un PNG alargado (perro sobre "PAWS"); se respeta su
+     proporcion real (2.22:1) y se limita la altura para no desbordar el header. */
+  .logo-img {
+    height: 34px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
   }
 
   .brand-title-wrap {
