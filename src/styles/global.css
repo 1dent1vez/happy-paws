@@ -465,6 +465,11 @@ div[id] {
 }
 
 /* Floating WhatsApp Mobile Bar */
+
+/* Mientras el usuario esta en el hero, la omnibar ya ofrece el CTA: mostrar
+   tambien el boton flotante pone dos llamadas a la accion compitiendo. Se
+   oculta y aparece al entrar de lleno en la seccion siguiente (lo controla
+   el IntersectionObserver de BaseLayout). */
 .floating-whatsapp {
   position: fixed;
   bottom: 20px;
@@ -480,11 +485,27 @@ div[id] {
   box-shadow: 0 8px 24px rgba(18, 140, 126, 0.45);
   font-weight: 600;
   font-size: 0.95rem;
-  transition: all var(--transition-normal);
+  transition:
+    opacity var(--transition-normal),
+    transform var(--transition-normal),
+    visibility var(--transition-normal),
+    background-color var(--transition-normal),
+    box-shadow var(--transition-normal);
   text-decoration: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  pointer-events: none;
 }
 
-.floating-whatsapp:hover {
+.floating-whatsapp.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.floating-whatsapp.is-visible:hover {
   background-color: var(--color-whatsapp-deep);
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 12px 28px rgba(7, 94, 84, 0.55);

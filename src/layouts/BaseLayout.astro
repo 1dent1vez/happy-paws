@@ -156,6 +156,42 @@ const schemaData = {
   import { initConversionTracking } from '../lib/tracking';
 
   initConversionTracking();
+
+  // El CTA flotante compite con la omnibar mientras el usuario está en el
+  // hero, así que se mantiene oculto hasta que el hero queda fuera de
+  // pantalla. Se usa un listener de scroll con rAF en lugar de
+  // IntersectionObserver porque el umbral exacto ("el hero ya no se ve")
+  // necesita la posición real del elemento, y así se evita depender de que
+  // el umbral de intersección se calcule como se espera.
+  const floatingCta = document.getElementById('floating-cta');
+  const hero = document.querySelector('.hero-fullscreen, .page-hero');
+
+  if (floatingCta) {
+    // Sin hero (páginas legales, 404) no hay CTA con el que competir: visible.
+    if (!hero) {
+      floatingCta.classList.add('is-visible');
+    } else {
+      let pendiente = false;
+
+      const actualizar = () => {
+        pendiente = false;
+        // El hero ocupa toda la pantalla inicial; cuando su borde inferior
+        // pasa de 0 es que quedó completamente fuera de vista.
+        const heroFuera = hero.getBoundingClientRect().bottom <= 0;
+        floatingCta.classList.toggle('is-visible', heroFuera);
+      };
+
+      const alScroll = () => {
+        if (pendiente) return;
+        pendiente = true;
+        requestAnimationFrame(actualizar);
+      };
+
+      window.addEventListener('scroll', alScroll, { passive: true });
+      window.addEventListener('resize', alScroll, { passive: true });
+      actualizar();
+    }
+  }
 </script>
 
 <style>
