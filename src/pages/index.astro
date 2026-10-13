@@ -22,6 +22,19 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
   <!-- ================= 1. FULL-SCREEN HERO (Estilo Petme con Omni-bar al centro) ================= -->
   <section class="hero-fullscreen" id="inicio">
     <div class="hero-bg-container" aria-hidden="true">
+      <!-- Vídeo del hero: la imagen queda como respaldo si el mp4 no carga
+           o si el usuario tiene el ahorro de datos activo. -->
+      <video
+        class="hero-bg-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/images/hero-poster.jpg"
+      >
+        <source src="/images/hero-walk.mp4" type="video/mp4" />
+      </video>
       <Image
         src={heroWalk}
         alt=""
@@ -335,13 +348,36 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
     overflow: hidden;
   }
 
-  .hero-bg-image {
-    /* <Image> emite width/height nativos; sin anularlos la foto aparecería
-       con su relación de aspecto original en lugar de cubrir el hero. */
+  /* El vídeo cubre el hero igual que la foto. Se apila encima: mientras no
+     reproduce se ve la imagen de debajo, así el fallback es automático. */
+  .hero-bg-video {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center 35%;
+    z-index: 2;
+  }
+
+  .hero-bg-image {
+    /* <Image> emite width/height nativos; sin anularlos la foto aparecería
+       con su relación de aspecto original en lugar de cubrir el hero. */
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    z-index: 1;
+  }
+
+  /* Con el ahorro de datos o si el mp4 falla, el vídeo se queda en el
+     póster: se quita de encima para que no tape la imagen. */
+  @media (prefers-reduced-data: reduce) {
+    .hero-bg-video {
+      display: none;
+    }
   }
 
   .hero-bg-overlay {
@@ -350,6 +386,9 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
     left: 0;
     width: 100%;
     height: 100%;
+    /* Debe ir por encima del vídeo (z-index 2) o el degradado no se aplica
+       y el texto pierde contraste sobre la imagen en movimiento. */
+    z-index: 3;
     background: linear-gradient(
       180deg,
       rgba(20, 18, 16, 0.48) 0%,
