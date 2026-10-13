@@ -1,10 +1,3 @@
----
-
-interface Props {
-  currentPath?: string;
-}
----
-
 <header class="site-header" id="site-header">
   <div class="container header-container">
     <a href="/" class="brand-logo" aria-label="Happy Paws - Inicio">
@@ -58,7 +51,11 @@ interface Props {
   </div>
 
   <!-- Mobile Clean Drawer -->
-  <div class="mobile-nav-drawer" id="mobile-nav" aria-hidden="true">
+  <!-- `inert` mientras está cerrado: sin él los enlaces siguen siendo focusables
+       por teclado aunque aria-hidden="true" y max-height:0 los oculten, así que
+       un lector de pantalla y el tabulador llegan a contenido "invisible".
+       El atributo se mantiene sincronizado desde el script de abajo. -->
+  <div class="mobile-nav-drawer" id="mobile-nav" aria-hidden="true" inert>
     <nav class="mobile-nav-links" aria-label="Navegación móvil">
       <a href="/#beneficios" class="mobile-link">Beneficios para tu Mascota</a>
       <a href="/#como-funciona" class="mobile-link">Cómo Funciona</a>
@@ -72,22 +69,38 @@ interface Props {
   const toggleBtn = document.getElementById('mobile-toggle');
   const mobileNav = document.getElementById('mobile-nav');
 
+  /** `inert` es lo que saca al drawer del orden de tabulación cuando está
+   *  cerrado; `aria-hidden` solo lo anuncia. Hay que mantener ambos en sync. */
+  const setOpen = (open: boolean) => {
+    toggleBtn?.setAttribute('aria-expanded', String(open));
+    mobileNav?.setAttribute('aria-hidden', String(!open));
+    mobileNav?.classList.toggle('is-open', open);
+    toggleBtn?.classList.toggle('is-active', open);
+    if (open) {
+      mobileNav?.removeAttribute('inert');
+    } else {
+      mobileNav?.setAttribute('inert', '');
+    }
+  };
+
   if (toggleBtn && mobileNav) {
     toggleBtn.addEventListener('click', () => {
       const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
-      mobileNav.setAttribute('aria-hidden', String(isExpanded));
-      mobileNav.classList.toggle('is-open', !isExpanded);
-      toggleBtn.classList.toggle('is-active', !isExpanded);
+      setOpen(!isExpanded);
     });
 
+    // Cerrar al elegir un destino: en una landing de una sola página el
+    // drawer abierto tapa el contenido al que se acaba de saltar.
     mobileNav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        mobileNav.setAttribute('aria-hidden', 'true');
-        mobileNav.classList.remove('is-open');
-        toggleBtn.classList.remove('is-active');
-      });
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    // Escape cierra el drawer, igual que los popovers del hero.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggleBtn.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggleBtn.focus();
+      }
     });
   }
 </script>

@@ -16,10 +16,16 @@ export interface SiteConfig {
     description: string;
     note: string;
     community: string;
+    city: string;
+    state: string;
+    latitude: number;
+    longitude: number;
   };
   schedule: {
     days: string;
     hours: string;
+    opens: string;
+    closes: string;
     note: string;
   };
   whatsapp: {
@@ -28,7 +34,6 @@ export interface SiteConfig {
     isConfigured: boolean;
     messages: {
       main: string;
-      header: string;
       floating: string;
       individual: string;
       group: string;
@@ -57,11 +62,17 @@ export const siteConfig: SiteConfig = {
     title: 'Zona Exclusiva',
     description: 'Servicio disponible exclusivamente para residentes de Foresta Dream Lagoons.',
     note: 'Paseos seguros y tranquilos dentro del fraccionamiento.',
-    community: 'Foresta Dream Lagoons'
+    community: 'Foresta Dream Lagoons',
+    city: 'Metepec',
+    state: 'Estado de México',
+    latitude: 19.2625,
+    longitude: -99.6042
   },
   schedule: {
     days: 'Lunes a Sábado',
     hours: '7:00 a 19:00 hrs',
+    opens: '07:00',
+    closes: '19:00',
     note: 'Horarios programados con previa cita.'
   },
   whatsapp: {
@@ -70,7 +81,6 @@ export const siteConfig: SiteConfig = {
     isConfigured,
     messages: {
       main: 'Hola, quiero conocer los paseos de Happy Paws en Foresta Dream Lagoons y consultar disponibilidad.',
-      header: 'Hola, me interesa solicitar informes sobre los paseos de Happy Paws en Foresta.',
       floating: 'Hola, quiero consultar la disponibilidad para pasear a mi perro en Foresta Dream Lagoons.',
       individual: 'Hola, me interesa el paseo individual para mi perro en Foresta. Me comparten tarifas y funcionamiento?',
       group: 'Hola, quiero información sobre los paseos grupales y cómo evalúan la compatibilidad entre perros en Foresta.',

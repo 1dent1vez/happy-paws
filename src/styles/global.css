@@ -172,6 +172,25 @@ p.lead {
   outline-offset: 3px;
 }
 
+/* Motion preference.
+   El sitio usa scroll suave y decenas de transiciones. Para quien pide reducir
+   el movimiento (trastornos vestibulares, migraña), el scroll instantáneo en
+   anclas es la diferencia entre poder usar la navegación o no. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -219,6 +238,14 @@ p.lead {
 
 .section-surface {
   background-color: var(--color-surface);
+}
+
+/* Sections with an id are anchor targets from the header nav and footer links.
+   The header is sticky (77px), so anchor jumps must clear it or the section
+   heading lands underneath and reads as blank space. */
+section[id],
+div[id] {
+  scroll-margin-top: calc(var(--header-height) + var(--space-4));
 }
 
 /* Section Headers */
@@ -448,20 +475,40 @@ p.lead {
   }
 }
 
-/* Demo Notice Banner */
-.demo-banner {
-  background-color: #FFFBEB;
-  border-bottom: 1px solid #FDE68A;
-  color: #92400E;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-  text-align: center;
+/* Floating WhatsApp Mobile Bar */
+.floating-whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  gap: 10px;
+  background-color: #25D366;
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition-normal);
+  text-decoration: none;
 }
 
-.demo-banner strong {
-  font-weight: 600;
+.floating-whatsapp:hover {
+  background-color: #20BD5A;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.55);
+  color: #FFFFFF;
+}
+
+@media (max-width: 640px) {
+  .floating-whatsapp {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
 }

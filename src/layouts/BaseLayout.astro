@@ -3,6 +3,7 @@ import { siteConfig } from '../config/site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { initConversionTracking } from '../lib/tracking';
 import '../styles/global.css';
 
 interface Props {
@@ -16,33 +17,56 @@ const {
   title = `${siteConfig.name} — Paseos en Foresta Dream Lagoons`,
   description = siteConfig.description,
   currentPath = '/',
-  ogImage = '/images/hero-walk.jpg'
+  ogImage = '/images/og-cover.jpg'
 } = Astro.props;
 
-const canonicalUrl = new URL(currentPath, siteConfig.url).href;
+// `new URL('/paseos', base)` normaliza a '/paseos' y se come el slash final,
+// mientras que Astro con trailingSlash:'always' sirve '/paseos/'. El canonical
+// debe coincidir con la URL realmente servida o se emiten dos canónicas para
+// la misma página. Las rutas internas ya llegan con slash; se garantiza aquí.
+const normalizedPath =
+  currentPath === '/' ? '/' : currentPath.replace(/\/?$/, '/');
+
+const canonicalUrl = new URL(normalizedPath, siteConfig.url).href;
 const fullOgImageUrl = new URL(ogImage, siteConfig.url).href;
 
+// LocalBusiness: postalAddress y geo eran los campos que faltaban para que
+// Google asociara el negocio a Metepec en búsquedas locales. Sin ellos el
+// snippet queda genérico y no compite por "paseos para perros Metepec".
 const schemaData = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   'name': siteConfig.name,
+  'legalName': siteConfig.legalName,
   'description': siteConfig.description,
   'url': siteConfig.url,
   'telephone': siteConfig.whatsapp.phoneFormatted,
+  'image': fullOgImageUrl,
+  'priceRange': '$$',
+  'currenciesAccepted': 'MXN',
+  'address': {
+    '@type': 'PostalAddress',
+    'addressLocality': siteConfig.coverage.city,
+    'addressRegion': siteConfig.coverage.state,
+    'addressCountry': 'MX'
+  },
+  'geo': {
+    '@type': 'GeoCoordinates',
+    'latitude': siteConfig.coverage.latitude,
+    'longitude': siteConfig.coverage.longitude
+  },
   'areaServed': {
-    '@type': 'AdministrativeArea',
+    '@type': 'Place',
     'name': siteConfig.coverage.community
   },
   'openingHoursSpecification': [
     {
       '@type': 'OpeningHoursSpecification',
       'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      'opens': '07:00',
-      'closes': '19:00'
+      'opens': siteConfig.schedule.opens,
+      'closes': siteConfig.schedule.closes
     }
-  ],
-  'priceRange': '$$',
-  'image': fullOgImageUrl
+  ]
 };
 ---
 
@@ -64,6 +88,9 @@ const schemaData = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={fullOgImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={siteConfig.tagline} />
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:locale" content="es_MX" />
 
@@ -74,16 +101,21 @@ const schemaData = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={fullOgImageUrl} />
 
-    <!-- Typography (Google Fonts - Plus Jakarta Sans) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Tipografía: Plus Jakarta Sans auto-alojada. Sin petición a Google Fonts
+         en la ruta crítica de render y sin terceros en la request inicial.
+         Es una fuente variable: un woff2 cubre los pesos 400-800. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/plus-jakarta-sans-latin-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
+    <link rel="stylesheet" href="/fonts/plus-jakarta-sans.css" />
 
     <!-- Structured Data JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+    <slot name="head" />
   </head>
   <body>
     <!-- Skip to main content -->
@@ -91,7 +123,7 @@ const schemaData = {
 
 
     <!-- Global Header -->
-    <Header currentPath={currentPath} />
+    <Header />
 
     <!-- Main Content Landmark -->
     <main id="main-content">
@@ -112,6 +144,14 @@ const schemaData = {
     />
   </body>
 </html>
+
+<script>
+  // Un único listener delegado mide todos los clics a WhatsApp de la página,
+  // incluidos los que el JS del hero genera en tiempo de ejecución.
+  import { initConversionTracking } from '../lib/tracking';
+
+  initConversionTracking();
+</script>
 
 <style>
   .skip-link {

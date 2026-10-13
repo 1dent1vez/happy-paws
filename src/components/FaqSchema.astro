@@ -1,0 +1,25 @@
+---
+import { faqs } from '../config/faqs';
+
+/**
+ * Schema FAQPage.
+ *
+ * Habilita rich results en Google para las 7 preguntas que el acordeón ya
+ * renderiza. Antes no existía: el contenido estaba visible para el usuario
+ * pero era invisible para el rastreador como dato estructurado.
+ */
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
