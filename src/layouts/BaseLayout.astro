@@ -41,6 +41,9 @@ const schemaData = {
   'url': siteConfig.url,
   'telephone': siteConfig.whatsapp.phoneFormatted,
   'image': fullOgImageUrl,
+  // schema.org exige URL absoluta para `logo`; con ruta relativa Google la
+  // descarta. Se usa el lockup completo (perro + "PAWS") que es la marca oficial.
+  'logo': new URL('/images/logo-full.png', siteConfig.url).href,
   'priceRange': '$$',
   'currenciesAccepted': 'MXN',
   'address': {

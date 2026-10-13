@@ -10,6 +10,15 @@ const pageDesc =
 <BaseLayout title={pageTitle} description={pageDesc} currentPath="/404/">
   <section class="section-wrapper section-surface notfound">
     <div class="container notfound-container">
+      <img
+        src="/images/logo-full.png"
+        alt="Happy Paws"
+        width="220"
+        height="140"
+        class="notfound-logo"
+        loading="eager"
+        fetchpriority="high"
+      />
       <span class="badge badge-orange">Error 404</span>
       <h1 class="notfound-title">Esta página no existe</h1>
       <p class="notfound-text">
@@ -56,6 +65,12 @@ const pageDesc =
     flex-direction: column;
     align-items: center;
     gap: var(--space-4);
+  }
+
+  .notfound-logo {
+    height: auto;
+    width: clamp(180px, 40vw, 240px);
+    margin-bottom: var(--space-2);
   }
 
   .notfound-title {
