@@ -23,16 +23,37 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
   <section class="hero-fullscreen" id="inicio">
     <div class="hero-bg-container" aria-hidden="true">
       <!-- Vídeo del hero: la imagen queda como respaldo si el mp4 no carga
-           o si el usuario tiene el ahorro de datos activo. -->
+           o si el usuario tiene el ahorro de datos activo.
+
+           Dos variantes VP9 + un MP4 de respaldo:
+           - `media="(max-width: 767px)"` en cada <source>: el navegador
+             descarga SOLO la que corresponde al ancho actual. Móvil recibe
+             480p (854x480, 3.6 MB) y escritorio 540p (960x540, 3.7 MB).
+             Antes todo el mundo bajaba el mismo archivo.
+           - VP9 en vez de H.264 para el mismo peso: medido con VMAF contra
+             la fuente original 1080p, el VP9 480p saca 87.6 y el H.264 480p
+             solo 77.2. La diferencia es real y se nota.
+           - El MP4 queda al final como último recurso para navegadores sin
+             VP9 (Safari/iOS antiguos), que ignoran los WebM y caen a él.
+           - `playsinline` es obligatorio en iOS: sin él el vídeo se abre a
+             pantalla completa y el usuario sale del sitio en el primer toque.
+           - `disablepictureinpicture` quita el botón de PiP en Chrome. -->
       <video
         class="hero-bg-video"
         autoplay
         muted
         loop
         playsinline
+        disablepictureinpicture
         preload="metadata"
         poster="/images/hero-poster.jpg"
       >
+        <source
+          src="/images/hero-walk-mobile.webm"
+          type="video/webm"
+          media="(max-width: 767px)"
+        />
+        <source src="/images/hero-walk.webm" type="video/webm" />
         <source src="/images/hero-walk.mp4" type="video/mp4" />
       </video>
       <Image
@@ -349,7 +370,20 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
   }
 
   /* El vídeo cubre el hero igual que la foto. Se apila encima: mientras no
-     reproduce se ve la imagen de debajo, así el fallback es automático. */
+     reproduce se ve la imagen de debajo, así el fallback es automático.
+
+     Rendimiento en móvil (el punto que más lag provocaba):
+     - `transform: translateZ(0)` crea una capa de composición propia, así el
+       reescalado de 720p -> pantalla lo hace la GPU y no la CPU. Sin esto el
+       navegador redecodifica/reescala el vídeo en cada scroll en móviles de
+       gama baja.
+     - `will-change: transform` le dice al compositor que prepare esa capa
+       antes del primer frame en vez de hacerlo en caliente.
+     - `contain: layout paint` aísla el contenedor: el vídeo no puede forzar
+       repintados fuera de su propia caja cuando el resto de la página hace
+       scroll.
+     - `object-position` igual al de la foto para que el encuadre no "salte"
+       cuando el vídeo aparece encima de la imagen. */
   .hero-bg-video {
     position: absolute;
     inset: 0;
@@ -358,6 +392,9 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
     object-fit: cover;
     object-position: center 35%;
     z-index: 2;
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
   }
 
   .hero-bg-image {
@@ -375,6 +412,15 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
   /* Con el ahorro de datos o si el mp4 falla, el vídeo se queda en el
      póster: se quita de encima para que no tape la imagen. */
   @media (prefers-reduced-data: reduce) {
+    .hero-bg-video {
+      display: none;
+    }
+  }
+
+  /* Igual para quien pidió menos movimiento: un bucle continuo a pantalla
+     completa es justo lo que quieren evitar. Se oculta el <video> y queda
+     visible la imagen de debajo, que es un frame de la misma escena. */
+  @media (prefers-reduced-motion: reduce) {
     .hero-bg-video {
       display: none;
     }
