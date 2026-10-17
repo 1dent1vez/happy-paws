@@ -41,6 +41,9 @@ const schemaData = {
   'legalName': siteConfig.legalName,
   'description': siteConfig.description,
   'url': siteConfig.url,
+  'sameAs': [
+    siteConfig.instagram.url
+  ],
   'telephone': siteConfig.whatsapp.phoneFormatted,
   'image': fullOgImageUrl,
   // schema.org exige URL absoluta para `logo`; con ruta relativa Google la

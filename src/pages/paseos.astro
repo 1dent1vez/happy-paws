@@ -66,7 +66,10 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
         <!-- MODALIDAD INDIVIDUAL -->
         <div class="modality-detail-card" id="individual">
           <div class="modality-header">
-            <span class="modality-tag tag-individual">Atención 1 a 1</span>
+            <div class="modality-top-row">
+              <span class="modality-tag tag-individual">Atención 1 a 1</span>
+              <span class="modality-subtag">100% Dedicado</span>
+            </div>
             <h3 class="modality-title">Paseo Individual Exclusivo</h3>
             <p class="modality-subtitle">Atención dedicada, ritmo sereno y exploración a su medida.</p>
           </div>
@@ -78,32 +81,67 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
 
             <div class="modality-points">
               <h4>¿Cómo funciona y qué incluye?</h4>
-              <ul>
-                <li>
-                  <strong>Atención 100% enfocada:</strong> El paseador está exclusivamente pendiente de las señales corporales y bienestar de tu perro.
+              <ul class="points-list">
+                <li class="point-item">
+                  <span class="point-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="point-content">
+                    <strong>Atención 100% enfocada:</strong> El paseador está exclusivamente pendiente de las señales corporales y bienestar de tu perro.
+                  </div>
                 </li>
-                <li>
-                  <strong>Ritmo personalizado:</strong> Si necesita parar a olfatear 5 minutos un mismo punto o caminar despacio por su edad, respetamos sus tiempos.
+                <li class="point-item">
+                  <span class="point-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="point-content">
+                    <strong>Ritmo personalizado:</strong> Si necesita parar a olfatear 5 minutos un mismo punto o caminar despacio por su edad, respetamos sus tiempos.
+                  </div>
                 </li>
-                <li>
-                  <strong>Ruta tranquila en Foresta:</strong> Recorremos senderos seguros y áreas verdes de baja congestión dentro del fraccionamiento.
+                <li class="point-item">
+                  <span class="point-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="point-content">
+                    <strong>Ruta tranquila en Foresta:</strong> Recorremos senderos seguros y áreas verdes de baja congestión dentro del fraccionamiento.
+                  </div>
                 </li>
-                <li>
-                  <strong>Sin contacto forzado:</strong> Evitamos cruces incómodos con otros perros para mantenerlo siempre en calma.
+                <li class="point-item">
+                  <span class="point-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="point-content">
+                    <strong>Sin contacto forzado:</strong> Evitamos cruces incómodos con otros perros para mantenerlo siempre en calma.
+                  </div>
                 </li>
-                <li>
-                  <strong>Reporte y foto post-salida:</strong> Mensaje detallado al entregarlo en tu puerta.
+                <li class="point-item">
+                  <span class="point-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="point-content">
+                    <strong>Reporte y foto post-salida:</strong> Mensaje detallado al entregarlo en tu puerta.
+                  </div>
                 </li>
               </ul>
             </div>
 
             <div class="modality-profile">
-              <span class="profile-label">Ideal para:</span>
+              <div class="profile-header">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="profile-icon" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span class="profile-label">Perfil Recomendado</span>
+              </div>
               <p>Perros tímidos, reactivos a la correa, adultos mayores (senior), cachorros en proceso de aprendizaje o familias que buscan atención exclusiva.</p>
             </div>
 
             <div class="modality-pricing-box">
-              <span class="pricing-label">Tarifa y horarios:</span>
+              <div class="pricing-header">
+                <span class="pricing-label">Tarifa y horarios</span>
+                <span class="pricing-badge">Respuesta &lt;15 min</span>
+              </div>
               <p class="pricing-text">
                 La tarifa por sesión o paquete mensual se cotiza directamente por WhatsApp según tu frecuencia requerida en Foresta.
               </p>
@@ -122,7 +160,13 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
         <!-- MODALIDAD GRUPAL -->
         <div class="modality-detail-card modality-detail-featured" id="grupal">
           <div class="modality-header">
-            <span class="modality-tag tag-group">Grupos Pequeños</span>
+            <div class="modality-top-row">
+              <span class="modality-tag tag-group">Grupos Pequeños</span>
+              <span class="featured-badge-pill">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                Más Solicitado
+              </span>
+            </div>
             <h3 class="modality-title">Paseo Grupal Controlado</h3>
             <p class="modality-subtitle">Socialización equilibrada en manadas reducidas y compatibles.</p>
           </div>
@@ -134,32 +178,67 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
 
             <div class="modality-points">
               <h4>¿Cómo funciona y qué incluye?</h4>
-              <ul>
-                <li>
-                  <strong>Máximo 3 a 4 perros por paseador:</strong> Cero saturación. Mantenemos el control visual y físico en cada segundo de la caminata.
+              <ul class="points-list">
+                <li class="point-item">
+                  <span class="point-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="point-content">
+                    <strong>Máximo 3 a 4 perros por paseador:</strong> Cero saturación. Mantenemos el control visual y físico en cada segundo de la caminata.
+                  </div>
                 </li>
-                <li>
-                  <strong>Evaluación previa obligatoria:</strong> Nunca integramos a un perro nuevo sin antes haber evaluado su lenguaje corporal y compatibilidad con el grupo.
+                <li class="point-item">
+                  <span class="point-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="point-content">
+                    <strong>Evaluación previa obligatoria:</strong> Nunca integramos a un perro nuevo sin antes haber evaluado su lenguaje corporal y compatibilidad con el grupo.
+                  </div>
                 </li>
-                <li>
-                  <strong>Correas desenredadas y manejo seguro:</strong> Caminata coordinada en paralelo sin permitir tirones ni juegos bruscos con correas puestas.
+                <li class="point-item">
+                  <span class="point-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="point-content">
+                    <strong>Correas desenredadas y manejo seguro:</strong> Caminata coordinada en paralelo sin permitir tirones ni juegos bruscos con correas puestas.
+                  </div>
                 </li>
-                <li>
-                  <strong>Pausas conjuntas de descanso:</strong> Momentos de sombra e hidratación fresca individual para cada perro.
+                <li class="point-item">
+                  <span class="point-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="point-content">
+                    <strong>Pausas conjuntas de descanso:</strong> Momentos de sombra e hidratación fresca individual para cada perro.
+                  </div>
                 </li>
-                <li>
-                  <strong>Reporte de convivencia:</strong> Te informamos cómo interactuó con sus compañeros y su estado de ánimo.
+                <li class="point-item">
+                  <span class="point-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="point-content">
+                    <strong>Reporte de convivencia:</strong> Te informamos cómo interactuó con sus compañeros y su estado de ánimo.
+                  </div>
                 </li>
               </ul>
             </div>
 
             <div class="modality-profile">
-              <span class="profile-label">Ideal para:</span>
+              <div class="profile-header">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="profile-icon" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span class="profile-label">Perfil Recomendado</span>
+              </div>
               <p>Perros sociables, activos, equilibrados y con gusto por convivir y pasear al lado de otros amigos caninos.</p>
             </div>
 
             <div class="modality-pricing-box">
-              <span class="pricing-label">Tarifa y horarios:</span>
+              <div class="pricing-header">
+                <span class="pricing-label">Tarifa y horarios</span>
+                <span class="pricing-badge">Cupos Limitados</span>
+              </div>
               <p class="pricing-text">
                 Disponibilidad y cupos sujetos a compatibilidad de grupo en Foresta Dream Lagoons. Consúltanos por WhatsApp.
               </p>
@@ -194,7 +273,10 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
         <div class="timeline-item">
           <div class="timeline-dot">1</div>
           <div class="timeline-card">
-            <span class="timeline-step-badge">Paso 1: Consulta Inicial</span>
+            <div class="timeline-card-header">
+              <span class="timeline-step-badge">Paso 1: Consulta Inicial</span>
+              <span class="timeline-time-badge">~10 min vía chat</span>
+            </div>
             <h3>Evaluación y Conocimiento del Perro</h3>
             <p>
               Al escribirnos por WhatsApp recopilamos datos clave: nombre, edad, nivel de actividad, comportamiento ante ruidos o personas extrañas y antecedentes de salud. Si es para grupal, programamos una breve sesión de observación previa en Foresta.
@@ -206,7 +288,10 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
         <div class="timeline-item">
           <div class="timeline-dot">2</div>
           <div class="timeline-card">
-            <span class="timeline-step-badge">Paso 2: Día del Paseo</span>
+            <div class="timeline-card-header">
+              <span class="timeline-step-badge">Paso 2: Día del Paseo</span>
+              <span class="timeline-time-badge">Puntual en puerta</span>
+            </div>
             <h3>Llegada Puntual y Preparación</h3>
             <p>
               Te notificamos por WhatsApp al aproximarnos a tu domicilio. Saludamos con calma a tu perro, revisamos que su arnés o pechera esté debidamente ajustado y salimos sin acelerar su emoción.
@@ -218,7 +303,10 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
         <div class="timeline-item">
           <div class="timeline-dot">3</div>
           <div class="timeline-card">
-            <span class="timeline-step-badge">Paso 3: El Recorrido</span>
+            <div class="timeline-card-header">
+              <span class="timeline-step-badge">Paso 3: El Recorrido</span>
+              <span class="timeline-time-badge">45 a 60 min</span>
+            </div>
             <h3>Caminata Activa, Olfato e Hidratación</h3>
             <p>
               Caminata segura con correa holgada por rutas previamente revisadas en Foresta. Estimulación olfativa enriquecedora, paradas para tomar agua fresca limpia y recolección responsable de heces en bolsas biodegradables.
@@ -230,7 +318,10 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
         <div class="timeline-item">
           <div class="timeline-dot">4</div>
           <div class="timeline-card">
-            <span class="timeline-step-badge">Paso 4: Entrega</span>
+            <div class="timeline-card-header">
+              <span class="timeline-step-badge">Paso 4: Entrega</span>
+              <span class="timeline-time-badge">Reporte inmediato</span>
+            </div>
             <h3>Regreso Seguro y Reporte Completo</h3>
             <p>
               Entregamos a tu perro en tu puerta, limpiamos sus patitas si el piso estaba húmedo, verificamos que tenga agua limpia en su tazón y te enviamos su reporte con hora, duración, detalles y foto autorizada.
@@ -301,6 +392,13 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
               </div>
             </li>
           </ul>
+
+          <div class="req-card-footer">
+            <span class="req-footer-highlight">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Todo se revisa en la charla previa de 15 min en tu domicilio
+            </span>
+          </div>
         </div>
 
         <!-- Protocolo de Seguridad y Clima -->
@@ -339,6 +437,13 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
                 Solo tomamos fotografías de tu perro si tú nos autorizas previamente. Las fotos son exclusivamente para tu reporte personal o fines acordados.
               </p>
             </div>
+          </div>
+
+          <div class="req-card-footer">
+            <span class="req-footer-highlight">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Protocolo de prevención activa en senderos de Foresta
+            </span>
           </div>
         </div>
       </div>
@@ -471,25 +576,58 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     flex-direction: column;
     gap: var(--space-6);
     box-shadow: var(--shadow-sm);
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
   }
 
   .modality-detail-card:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 16px 36px -8px rgba(28, 25, 23, 0.1);
   }
 
   .modality-detail-featured {
-    border-color: var(--color-primary);
+    border: 1.5px solid var(--color-primary-action);
     background: #FFFDFB;
+    box-shadow: 0 12px 32px -8px rgba(194, 65, 12, 0.12), var(--shadow-sm);
   }
 
   .modality-header {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-3);
     border-bottom: 1px solid var(--color-border-subtle);
     padding-bottom: var(--space-4);
+  }
+
+  .modality-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .modality-subtag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-subtle);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+  }
+
+  .featured-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.725rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--color-primary-light);
+    color: var(--color-primary-action);
+    border: 1px solid var(--color-primary-border);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
   }
 
   .modality-tag {
@@ -504,7 +642,6 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
 
   .tag-individual {
     background: #FFF0E6;
-    /* #EE5D1A sobre #FFF0E6 da 3.03:1 (FALLA AA). */
     color: var(--color-primary-text);
   }
 
@@ -520,7 +657,6 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
 
   .modality-subtitle {
     font-size: 0.95rem;
-    /* #D94B0B sobre #FFFDFB daba 4.23:1 (FALLA AA). */
     color: var(--color-primary-text);
     font-weight: 600;
   }
@@ -536,6 +672,7 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     font-size: 0.95rem;
     color: var(--color-text-muted);
     line-height: 1.6;
+    max-width: 52ch;
   }
 
   .modality-points h4 {
@@ -546,33 +683,57 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     margin-bottom: var(--space-3);
   }
 
-  .modality-points ul {
+  .points-list {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
   }
 
-  .modality-points li {
+  .point-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
     font-size: 0.9rem;
-    color: var(--color-text);
-    padding-left: 20px;
-    position: relative;
     line-height: 1.5;
   }
 
-  .modality-points li::before {
-    content: '•';
+  .point-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: var(--color-primary-light);
     color: var(--color-primary-action);
-    position: absolute;
-    left: 4px;
-    font-size: 1.2rem;
-    top: -2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .point-content {
+    color: var(--color-text);
+    flex-grow: 1;
+    max-width: 52ch;
   }
 
   .modality-profile {
     padding-top: var(--space-4);
     border-top: 1px solid var(--color-border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .profile-icon {
+    color: var(--color-primary-action);
+    flex-shrink: 0;
   }
 
   .profile-label {
@@ -580,16 +741,15 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--color-text-subtle);
-    display: block;
-    margin-bottom: 2px;
+    color: var(--color-text-title);
   }
 
   .modality-profile p {
     font-size: 0.875rem;
-    color: var(--color-text);
+    color: var(--color-text-muted);
+    line-height: 1.5;
     margin: 0;
-    max-width: 65ch;
+    max-width: 52ch;
   }
 
   .modality-pricing-box {
@@ -601,18 +761,35 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     gap: var(--space-3);
   }
 
+  .pricing-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
   .pricing-label {
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: var(--color-text-subtle);
+    color: var(--color-text-title);
+  }
+
+  .pricing-badge {
+    font-size: 0.725rem;
+    font-weight: 700;
+    color: #15803D;
+    background-color: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
   }
 
   .pricing-text {
     font-size: 0.85rem;
     color: var(--color-text-muted);
     line-height: 1.45;
-    max-width: 65ch;
+    max-width: 52ch;
   }
 
   /* TIMELINE CONTAINER */
@@ -656,15 +833,38 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     flex-direction: column;
     gap: var(--space-2);
     box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  }
+
+  .timeline-card:hover {
+    transform: translateX(4px);
+    border-color: var(--color-primary-border);
+    box-shadow: var(--shadow-md);
+  }
+
+  .timeline-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
   }
 
   .timeline-step-badge {
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    /* #EE5D1A sobre blanco da 3.38:1 (FALLA AA). */
     color: var(--color-primary-text);
     letter-spacing: 0.05em;
+  }
+
+  .timeline-time-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-subtle);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 2px 10px;
+    border-radius: var(--radius-full);
   }
 
   .timeline-card h3 {
@@ -688,6 +888,26 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+  }
+
+  .req-card-footer {
+    padding-top: var(--space-4);
+    border-top: 1px dashed var(--color-border-subtle);
+    margin-top: auto;
+  }
+
+  .req-footer-highlight {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-title);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .req-footer-highlight svg {
+    color: var(--color-primary-action);
+    flex-shrink: 0;
   }
 
   .req-title {

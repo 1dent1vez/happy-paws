@@ -43,6 +43,10 @@ export interface SiteConfig {
       paseosPage: string;
     };
   };
+  instagram: {
+    handle: string;
+    url: string;
+  };
 }
 
 const PLACEHOLDER_PHONE = '525500000000';
@@ -122,6 +126,10 @@ export const siteConfig: SiteConfig = {
       general: 'Hola, quiero platicar con el equipo de Happy Paws sobre sus paseos en Foresta.',
       paseosPage: 'Hola, estuve revisando los detalles de sus paseos y quisiera agendar una evaluación para mi perro en Foresta.'
     }
+  },
+  instagram: {
+    handle: '@happypawsmetepec',
+    url: 'https://www.instagram.com/happypawsmetepec?cplk=MTk2bTAxN3RzamttdQ=='
   }
 };
 
