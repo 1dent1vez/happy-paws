@@ -25,3 +25,16 @@ pnpm-debug.log*
 .idea/
 .vercel
 .env*
+
+# Impeccable binary downloads
+**/scripts/bin/**
+**/bin/**
+
+# Multi-provider harness folders
+.agent/
+.claude/
+.codex/
+.gemini/
+.hermes/
+.kiro/
+.opencode/

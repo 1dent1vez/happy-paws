@@ -35,12 +35,17 @@ import { faqs } from '../config/faqs';
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .faq-item:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-sm);
   }
 
   .faq-item[open] {
     border-color: var(--color-primary-border);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
   }
 
   .faq-question {
@@ -55,6 +60,7 @@ import { faqs } from '../config/faqs';
     gap: var(--space-4);
     list-style: none;
     user-select: none;
+    transition: color var(--transition-fast);
   }
 
   .faq-question::-webkit-details-marker {
@@ -62,21 +68,20 @@ import { faqs } from '../config/faqs';
   }
 
   .faq-question:hover {
-    /* 1.05rem sobre blanco: el naranja de marca da 3.38:1 (FALLA AA). */
-    color: var(--color-primary-text);
+    color: var(--color-primary-action);
   }
 
   .faq-icon-wrap {
     flex-shrink: 0;
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: var(--color-primary-light);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-primary);
-    transition: transform var(--transition-fast);
+    color: var(--color-primary-action);
+    transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
   }
 
   .faq-icon-toggle {
@@ -94,8 +99,9 @@ import { faqs } from '../config/faqs';
   }
 
   .faq-item[open] .faq-icon-wrap {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-action);
     color: #FFFFFF;
+    transform: rotate(90deg);
   }
 
   .faq-answer {
@@ -109,5 +115,6 @@ import { faqs } from '../config/faqs';
 
   .faq-answer p {
     margin: 0;
+    max-width: 72ch;
   }
 </style>

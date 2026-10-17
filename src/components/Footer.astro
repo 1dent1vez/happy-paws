@@ -139,10 +139,14 @@ import WhatsAppButton from './WhatsAppButton.astro';
     letter-spacing: -0.02em;
   }
 
+  .site-footer p {
+    color: #D6CBC0;
+  }
+
   .footer-bio {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: #B5ABA0;
+    color: #D6CBC0;
   }
 
   .footer-heading {
@@ -162,25 +166,23 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .footer-links a {
-    color: #B5ABA0;
+    color: #C4B9AD;
     font-size: 0.95rem;
     transition: color var(--transition-fast);
   }
 
   .footer-links a:hover {
-    /* #EE5D1A sobre #211D1A da 4.95:1 (pasa AA), pero el naranja de acción
-       mantiene la coherencia con el resto del sitio. */
-    color: var(--color-primary-action);
+    color: #FDBA74;
   }
 
   .sublanding-link {
     font-size: 0.85rem !important;
-    opacity: 0.75;
+    opacity: 0.85;
   }
 
   .footer-meta-text {
     font-size: 0.9rem;
-    color: #B5ABA0;
+    color: #D6CBC0;
     margin-bottom: var(--space-3);
   }
 
@@ -198,8 +200,8 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .footer-zone-note {
-    font-size: 0.825rem;
-    color: #9E948A;
+    font-size: 0.85rem;
+    color: #C4B9AD;
     line-height: 1.5;
   }
 
@@ -213,19 +215,19 @@ import WhatsAppButton from './WhatsAppButton.astro';
 
   .schedule-days, .schedule-hours {
     font-size: 0.875rem;
-    color: #E6DFD7;
+    color: #F5EFEB;
     margin-bottom: 2px;
   }
 
   .schedule-note {
-    font-size: 0.775rem;
-    color: #A3988D;
+    font-size: 0.8rem;
+    color: #C4B9AD;
     margin-top: 4px;
   }
 
   .contact-label {
     font-size: 0.775rem;
-    color: #A3988D;
+    color: #C4B9AD;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -255,9 +257,10 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .footer-transparency p {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     line-height: 1.6;
-    color: #A89E93;
+    color: #C4B9AD;
+    max-width: 52ch;
   }
 
   .footer-bottom {
@@ -267,7 +270,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
     border-top: 1px solid #36302B;
     padding-top: var(--space-6);
     font-size: 0.85rem;
-    color: #8C8276;
+    color: #B5ABA0;
     flex-wrap: wrap;
     gap: var(--space-4);
   }
@@ -279,8 +282,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .legal-links a {
-    /* #8C8276 sobre #211D1A daba 4.44:1, apenas por debajo de AA. */
-    color: #A3988D;
+    color: #C4B9AD;
     transition: color var(--transition-fast);
   }
 
@@ -289,7 +291,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .sep {
-    color: #554D46;
+    color: #8C8276;
   }
 
   @media (max-width: 992px) {

@@ -116,12 +116,21 @@ const pageDesc =
   }
 
   .notfound-links a {
-    font-size: 0.95rem;
+    font-size: 0.925rem;
     font-weight: 600;
-    /* #EE5D1A sobre blanco da 3.38:1 (FALLA AA para texto de 0.95rem). */
-    color: var(--color-primary-text);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    color: var(--color-primary-action);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-primary-light);
+    border: 1px solid var(--color-primary-border);
+    transition: all var(--transition-fast);
+    display: inline-block;
+  }
+
+  .notfound-links a:hover {
+    background-color: var(--color-primary-subtle);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
   }
 
   @media (max-width: 640px) {

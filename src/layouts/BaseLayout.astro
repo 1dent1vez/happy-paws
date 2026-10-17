@@ -114,9 +114,13 @@ const schemaData = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={fullOgImageUrl} />
 
-    <!-- Tipografía: Plus Jakarta Sans auto-alojada. Sin petición a Google Fonts
-         en la ruta crítica de render y sin terceros en la request inicial.
-         Es una fuente variable: un woff2 cubre los pesos 400-800. -->
+    <!-- Tipografía: Outfit (Moderno, cálido y geométrico) + Plus Jakarta Sans como respaldo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="preload"
       href="/fonts/plus-jakarta-sans-latin-variable.woff2"

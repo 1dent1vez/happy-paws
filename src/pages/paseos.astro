@@ -571,10 +571,8 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
   }
 
   .modality-profile {
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: var(--space-3) var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border-subtle);
   }
 
   .profile-label {
@@ -591,6 +589,7 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     font-size: 0.875rem;
     color: var(--color-text);
     margin: 0;
+    max-width: 65ch;
   }
 
   .modality-pricing-box {
@@ -613,6 +612,7 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     font-size: 0.85rem;
     color: var(--color-text-muted);
     line-height: 1.45;
+    max-width: 65ch;
   }
 
   /* TIMELINE CONTAINER */
@@ -676,6 +676,7 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     font-size: 0.95rem;
     color: var(--color-text-muted);
     line-height: 1.6;
+    max-width: 52ch;
   }
 
   /* REQUIREMENTS & SAFETY */
@@ -744,10 +745,13 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
   }
 
   .safety-item {
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-md);
-    padding: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .safety-item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
   }
 
   .safety-item h4 {
@@ -761,6 +765,7 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     color: var(--color-text-muted);
     line-height: 1.5;
     margin: 0;
+    max-width: 65ch;
   }
 
   /* FAQ HELP */

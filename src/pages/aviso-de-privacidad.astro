@@ -106,7 +106,7 @@ const pageDesc =
   }
 
   .legal-container {
-    max-width: 780px;
+    max-width: 680px;
   }
 
   .legal-title {
@@ -131,6 +131,7 @@ const pageDesc =
     font-size: 1.075rem;
     line-height: 1.7;
     color: var(--color-text);
+    max-width: 65ch;
   }
 
   .legal-body h2 {
@@ -145,6 +146,7 @@ const pageDesc =
     font-size: 1rem;
     line-height: 1.7;
     color: var(--color-text-muted);
+    max-width: 65ch;
   }
 
   .legal-body ul {
@@ -157,20 +159,22 @@ const pageDesc =
     font-size: 1rem;
     line-height: 1.7;
     color: var(--color-text-muted);
+    max-width: 65ch;
   }
 
   .legal-body strong {
     color: var(--color-text-title);
   }
 
-  /* Nota aclaratoria: se distingue del cuerpo sin depender solo del color. */
+  /* Nota aclaratoria con superficie limpia y borde sutil */
   .legal-note {
     margin-top: var(--space-10);
-    padding: var(--space-4) var(--space-5);
+    padding: var(--space-5) var(--space-6);
     background-color: var(--color-bg-alt);
-    border-left: 3px solid var(--color-primary);
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
     font-size: 0.925rem;
+    max-width: 72ch;
   }
 
   /* La segunda nota continúa a la primera: sin este margen quedaría pegada. */
