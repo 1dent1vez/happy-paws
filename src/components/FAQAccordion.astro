@@ -117,4 +117,22 @@ import { faqs } from '../config/faqs';
     margin: 0;
     max-width: 72ch;
   }
+
+  @media (max-width: 640px) {
+    .faq-question {
+      padding: var(--space-4);
+      font-size: 0.975rem;
+      gap: var(--space-3);
+    }
+
+    .faq-icon-wrap {
+      width: 32px;
+      height: 32px;
+    }
+
+    .faq-answer {
+      padding: 0 var(--space-4) var(--space-4) var(--space-4);
+      font-size: 0.925rem;
+    }
+  }
 </style>

@@ -245,7 +245,7 @@ import reportMoment from '../assets/report-moment.jpg';
 
   .phone-frame {
     width: 100%;
-    max-width: 380px;
+    max-width: min(380px, 100%);
     background-color: #EFEAE2;
     border: 9px solid #1C1917;
     border-radius: 40px;
@@ -439,6 +439,16 @@ import reportMoment from '../assets/report-moment.jpg';
     }
     .report-mockup-wrapper {
       order: -1;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .phone-frame {
+      border-width: 6px;
+      border-radius: 28px;
+    }
+    .wa-chat-body {
+      padding: 12px 8px;
     }
   }
 </style>
