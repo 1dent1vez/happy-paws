@@ -1,5 +1,5 @@
-# Happy Paws — https://happypaws.mx
+# Happy Paws — https://www.happypawsmetepec.me
 User-agent: *
 Allow: /
 
-Sitemap: https://happypaws.mx/sitemap-index.xml
+Sitemap: https://www.happypawsmetepec.me/sitemap-index.xml

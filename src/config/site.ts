@@ -89,7 +89,7 @@ export const siteConfig: SiteConfig = {
   legalName: 'Happy Paws Paseos Residenciales',
   tagline: 'Paseos caninos dedicados en Foresta Dream Lagoons',
   description: 'Servicio de paseo y bienestar canino exclusivo para residentes de Foresta Dream Lagoons. Cuidado atento, exploración a su ritmo y reporte directo en tu teléfono.',
-  url: 'https://happypaws.mx',
+  url: 'https://www.happypawsmetepec.me',
   locale: 'es-MX',
   coverage: {
     title: 'Zona Exclusiva',

@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://happypaws.mx',
+  site: 'https://www.happypawsmetepec.me',
   // 'ignore' + directory: la combinación que recomiendan Netlify, Cloudflare
   // Pages y Vercel. Sirve /paseos y /paseos/ sin forzar redirecciones que el
   // host pueda interpretar de otra forma.
