@@ -420,7 +420,7 @@ const baseWaUrl =
             btn.addEventListener('click', function(e) {
               e.stopPropagation();
               selDate = dayDate;
-              var formatted = day + ' ' + MONTHS[calMonth] + ', ' + calYear;
+              var formatted = day + ' ' + MONTHS[calMonth] + (selHour != null ? ' · ' + pad(selHour) + ':00' : ', ' + calYear);
               if (valFecha) {
                 valFecha.textContent = formatted;
                 valFecha.classList.remove('omni-ph');
@@ -479,6 +479,9 @@ const baseWaUrl =
             b.addEventListener('click', function(e) {
               e.stopPropagation();
               selHour = hour;
+              if (valFecha && selDate) {
+                valFecha.textContent = selDate.getDate() + ' ' + MONTHS[selDate.getMonth()] + ' · ' + pad(hour) + ':00';
+              }
               renderHours();
               syncCta();
             });

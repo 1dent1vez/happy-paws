@@ -1,8 +1,41 @@
 # Auditoría pre-producción — Happy Paws
 
-_Fecha: 2026-10-12 (ronda 1) · 2026-10-13 (ronda 2) · Build verificada: `npm run build` OK · `astro check`: 0 errores / 0 warnings / 0 hints_
+_Fecha: 2026-10-12 (ronda 1) · 2026-10-13 (ronda 2) · 2026-10-17 (ronda 3) · Build verificada: `npm run build` OK · `astro check`: 0 errores / 0 warnings / 0 hints_
 
 Verificado contra la build de producción (`dist/`) servida con `astro preview`, en desktop (1280px) y viewport móvil 390px. Los ratios de contraste están medidos en el navegador sobre los estilos computados, no estimados.
+
+---
+
+## RONDA 3 (2026-10-17) — Preparación para Vercel y Auditoría End-to-End
+
+### 1. Incompatibilidad de `_headers` con Vercel (bloqueante de seguridad en host)
+`public/_headers` solo es interpretado por Netlify y Cloudflare Pages. En un despliegue en Vercel, ese archivo es ignorado por el Edge y la web se habría servido en producción sin CSP, HSTS, X-Frame-Options, Permissions-Policy ni políticas de caché para assets inmutables (`/_astro/*`).
+- **Resuelto**: Se creó `vercel.json` con el schema oficial de Vercel, replicando todas las directivas de seguridad (CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) y reglas de caché (`/_astro/*` inmutable 1 año, `/images/*` y `/fonts/*` con revalidación diaria, CORS en fuentes).
+- Se configuró además `cleanUrls: true` y `trailingSlash: true` para alinear el enrutamiento con los canonicals y el sitemap.
+
+### 2. `.vercel/` expuesto en Git
+Al ejecutar comandos de Vercel CLI o vincular el proyecto, Vercel genera la carpeta `.vercel/`.
+- **Resuelto**: Se añadió `.vercel/` a `.gitignore`.
+
+### 3. Enlace interno inconsistente en Footer (`/paseos` sin slash)
+`Footer.astro` contenía `href="/paseos"`, mientras que el resto del sitio, el canonical tag y el sitemap usan `/paseos/`. Al hacer clic requería una redirección en el host y podía generar discrepancias canónicas.
+- **Resuelto**: Actualizado a `href="/paseos/"`.
+
+### 4. `currentPath` sin slash en `paseos.astro`
+`src/pages/paseos.astro` enviaba `currentPath="/paseos"`, divergente de las demás páginas.
+- **Resuelto**: Unificado a `currentPath="/paseos/"`.
+
+### 5. Página 404 sin etiqueta robots `noindex`
+`404.astro` carecía de directiva de exclusión de rastreo. Si un bot o enlace externo apuntaba a `/404.html`, la página de error corría el riesgo de ser indexada en Google.
+- **Resuelto**: Se añadió la prop `noindex?: boolean` a `BaseLayout.astro` que inyecta `<meta name="robots" content="noindex, nofollow" />`, activada en `404.astro`. Verificado en el HTML compilado de `dist/404.html`.
+
+### 6. Iconos PWA estándar ausentes en `manifest.webmanifest`
+El estándar PWA (Google / Lighthouse) requiere iconos de `192x192` y `512x512`. El manifiesto solo listaba 32, 180 y 820.
+- **Resuelto**: Se generaron `public/icon-192.png` y `public/icon-512.png` con Pillow a partir de `logo-mark-square.png` y se agregaron a `public/manifest.webmanifest`.
+
+### 7. Feedback visual de hora seleccionada en `HeroOmniBar`
+Al seleccionar un día y luego una hora en el calendario de la omnibar, el texto del botón principal no actualizaba la hora (permanecía solo con la fecha), restando claridad antes de pulsar el CTA de WhatsApp.
+- **Resuelto**: El botón ahora muestra tanto el día como la hora seleccionada (ej. `14 Oct · 10:00`).
 
 ---
 
