@@ -1,8 +1,38 @@
 # Auditoría pre-producción — Happy Paws
 
-_Fecha: 2026-10-12 (ronda 1) · 2026-10-13 (ronda 2) · 2026-10-17 (ronda 3) · Build verificada: `npm run build` OK · `astro check`: 0 errores / 0 warnings / 0 hints_
+_Fecha: 2026-10-12 (ronda 1) · 2026-10-13 (ronda 2) · 2026-10-17 (rondas 3 y 4) · Build verificada: `npm run build` OK · `astro check`: 0 errores / 0 warnings / 0 hints_
 
-Verificado contra la build de producción (`dist/`) servida con `astro preview`, en desktop (1280px) y viewport móvil 390px. Los ratios de contraste están medidos en el navegador sobre los estilos computados, no estimados.
+Verificado contra la build de producción (`dist/`) servida con `astro preview`, en desktop (1280px), tablet (768px - 1024px) y viewport móvil 390px.
+
+---
+
+## RONDA 4 (2026-10-17) — Optimización Completa de Imágenes para Tablet
+
+### 1. `srcset` inexistente / monocopia por bug de deduplicación de anchos
+En los componentes con `astro:assets`, la propiedad `widths` se pasaba como `widths={[individualWalk.width, 800]}`. Al medir la imagen fuente 800px, Astro deduplicaba a `[800]` y generaba un `srcset` con una sola variante `800w`.
+- **Impacto en tablet**: En pantallas Retina (DPR 2x, 1536px físicos en iPad), una imagen estirada a 720px en un contenedor colapsado se servía borrosa y pixelada.
+- **Resuelto**: Se suministraron assets optimizados de 1600px y se especificaron anchos escalonados `widths={[400, 600, 768, 1024, 1200]}` (y `[640, 768, 1024, 1200]` en el hero). El build ahora genera 26 variantes WebP cubriendo móvil, tablet 1x, tablet 2x Retina y desktop.
+
+### 2. Atributos `sizes` inexactos en tablet
+Los componentes declaraban `sizes="(max-width: 992px) 100vw, 50vw"`. En tablets (768px-992px), el contenedor usa padding `var(--space-6)` (48px totales), y el mockup de `PostWalkReport.astro` tiene `max-width: 380px` (la imagen dentro nunca excede 330px). Declarar `100vw` forzaba a los navegadores de tablet a pedir recursos hasta 3x más pesados de lo necesario.
+- **Resuelto**:
+  - Cards editoriales y banner CTA: `sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 992px) calc(100vw - 48px), 560px"`
+  - Hero de `/paseos/`: `sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 992px) calc(100vw - 48px), 480px"`
+  - Mockup WhatsApp: `sizes="(max-width: 480px) min(calc(100vw - 80px), 330px), 330px"`
+
+### 3. Deformación y recorte extremo en slit panorámico en tablet (641px - 992px)
+Al colapsar el grid a 1 columna en tablet (`@media (max-width: 992px)`), la altura de `.wide-card-media` estaba clavada en `280px` y `.fcta-image-side` en `240px`. En un iPad de 768px a 992px de ancho, el contenedor mide entre 720px y 944px, generando un aspecto de 2.5:1 a 3.4:1. Esto recortaba más del 75% de las fotografías verticales, cortando personas y perros por la mitad.
+- **Resuelto**:
+  - En tablet (641px a 992px), `.wide-card-media` se fijó en `height: 380px; aspect-ratio: 16 / 9; max-height: 420px; min-height: 320px;`, devolviéndole proporción fotográfica sin recortes excesivos. En móvil (`<= 640px`) se ajusta a `240px`.
+  - `.fcta-image-side` se amplió a `height: 360px; min-height: 320px;` en tablet, y `220px` en móvil.
+  - En `/paseos/`, `.page-hero-img` se ajustó a `380px` en tablet y `240px` en móvil.
+
+### 4. Encuadre focal (`object-position`) ausente
+Con `object-fit: cover` centrado por defecto (`50% 50%`), el punto de interés de `individual-walk` (perro olfateando a 68.5% de altura) y `care-checkin` (cuidador y perro a 35-40%) quedaban fuera del encuadre.
+- **Resuelto**:
+  - `.benefit-img-individual`: `object-position: center 65%;`
+  - `.benefit-img-group`: `object-position: center 55%;`
+  - `.fcta-image-side img` y `.page-hero-img`: `object-position: center 35-40%;`
 
 ---
 

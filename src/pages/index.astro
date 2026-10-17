@@ -62,7 +62,7 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
         class="hero-bg-image"
         loading="eager"
         fetchpriority="high"
-        widths={[heroWalk.width, 1200, 1600]}
+        widths={[640, 768, 1024, 1200]}
         sizes="100vw"
       />
       <div class="hero-bg-overlay"></div>
@@ -122,9 +122,10 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
             <Image
               src={individualWalk}
               alt="Perro explorando y oliendo con calma en un paseo individual atento"
+              class="benefit-img-individual"
               loading="lazy"
-              widths={[individualWalk.width, 800]}
-              sizes="(max-width: 992px) 100vw, 50vw"
+              widths={[400, 600, 768, 1024, 1200]}
+              sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 992px) calc(100vw - 48px), 560px"
             />
           </div>
           <div class="wide-card-content">
@@ -147,9 +148,10 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
             <Image
               src={groupWalk}
               alt="Perros sociables caminando coordinadamente en pasto sin tirones"
+              class="benefit-img-group"
               loading="lazy"
-              widths={[groupWalk.width, 800]}
-              sizes="(max-width: 992px) 100vw, 50vw"
+              widths={[400, 600, 768, 1024, 1200]}
+              sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 992px) calc(100vw - 48px), 560px"
             />
           </div>
           <div class="wide-card-content">
@@ -334,8 +336,8 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
             src={careCheckin}
             alt="Paseador de Happy Paws atendiendo a un perro con cariño antes de salir"
             loading="lazy"
-            widths={[careCheckin.width, 800]}
-            sizes="(max-width: 992px) 100vw, 40vw"
+            widths={[400, 600, 768, 1024, 1200]}
+            sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 992px) calc(100vw - 48px), 480px"
           />
         </div>
       </div>
@@ -569,6 +571,14 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
     transition: transform var(--transition-smooth);
   }
 
+  .benefit-img-individual {
+    object-position: center 65%;
+  }
+
+  .benefit-img-group {
+    object-position: center 55%;
+  }
+
   /* El zoom al pasar el ratón se aplica a la imagen, no a la tarjula. */
   .wide-benefit-card:hover .wide-card-media img {
     transform: scale(1.03);
@@ -788,6 +798,7 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 40%;
   }
 
   /* ================= RESPONSIVE ================= */
@@ -802,7 +813,10 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
       order: 2;
     }
     .wide-card-media {
-      height: 280px;
+      height: 380px;
+      aspect-ratio: 16 / 9;
+      max-height: 420px;
+      min-height: 320px;
     }
     .benefits-strip-grid {
       grid-template-columns: 1fr;
@@ -814,7 +828,8 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
       grid-template-columns: 1fr;
     }
     .fcta-image-side {
-      height: 240px;
+      height: 360px;
+      min-height: 320px;
     }
   }
 
@@ -823,11 +838,21 @@ const pageDesc = "Paseos caninos dedicados y seguros en Foresta Dream Lagoons. A
       min-height: 90dvh;
       padding: var(--space-12) 0 var(--space-16) 0;
     }
+    .wide-card-media {
+      height: 240px;
+      aspect-ratio: auto;
+      max-height: none;
+      min-height: auto;
+    }
     .wide-card-content {
       padding: var(--space-6);
     }
     .fcta-content-side {
       padding: var(--space-6);
+    }
+    .fcta-image-side {
+      height: 220px;
+      min-height: auto;
     }
     .fcta-actions {
       width: 100%;

@@ -44,8 +44,8 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
           alt="Cuidador de Happy Paws atendiendo a un perro con paciencia antes del paseo"
           class="page-hero-img"
           loading="eager"
-          widths={[careCheckin.width, 800]}
-          sizes="(max-width: 992px) 100vw, 40vw"
+          widths={[400, 600, 768, 1024, 1200]}
+          sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 992px) calc(100vw - 48px), 480px"
         />
       </div>
     </div>
@@ -449,6 +449,7 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
     width: 100%;
     height: 400px;
     object-fit: cover;
+    object-position: center 35%;
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-lg);
     border: 4px solid #fff;
@@ -829,7 +830,8 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
       grid-template-columns: 1fr;
     }
     .page-hero-img {
-      height: 320px;
+      height: 380px;
+      object-position: center 35%;
     }
     .modalities-grid {
       grid-template-columns: 1fr;
@@ -842,6 +844,7 @@ const pageDesc = "Descubre a detalle nuestros paseos caninos individuales y grup
   @media (max-width: 640px) {
     .page-hero-img {
       height: 240px;
+      object-position: center 35%;
     }
     .page-hero-ctas {
       flex-direction: column;
