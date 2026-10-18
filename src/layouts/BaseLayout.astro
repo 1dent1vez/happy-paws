@@ -14,10 +14,10 @@ interface Props {
 }
 
 const {
-  title = `${siteConfig.name} — Paseos en Foresta Dream Lagoons`,
+  title = `${siteConfig.name} Metepec | Paseos de Perros en Foresta Dream Lagoons`,
   description = siteConfig.description,
   currentPath = '/',
-  ogImage = '/images/og-cover.jpg',
+  ogImage = '/images/og-image.jpg',
   noindex = false
 } = Astro.props;
 
@@ -31,12 +31,10 @@ const normalizedPath =
 const canonicalUrl = new URL(normalizedPath, siteConfig.url).href;
 const fullOgImageUrl = new URL(ogImage, siteConfig.url).href;
 
-// LocalBusiness: postalAddress y geo eran los campos que faltaban para que
-// Google asociara el negocio a Metepec en búsquedas locales. Sin ellos el
-// snippet queda genérico y no compite por "paseos para perros Metepec".
+// PetService & LocalBusiness: Structured data robusto para Google y motores IA (GEO)
 const schemaData = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': ['LocalBusiness', 'PetService'],
   'name': siteConfig.name,
   'legalName': siteConfig.legalName,
   'description': siteConfig.description,
@@ -46,15 +44,17 @@ const schemaData = {
   ],
   'telephone': siteConfig.whatsapp.phoneFormatted,
   'image': fullOgImageUrl,
-  // schema.org exige URL absoluta para `logo`; con ruta relativa Google la
-  // descarta. Se usa el lockup completo (perro + "PAWS") que es la marca oficial.
+  // schema.org exige URL absoluta para `logo`
   'logo': new URL('/images/logo-full.png', siteConfig.url).href,
   'priceRange': '$$',
   'currenciesAccepted': 'MXN',
+  'paymentAccepted': 'Efectivo, Transferencia',
   'address': {
     '@type': 'PostalAddress',
+    'streetAddress': 'Fraccionamiento Foresta Dream Lagoons',
     'addressLocality': siteConfig.coverage.city,
     'addressRegion': siteConfig.coverage.state,
+    'postalCode': '52140',
     'addressCountry': 'MX'
   },
   'geo': {
@@ -63,8 +63,8 @@ const schemaData = {
     'longitude': siteConfig.coverage.longitude
   },
   'areaServed': {
-    '@type': 'Place',
-    'name': siteConfig.coverage.community
+    '@type': 'AdministrativeArea',
+    'name': `${siteConfig.coverage.community}, ${siteConfig.coverage.city}`
   },
   'openingHoursSpecification': [
     {
@@ -73,7 +73,35 @@ const schemaData = {
       'opens': siteConfig.schedule.opens,
       'closes': siteConfig.schedule.closes
     }
-  ]
+  ],
+  'hasOfferCatalog': {
+    '@type': 'OfferCatalog',
+    'name': 'Servicios de Paseo Canino',
+    'itemListElement': [
+      {
+        '@type': 'Offer',
+        'itemOffered': {
+          '@type': 'Service',
+          'name': 'Paseo Canino Individual Dedicado',
+          'description': 'Paseo exclusivo 1 a 1 de 45 a 60 minutos con estimulación olfativa guiada y reporte con fotos en Foresta Dream Lagoons.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        'itemOffered': {
+          '@type': 'Service',
+          'name': 'Paseo Canino en Grupo Reducido',
+          'description': 'Paseo en manadas pequeñas de máximo 3 a 4 perros con temperamentos compatibles evaluados en Foresta Dream Lagoons.'
+        }
+      }
+    ]
+  },
+  'contactPoint': {
+    '@type': 'ContactPoint',
+    'contactType': 'customer service',
+    'telephone': siteConfig.whatsapp.phoneFormatted,
+    'availableLanguage': ['Spanish']
+  }
 };
 ---
 
@@ -84,7 +112,11 @@ const schemaData = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow" />
+    )}
     <link rel="canonical" href={canonicalUrl} />
     <!-- Logo oficial: cuadrado PNG con el perro completo y centrado -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />

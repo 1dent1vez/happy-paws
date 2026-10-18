@@ -14,9 +14,14 @@ export interface FAQItem {
 
 export const faqs: FAQItem[] = [
   {
-    question: '¿El servicio opera exclusivamente dentro de Foresta Dream Lagoons?',
+    question: '¿Dónde opera Happy Paws en Metepec?',
     answer:
-      'Sí. Nos enfocamos exclusivamente en Foresta Dream Lagoons. Esto nos permite garantizar máxima puntualidad, conocimiento profundo de las áreas verdes y senderos más seguros del fraccionamiento, y atención vecinal cercana y confiable.'
+      'Operamos de forma exclusiva dentro del fraccionamiento residencial Foresta Dream Lagoons en Metepec, Estado de México. No realizamos traslados en jaulas ni salimos a avenidas de alto tráfico, garantizando paseos 100% seguros y tranquilos dentro de las áreas verdes del complejo.'
+  },
+  {
+    question: '¿Cómo funcionan los reportes de paseo tras cada salida?',
+    answer:
+      'Al concluir cada caminata, recibes un reporte directo en tu WhatsApp con la hora exacta de inicio y entrega, duración del recorrido, registro de hidratación y necesidades fisiológicas, además de una foto espontánea de tu perro.'
   },
   {
     question: '¿Cuánto tiempo dura cada paseo?',
