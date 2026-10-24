@@ -23,7 +23,7 @@ import { siteConfig } from '../config/site';
     <nav class="desktop-nav" aria-label="Navegación principal">
       <ul class="nav-list">
         <li>
-          <a href="/#beneficios" class="nav-link">Beneficios</a>
+          <a href="/#paseos" class="nav-link">Paseos</a>
         </li>
         <li>
           <a href="/#como-funciona" class="nav-link">Cómo Funciona</a>
@@ -73,7 +73,7 @@ import { siteConfig } from '../config/site';
        El atributo se mantiene sincronizado desde el script de abajo. -->
   <div class="mobile-nav-drawer" id="mobile-nav" aria-hidden="true" inert>
     <nav class="mobile-nav-links" aria-label="Navegación móvil">
-      <a href="/#beneficios" class="mobile-link">Beneficios para tu Mascota</a>
+      <a href="/#paseos" class="mobile-link">Paseos y tarifas</a>
       <a href="/#como-funciona" class="mobile-link">Cómo Funciona</a>
       <a href="/#faq" class="mobile-link">Preguntas Frecuentes</a>
       <a
@@ -101,6 +101,7 @@ import { siteConfig } from '../config/site';
    *  cerrado; `aria-hidden` solo lo anuncia. Hay que mantener ambos en sync. */
   const setOpen = (open: boolean) => {
     toggleBtn?.setAttribute('aria-expanded', String(open));
+    toggleBtn?.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
     mobileNav?.setAttribute('aria-hidden', String(!open));
     mobileNav?.classList.toggle('is-open', open);
     toggleBtn?.classList.toggle('is-active', open);
@@ -120,7 +121,29 @@ import { siteConfig } from '../config/site';
     // Cerrar al elegir un destino: en una landing de una sola página el
     // drawer abierto tapa el contenido al que se acaba de saltar.
     mobileNav.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => setOpen(false));
+      link.addEventListener('click', () => {
+        setOpen(false);
+        const destination = new URL(link.href, window.location.href);
+        if (destination.pathname === window.location.pathname && destination.hash) {
+          const target = document.getElementById(decodeURIComponent(destination.hash.slice(1)));
+          if (target) {
+            target.setAttribute('tabindex', '-1');
+            target.focus({ preventScroll: true });
+          }
+        }
+      });
+    });
+
+    const desktop = window.matchMedia('(min-width: 861px)');
+    desktop.addEventListener('change', () => {
+      if (desktop.matches) {
+        const focusWasInside = mobileNav.contains(document.activeElement);
+        setOpen(false);
+        if (focusWasInside) document.querySelector<HTMLAnchorElement>('.brand-logo')?.focus();
+      }
+    });
+    document.addEventListener('click', (event) => {
+      if (!document.getElementById('site-header')?.contains(event.target as Node)) setOpen(false);
     });
 
     // Escape cierra el drawer, igual que los popovers del hero.
@@ -138,7 +161,7 @@ import { siteConfig } from '../config/site';
     position: sticky;
     top: 0;
     z-index: 90;
-    background-color: rgba(250, 247, 242, 0.88);
+    background-color: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     border-bottom: 1px solid var(--color-border);
@@ -250,7 +273,7 @@ import { siteConfig } from '../config/site';
 
   .header-insta-link:hover {
     background-color: var(--color-primary-light);
-    color: #E1306C;
+    color: var(--brand-wine);
     border-color: var(--color-primary-border);
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
@@ -314,7 +337,7 @@ import { siteConfig } from '../config/site';
       display: block;
       max-height: 0;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.98);
+      background: var(--brand-cream);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--color-border);
       box-shadow: var(--shadow-lg);
@@ -361,7 +384,7 @@ import { siteConfig } from '../config/site';
     }
 
     .mobile-insta-link svg {
-      color: #E1306C;
+      color: var(--brand-wine);
       flex-shrink: 0;
     }
   }

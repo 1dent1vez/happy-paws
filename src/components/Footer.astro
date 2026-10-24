@@ -20,7 +20,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
           <span class="footer-brand-name">Happy Paws</span>
         </div>
         <p class="footer-bio">
-          Paseos conscientes, seguros y personalizados para perros. Exclusivo para la comunidad residencial de Foresta Dream Lagoons.
+          Paseos al ritmo de tu perro, con recogida en tu puerta y reporte por WhatsApp. Exclusivo para la comunidad residencial de Foresta Dream Lagoons.
         </p>
         <div class="footer-cta-wrap">
           <WhatsAppButton
@@ -52,10 +52,10 @@ import WhatsAppButton from './WhatsAppButton.astro';
         <h4 class="footer-heading">Navegación</h4>
         <ul class="footer-links">
           <li><a href="/">Inicio</a></li>
-          <li><a href="/#beneficios">Beneficios para la Mascota</a></li>
+          <li><a href="/#paseos">Paseos y cuidado</a></li>
           <li><a href="/#como-funciona">Cómo Funciona</a></li>
           <li><a href="/#faq">Preguntas Frecuentes</a></li>
-          <li><a href="/paseos/" class="sublanding-link">Detalles de Modalidades</a></li>
+          <li><a href="/paseos/" class="sublanding-link">Paseos individuales y grupales</a></li>
         </ul>
       </div>
 
@@ -63,13 +63,13 @@ import WhatsAppButton from './WhatsAppButton.astro';
       <div class="footer-col">
         <h4 class="footer-heading">Zona Exclusiva</h4>
         <p class="footer-meta-text">
-          {siteConfig.coverage.description}
+          {siteConfig.coverage.description} {siteConfig.coverage.city}, {siteConfig.coverage.state}.
         </p>
         <div class="exclusive-badge">
           <span>{siteConfig.coverage.community}</span>
         </div>
         <p class="footer-zone-note">
-          Rutas dentro del fraccionamiento y sus áreas verdes para máxima seguridad y tranquilidad.
+          Rutas dentro del fraccionamiento y sus áreas verdes para pasear en un entorno conocido.
         </p>
       </div>
 
@@ -125,13 +125,23 @@ import WhatsAppButton from './WhatsAppButton.astro';
 </footer>
 
 <style>
+  .footer-cta-wrap :global(.btn-whatsapp) {
+    background: transparent;
+    border: 1px solid #786E63;
+    color: #F4EEE6;
+  }
+  .footer-cta-wrap :global(.btn-whatsapp:hover) {
+    background: #F4EEE6;
+    color: #25231F;
+  }
+
   .site-footer {
-    background-color: #211D1A;
-    color: #E6DFD7;
+    background-color: #25231F;
+    color: #E9E3DA;
     padding-top: var(--space-16);
     padding-bottom: var(--space-8);
     margin-top: auto;
-    border-top: 1px solid #36302B;
+    border-top: 1px solid #443E36;
   }
 
   .footer-grid {
@@ -168,13 +178,13 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .site-footer p {
-    color: #D6CBC0;
+    color: #E9E3DA;
   }
 
   .footer-bio {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: #D6CBC0;
+    color: #E9E3DA;
   }
 
   .footer-cta-wrap {
@@ -189,9 +199,9 @@ import WhatsAppButton from './WhatsAppButton.astro';
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #2E2925;
-    color: #F5EFEB;
-    border: 1px solid #443B33;
+    background: #25231F;
+    color: #E9E3DA;
+    border: 1px solid #443E36;
     padding: 0.55rem 1.15rem;
     border-radius: var(--radius-full);
     font-size: 0.85rem;
@@ -201,11 +211,11 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .footer-insta-btn:hover {
-    background: #E1306C;
-    color: #FFFFFF;
-    border-color: #E1306C;
+    background: #C9BEB1;
+    color: #25231F;
+    border-color: #C9BEB1;
     transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(225, 48, 108, 0.4);
+    box-shadow: 0 4px 14px rgba(109, 1, 1, 0.15);
   }
 
   .footer-heading {
@@ -225,13 +235,13 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .footer-links a {
-    color: #C4B9AD;
+    color: #C9BEB1;
     font-size: 0.95rem;
     transition: color var(--transition-fast);
   }
 
   .footer-links a:hover {
-    color: #FDBA74;
+    color: #C9BEB1;
   }
 
   .sublanding-link {
@@ -241,15 +251,15 @@ import WhatsAppButton from './WhatsAppButton.astro';
 
   .footer-meta-text {
     font-size: 0.9rem;
-    color: #D6CBC0;
+    color: #E9E3DA;
     margin-bottom: var(--space-3);
   }
 
   .exclusive-badge {
     display: inline-block;
-    background-color: #2E2925;
-    color: #FDBA74;
-    border: 1px solid #443B33;
+    background-color: #25231F;
+    color: #C9BEB1;
+    border: 1px solid #443E36;
     padding: 6px 14px;
     border-radius: var(--radius-md);
     font-size: 0.85rem;
@@ -260,13 +270,13 @@ import WhatsAppButton from './WhatsAppButton.astro';
 
   .footer-zone-note {
     font-size: 0.85rem;
-    color: #C4B9AD;
+    color: #C9BEB1;
     line-height: 1.5;
   }
 
   .schedule-card, .contact-card {
-    background-color: #2E2925;
-    border: 1px solid #3E3731;
+    background-color: #25231F;
+    border: 1px solid #443E36;
     border-radius: var(--radius-md);
     padding: var(--space-3) var(--space-4);
     margin-bottom: var(--space-3);
@@ -274,19 +284,19 @@ import WhatsAppButton from './WhatsAppButton.astro';
 
   .schedule-days, .schedule-hours {
     font-size: 0.875rem;
-    color: #F5EFEB;
+    color: #E9E3DA;
     margin-bottom: 2px;
   }
 
   .schedule-note {
     font-size: 0.8rem;
-    color: #C4B9AD;
+    color: #C9BEB1;
     margin-top: 4px;
   }
 
   .contact-label {
     font-size: 0.775rem;
-    color: #C4B9AD;
+    color: #C9BEB1;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -294,7 +304,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
   .contact-val {
     font-size: 0.875rem;
     font-weight: 600;
-    color: #25D366;
+    color: #E9E3DA;
   }
 
   .contact-insta-row {
@@ -303,7 +313,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
     gap: 6px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #FDBA74;
+    color: #C9BEB1;
     margin-top: 4px;
     text-decoration: none;
     transition: color var(--transition-fast);
@@ -314,8 +324,8 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .footer-transparency {
-    background-color: #28231F;
-    border: 1px solid #3E3630;
+    background-color: #25231F;
+    border: 1px solid #443E36;
     border-radius: var(--radius-lg);
     padding: var(--space-6);
     margin-bottom: var(--space-8);
@@ -325,7 +335,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
     display: inline-block;
     font-size: 0.75rem;
     font-weight: 700;
-    color: #FDBA74;
+    color: #C9BEB1;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: var(--space-2);
@@ -334,7 +344,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
   .footer-transparency p {
     font-size: 0.875rem;
     line-height: 1.6;
-    color: #C4B9AD;
+    color: #C9BEB1;
     max-width: 52ch;
   }
 
@@ -342,10 +352,10 @@ import WhatsAppButton from './WhatsAppButton.astro';
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #36302B;
+    border-top: 1px solid #443E36;
     padding-top: var(--space-6);
     font-size: 0.85rem;
-    color: #B5ABA0;
+    color: #C9BEB1;
     flex-wrap: wrap;
     gap: var(--space-4);
   }
@@ -357,7 +367,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .legal-links a {
-    color: #C4B9AD;
+    color: #C9BEB1;
     transition: color var(--transition-fast);
   }
 
@@ -366,7 +376,7 @@ import WhatsAppButton from './WhatsAppButton.astro';
   }
 
   .sep {
-    color: #8C8276;
+    color: #C9BEB1;
   }
 
   @media (max-width: 992px) {

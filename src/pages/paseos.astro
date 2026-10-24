@@ -6,7 +6,7 @@ import FaqSchema from '../components/FaqSchema.astro';
 import { Image } from 'astro:assets';
 import careCheckin from '../assets/care-checkin.jpg';
 
-const pageTitle = "Paseos de Perros en Foresta Dream Lagoons | Happy Paws Metepec";
+const pageTitle = "Paseo individual y grupal en Foresta | Happy Paws Metepec";
 const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lagoons, Metepec. Rutas seguras, estimulación olfativa y reporte detallado con fotos en WhatsApp.";
 ---
 
@@ -15,13 +15,12 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   <section class="page-hero">
     <div class="container page-hero-container">
       <div class="page-hero-text">
-        <span class="badge badge-orange">Exclusivo en Foresta Dream Lagoons</span>
         <h1 class="page-hero-title">
-          Paseos que se adaptan a tu perro, <br />
-          <span class="text-highlight">no al revés.</span>
+          Paseo individual o grupal<br />
+          <span class="text-highlight">en Foresta Dream Lagoons.</span>
         </h1>
         <p class="lead">
-          Conoce a fondo cómo cuidamos a tu mascota en Foresta Dream Lagoons: desde la primera charla de conocimiento hasta el reporte que recibes al devolverlo tranquilo en tu puerta.
+          Conoce las opciones para su paseo dentro de Foresta: atención individual o compañía en un grupo pequeño. Te ayudamos a elegir y te contamos cómo le fue al regresar.
         </p>
 
         <div class="page-hero-ctas">
@@ -41,7 +40,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
       <div class="page-hero-media">
         <Image
           src={careCheckin}
-          alt="Cuidador de Happy Paws atendiendo a un perro con paciencia antes del paseo"
+          alt="Perro acompañado antes de salir a pasear"
           class="page-hero-img"
           loading="eager"
           widths={[400, 600, 768, 1024, 1200]}
@@ -55,10 +54,9 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   <section class="section-wrapper section-surface" id="comparativa">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-orange">Modalidades de Paseo</span>
-        <h2>¿Paseo individual o paseo grupal para tu perro?</h2>
+        <h2>¿Paseo individual o grupal para tu perro?</h2>
         <p>
-          Evaluamos el temperamento, edad y nivel de actividad de tu mascota para sugerir la modalidad ideal. El paseo individual garantiza ritmo propio y atención exclusiva, mientras que el grupo reducido fomenta la convivencia armónica entre compañeros compatibles.
+          No necesitas decidir antes de escribirnos. Hablamos de su edad, energía y cómo se siente con otros perros para recomendarte una opción.
         </p>
       </div>
 
@@ -68,9 +66,9 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
           <div class="modality-header">
             <div class="modality-top-row">
               <span class="modality-tag tag-individual">Atención 1 a 1</span>
-              <span class="modality-subtag">100% Dedicado</span>
+              <span class="modality-subtag">Atención individual</span>
             </div>
-            <h3 class="modality-title">Paseo Individual Exclusivo</h3>
+            <h3 class="modality-title">Individual: toda la atención para él</h3>
             <p class="modality-subtitle">Atención dedicada, ritmo sereno y exploración a su medida.</p>
           </div>
 
@@ -87,7 +85,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
                   <div class="point-content">
-                    <strong>Atención 100% enfocada:</strong> El paseador está exclusivamente pendiente de las señales corporales y bienestar de tu perro.
+                    <strong>Atención exclusiva:</strong> El paseador está exclusivamente pendiente de las señales corporales y bienestar de tu perro.
                   </div>
                 </li>
                 <li class="point-item">
@@ -111,7 +109,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
                   <div class="point-content">
-                    <strong>Sin contacto forzado:</strong> Evitamos cruces incómodos con otros perros para mantenerlo siempre en calma.
+                    <strong>Sin contacto forzado:</strong> Evitamos cruces incómodos con otros perros respetando su espacio.
                   </div>
                 </li>
                 <li class="point-item">
@@ -132,7 +130,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                   <line x1="12" y1="16" x2="12" y2="12"></line>
                   <line x1="12" y1="8" x2="12.01" y2="8"></line>
                 </svg>
-                <span class="profile-label">Perfil Recomendado</span>
+                <span class="profile-label">¿Para quién es?</span>
               </div>
               <p>Perros tímidos, reactivos a la correa, adultos mayores (senior), cachorros en proceso de aprendizaje o familias que buscan atención exclusiva.</p>
             </div>
@@ -140,14 +138,14 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
             <div class="modality-pricing-box">
               <div class="pricing-header">
                 <span class="pricing-label">Tarifa y horarios</span>
-                <span class="pricing-badge">Respuesta &lt;15 min</span>
+                <span class="pricing-badge">Consulta por WhatsApp</span>
               </div>
               <p class="pricing-text">
-                La tarifa por sesión o paquete mensual se cotiza directamente por WhatsApp según tu frecuencia requerida en Foresta.
+                La tarifa depende de la modalidad y de cuántos paseos necesitas por semana. Te compartimos por WhatsApp las opciones por sesión o paquete mensual y sus horarios disponibles.
               </p>
               <WhatsAppButton
                 context="individual"
-                text="Cotizar Paseo Individual"
+                text="Consultar paseo individual"
                 variant="whatsapp"
                 size="md"
                 className="w-full"
@@ -164,11 +162,11 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
               <span class="modality-tag tag-group">Grupos Pequeños</span>
               <span class="featured-badge-pill">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                Más Solicitado
+                Compatibilidad previa
               </span>
             </div>
-            <h3 class="modality-title">Paseo Grupal Controlado</h3>
-            <p class="modality-subtitle">Socialización equilibrada en manadas reducidas y compatibles.</p>
+            <h3 class="modality-title">Grupal: compañía en un grupo pequeño</h3>
+            <p class="modality-subtitle">Caminatas acompañadas con perros compatibles.</p>
           </div>
 
           <div class="modality-body">
@@ -184,7 +182,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
                   <div class="point-content">
-                    <strong>Máximo 3 a 4 perros por paseador:</strong> Cero saturación. Mantenemos el control visual y físico en cada segundo de la caminata.
+                    <strong>Hasta 4 perros por paseador:</strong> Formamos grupos pequeños y observamos cómo se siente cada perro durante el recorrido.
                   </div>
                 </li>
                 <li class="point-item">
@@ -200,7 +198,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
                   <div class="point-content">
-                    <strong>Correas desenredadas y manejo seguro:</strong> Caminata coordinada en paralelo sin permitir tirones ni juegos bruscos con correas puestas.
+                    <strong>Correas desenredadas y manejo seguro:</strong> Caminata coordinada en paralelo evitando juegos bruscos con las correas puestas.
                   </div>
                 </li>
                 <li class="point-item">
@@ -229,7 +227,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                   <line x1="12" y1="16" x2="12" y2="12"></line>
                   <line x1="12" y1="8" x2="12.01" y2="8"></line>
                 </svg>
-                <span class="profile-label">Perfil Recomendado</span>
+                <span class="profile-label">¿Para quién es?</span>
               </div>
               <p>Perros sociables, activos, equilibrados y con gusto por convivir y pasear al lado de otros amigos caninos.</p>
             </div>
@@ -237,14 +235,14 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
             <div class="modality-pricing-box">
               <div class="pricing-header">
                 <span class="pricing-label">Tarifa y horarios</span>
-                <span class="pricing-badge">Cupos Limitados</span>
+                <span class="pricing-badge">Según compatibilidad</span>
               </div>
               <p class="pricing-text">
                 Disponibilidad y cupos sujetos a compatibilidad de grupo en Foresta Dream Lagoons. Consúltanos por WhatsApp.
               </p>
               <WhatsAppButton
                 context="group"
-                text="Consultar Disponibilidad Grupal"
+                text="Consultar paseo grupal"
                 variant="primary"
                 size="md"
                 className="w-full"
@@ -261,10 +259,9 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   <section class="section-wrapper" id="proceso">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-orange">Flujo Operativo</span>
-        <h2>¿Cómo es el protocolo de paseo desde la salida hasta la entrega?</h2>
+        <h2>De tu puerta al paseo, y de vuelta contigo.</h2>
         <p>
-          Nuestro proceso asegura total orden y bienestar: consulta previa, preparación en tu puerta, caminata enriquecida con pausas de olfato en Foresta y reporte inmediato con fotos en tu WhatsApp.
+          Acordamos los detalles contigo, revisamos su arnés antes de salir y caminamos dentro de Foresta. Al regresar, te enviamos su reporte por WhatsApp.
         </p>
       </div>
 
@@ -275,7 +272,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
           <div class="timeline-card">
             <div class="timeline-card-header">
               <span class="timeline-step-badge">Paso 1: Consulta Inicial</span>
-              <span class="timeline-time-badge">~10 min vía chat</span>
+              <span class="timeline-time-badge">Por WhatsApp</span>
             </div>
             <h3>Evaluación y Conocimiento del Perro</h3>
             <p>
@@ -338,10 +335,9 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
       <div class="grid-2 requirements-grid">
         <!-- Requisitos Previos -->
         <div class="card req-card">
-          <span class="badge badge-orange">Antes del Primer Paseo</span>
           <h3 class="req-title">¿Qué información y equipo solicitamos antes del primer paseo?</h3>
           <p class="req-intro">
-            Para garantizar paseos seguros y sin riesgos en Foresta solicitamos carnet de vacunación vigente, pechera o arnés ergonómico y datos de emergencia antes de la primera salida:
+            Antes de la primera salida revisamos contigo su cartilla de vacunación, el ajuste del arnés y los datos de contacto para una emergencia:
           </p>
 
           <ul class="req-list">
@@ -396,7 +392,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
           <div class="req-card-footer">
             <span class="req-footer-highlight">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-              Todo se revisa en la charla previa de 15 min en tu domicilio
+              Lo revisamos contigo antes de la primera salida
             </span>
           </div>
         </div>
@@ -454,10 +450,9 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   <section class="section-wrapper section-surface" id="faq">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-orange">Dudas Comunes</span>
         <h2>¿Cuáles son las dudas más frecuentes sobre los paseos?</h2>
         <p>
-          Respondemos con claridad cómo coordinamos horarios, qué pasa ante lluvia y cómo recibirás las actualizaciones de tu mascota directamente en tu teléfono.
+          Respondemos con claridad cómo coordinamos horarios, qué pasa ante lluvia y cómo recibirás el reporte de tu perro por WhatsApp.
         </p>
       </div>
 
@@ -481,17 +476,16 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
     <div class="container">
       <div class="final-cta-card">
         <div class="cta-inner-content">
-          <span class="badge badge-orange">Atención Vecinal</span>
           <h2 class="final-cta-title">
-            Hablemos sobre el paseo ideal para tu perro en Foresta
+            Empecemos por conocer a tu perro.
           </h2>
           <p class="final-cta-desc">
-            Escríbenos directamente por WhatsApp. Te compartimos disponibilidad, resolvemos cualquier duda y agendamos una primera salida sin complicaciones.
+            Cuéntanos su edad, cómo suele llevarse con otros perros y qué horarios necesitas. Te compartimos opciones y tarifas antes de coordinar su primera salida.
           </p>
           <div class="cta-buttons-wrap">
             <WhatsAppButton
               context="paseosPage"
-              text="Escribir por WhatsApp a Happy Paws"
+              text="Consultar horarios y tarifas"
               variant="primary"
               size="lg"
               id="paseos-final-cta"
@@ -511,7 +505,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   .page-hero {
     padding-top: var(--space-12);
     padding-bottom: var(--space-16);
-    background: linear-gradient(180deg, #FAF7F2 0%, #FFF5EB 100%);
+    background: var(--color-bg-alt);
     border-bottom: 1px solid var(--color-border);
   }
 
@@ -586,7 +580,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
 
   .modality-detail-featured {
     border: 1.5px solid var(--color-primary-action);
-    background: #FFFDFB;
+    background: var(--brand-cream);
     box-shadow: 0 12px 32px -8px rgba(194, 65, 12, 0.12), var(--shadow-sm);
   }
 
@@ -641,13 +635,13 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   }
 
   .tag-individual {
-    background: #FFF0E6;
+    background: var(--color-primary-light);
     color: var(--color-primary-text);
   }
 
   .tag-group {
-    background: #F0FDF4;
-    color: #15803D;
+    background: var(--color-bg-alt);
+    color: var(--color-text-muted);
   }
 
   .modality-title {
@@ -778,9 +772,9 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   .pricing-badge {
     font-size: 0.725rem;
     font-weight: 700;
-    color: #15803D;
-    background-color: #F0FDF4;
-    border: 1px solid #BBF7D0;
+    color: var(--color-text-muted);
+    background-color: var(--brand-blue);
+    border: 1px solid var(--color-border-strong);
     padding: 2px 8px;
     border-radius: var(--radius-full);
   }
@@ -1010,7 +1004,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   }
 
   .final-cta-card {
-    background: linear-gradient(135deg, #FFF6EE 0%, #FFE9D9 100%);
+    background: var(--brand-cream);
     border: 2px solid var(--color-primary-border);
     border-radius: var(--radius-xl);
     padding: var(--space-16) var(--space-8);

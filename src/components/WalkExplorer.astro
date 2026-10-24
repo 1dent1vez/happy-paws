@@ -1,0 +1,236 @@
+---
+import { Image } from 'astro:assets';
+import { getWhatsAppUrl } from '../config/site';
+import individualWalk from '../assets/individual-walk.jpg';
+import groupWalk from '../assets/group-walk.jpg';
+import reportMoment from '../assets/report-moment.jpg';
+import careCheckin from '../assets/care-checkin.jpg';
+
+const moments = [
+  { label: 'Antes', title: 'Primero, nos conocemos.', description: 'En tu puerta, contigo y con él. Hablamos de sus hábitos, revisamos su arnés y resolvemos tus dudas antes de salir.', detail: 'Tú conoces a quien lo acompañará. Nosotros conocemos lo que él necesita.' },
+  { label: 'Durante', title: 'El mundo, a su ritmo.', description: 'Tiempo para caminar y detenerse a olfatear. Atención individual, pausas de agua y un recorrido adaptado a su energía dentro de Foresta.', detail: 'De 45 a 60 minutos · Recogida y regreso en tu puerta.' },
+  { label: 'Después', title: 'Regresa él. Llega tu reporte.', description: 'Te contamos cómo estuvo, cuánto duró la salida y sus pausas de agua. La foto se envía con tu autorización.', detail: 'El reporte que ves es un ejemplo. Cada salida tiene su propia historia.' },
+];
+---
+<section class="walk-explorer" aria-labelledby="explorer-title" data-walk-explorer data-stage="0" data-mode="individual" data-individual-url={getWhatsAppUrl('individual')} data-group-url={getWhatsAppUrl('group')}>
+  <div class="container">
+    <div class="explorer-heading">
+      <h2 id="explorer-title">Paseos individuales<br /><em>y grupales en Foresta.</em></h2>
+      <p>Explora las opciones y descubre cada momento. No necesitas decidir para escribirnos.</p>
+    </div>
+    <fieldset class="mode-picker">
+      <legend>Modalidad de paseo</legend>
+      <label><input type="radio" name="explorer-mode" value="individual" checked /><span>Individual</span></label>
+      <label><input type="radio" name="explorer-mode" value="group" /><span>Grupal · hasta 4</span></label>
+    </fieldset>
+    <div class="explorer-scene">
+      <div class="moment-slider">
+        <label class="slider-heading" for="moment-range">
+          <span>Momento del paseo</span>
+          <output for="moment-range" data-moment-output aria-hidden="true">Antes</output>
+        </label>
+        <div class="slider-track-wrap">
+          <div class="slider-stops" aria-hidden="true"><i></i><i></i><i></i></div>
+          <input id="moment-range" type="range" min="0" max="2" step="1" value="0" aria-valuetext="Antes del paseo" aria-controls="moment-panel-0" aria-describedby="moment-slider-hint" data-moment-range />
+        </div>
+        <div class="slider-labels" aria-hidden="true">
+          {moments.map((moment, index) => <span class:list={{ 'is-current': index === 0 }} data-moment-label={index}>{moment.label}</span>)}
+        </div>
+        <p id="moment-slider-hint">Desliza para explorar los tres momentos.</p>
+      </div>
+
+      <div class="scene-media" aria-label="Momentos del paseo">
+        <div class="scene-image" data-image="before"><Image src={careCheckin} alt="Perro antes de una salida" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
+        <div class="scene-image" data-image="individual"><Image src={individualWalk} alt="Perro explorando en un paseo individual" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
+        <div class="scene-image" data-image="group"><Image src={groupWalk} alt="Perros paseando acompañados" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
+        <div class="scene-image" data-image="after"><Image src={reportMoment} alt="Perro al aire libre, fotografía ilustrativa del reporte" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
+        <div class="scene-caption" data-caption="before"><span>El primer encuentro</span><strong>La confianza va primero.</strong></div>
+        <div class="scene-caption" data-caption="during"><span>Dentro de Foresta</span><strong data-mode-caption>Su espacio. Sus pausas.</strong></div>
+        <div class="report-preview" data-caption="after">
+          <span class="report-label">Ejemplo de tu reporte</span>
+          <p><strong>Hoy salió a explorar.</strong></p>
+          <dl><div><dt>Paseo</dt><dd>45 minutos</dd></div><div><dt>Agua</dt><dd>2 pausas</dd></div></dl>
+          <p class="report-observation">Curioso con los olores, caminó a su ritmo.</p>
+          <span class="report-channel">En tu WhatsApp, al regresar.</span>
+        </div>
+        <span class="scene-position" aria-hidden="true"><span data-position>01</span> / 03</span>
+      </div>
+      <div class="scene-reading">
+        <div class="moment-content">
+          {moments.map((moment, index) => (
+            <div id={`moment-panel-${index}`} role="region" data-moment-panel aria-labelledby={`moment-title-${index}`} hidden={index !== 0} tabindex="0">
+              <h3 id={`moment-title-${index}`}>{moment.title}</h3>
+              <p data-description={index}>{moment.description}</p>
+              <p class="moment-detail">{moment.detail}</p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+    <div class="explorer-bottom">
+      <div><p class="mode-summary" data-mode-summary>Individual · Atención exclusiva para tu perro.</p><p class="compatibility-note" data-compatibility>Si no sabes qué elegir, te orientamos por WhatsApp.</p></div>
+      <a class="btn btn-whatsapp explorer-cta" data-explorer-cta href={getWhatsAppUrl('individual')} target="_blank" rel="noopener noreferrer" data-hp-context="individual" aria-label="Consultar paseo individual por WhatsApp (abre una nueva pestaña)">Consultar paseo individual</a>
+    </div>
+    <a class="help-choosing" href={getWhatsAppUrl('general', 'Hola, quiero pasear a mi perro en Foresta. ¿Me ayudan a elegir entre paseo individual y grupal?')} target="_blank" rel="noopener noreferrer" data-hp-context="general">No sé cuál elegir: quiero orientación por WhatsApp</a>
+    <div class="explorer-facts"><p>La tarifa depende de la modalidad y la frecuencia.</p><a href="/paseos/">Ver todos los detalles del servicio</a></div>
+    <p class="sr-only" aria-live="polite" aria-atomic="true" data-explorer-status></p>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-walk-explorer]');
+  if (root) {
+    const slider = root.querySelector<HTMLInputElement>('[data-moment-range]')!;
+    const labels = Array.from(root.querySelectorAll<HTMLElement>('[data-moment-label]'));
+    const stageNames = ['Antes', 'Durante', 'Después'];
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-moment-panel]'));
+
+    let mode = 'individual';
+    const status = root.querySelector<HTMLElement>('[data-explorer-status]');
+    const text = (selector: string, value: string) => {
+      const element = root.querySelector<HTMLElement>(selector);
+      if (element) element.textContent = value;
+    };
+    const activate = (value: number) => {
+      const index = Math.max(0, Math.min(panels.length - 1, Math.round(value)));
+      root.dataset.stage = String(index);
+      slider.value = String(index);
+      slider.setAttribute('aria-valuetext', `${stageNames[index]} del paseo`);
+      slider.setAttribute('aria-controls', panels[index].id);
+      root.style.setProperty('--moment-progress', `${index * 50}%`);
+      panels.forEach((panel, i) => { panel.hidden = i !== index; });
+      labels.forEach((label, i) => label.classList.toggle('is-current', i === index));
+      text('[data-moment-output]', stageNames[index]);
+      // Inactive photographs do not appear as additional images to assistive technology.
+      root.querySelectorAll<HTMLElement>('[data-image]').forEach((image) => {
+        const active = index === 0 ? image.dataset.image === 'before' : index === 2 ? image.dataset.image === 'after' : image.dataset.image === mode;
+        image.setAttribute('aria-hidden', String(!active));
+      });
+      text('[data-position]', `0${index + 1}`);
+      if (status) status.textContent = `${stageNames[index]}: ${panels[index].querySelector('h3')?.textContent}`;
+    };
+    slider.addEventListener('input', () => activate(Number(slider.value)));
+    root.querySelectorAll<HTMLInputElement>('[name="explorer-mode"]').forEach((input) => {
+      input.addEventListener('change', () => {
+        mode = input.value;
+        const group = mode === 'group';
+        root.dataset.mode = mode;
+        text('[data-mode-caption]', group ? 'Compañeros compatibles.' : 'Su espacio. Sus pausas.');
+        text('[data-description="1"]', group
+          ? 'Una caminata con hasta 4 perros por paseador, elegidos por su compatibilidad. Pausas de olfato, agua y descanso dentro de Foresta.'
+          : 'Tiempo para caminar y detenerse a olfatear. Atención individual, pausas de agua y un recorrido adaptado a su energía dentro de Foresta.');
+        text('[data-mode-summary]', group ? 'Grupal · Hasta 4 perros por paseador.' : 'Individual · Atención exclusiva para tu perro.');
+        text('[data-compatibility]', group ? 'Revisamos su compatibilidad antes de integrarlo al grupo.' : 'Si no sabes qué elegir, te orientamos por WhatsApp.');
+        const cta = root.querySelector<HTMLAnchorElement>('[data-explorer-cta]');
+        if (cta) {
+          cta.href = (group ? root.dataset.groupUrl : root.dataset.individualUrl) || cta.href;
+          cta.dataset.hpContext = group ? 'group' : 'individual';
+          cta.textContent = group ? 'Consultar paseo grupal' : 'Consultar paseo individual';
+          cta.setAttribute('aria-label', `Consultar paseo ${group ? 'grupal' : 'individual'} por WhatsApp (abre una nueva pestaña)`);
+        }
+        // Choosing a modality should immediately explain that choice.
+        activate(1);
+        document.dispatchEvent(new CustomEvent('hp:walk-mode', { detail: mode }));
+      });
+    });
+    document.addEventListener('hp:walk-mode', (event) => {
+      const selectedMode = (event as CustomEvent<string>).detail;
+      if (selectedMode === mode) return;
+      const input = root.querySelector<HTMLInputElement>(`[name="explorer-mode"][value="${selectedMode === 'group' ? 'group' : 'individual'}"]`);
+      if (input) {
+        input.checked = true;
+        input.dispatchEvent(new Event('change'));
+      }
+    });
+    // Browsers may restore form controls when navigating back.
+    const restoredMoment = Number(slider.value);
+    const restored = root.querySelector<HTMLInputElement>('[name="explorer-mode"]:checked');
+    restored?.dispatchEvent(new Event('change'));
+    activate(restoredMoment);
+    if (status) status.textContent = '';
+    root.classList.add('is-enhanced');
+    document.querySelector('main')?.setAttribute('data-walk-experience-ready', '');
+  }
+</script>
+
+<style>
+.walk-explorer { display: none; }
+@media (max-width: 1100px) {
+  .walk-explorer.is-enhanced { display: block; padding: 48px 0 40px; }
+  :global([data-walk-experience-ready] .classic-experience) { display: none; }
+  .explorer-heading h2 { font-size: clamp(2.15rem, 5vw, 3.4rem); line-height: 1.07; letter-spacing: -.03em; }
+  .explorer-heading h2 em { font-style: normal; color: var(--color-text-muted); }
+  .explorer-heading > p { margin-top: 18px; font-size: 1rem; max-width: 45ch; }
+  .mode-picker { border: 0; display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 22px; }
+  .mode-picker legend { font-size: .85rem; color: var(--color-text-muted); margin-bottom: 10px; }
+  .mode-picker label { cursor: pointer; position: relative; }
+  .mode-picker input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .mode-picker span { display: flex; align-items: center; min-height: 46px; padding: 10px 20px; border: 1px solid var(--color-border-strong); border-radius: 999px; font-size: .95rem; font-weight: 600; transition: background-color 180ms, color 180ms; }
+  .mode-picker input:checked + span { background: var(--color-text-title); color: white; border-color: var(--color-text-title); }
+  .mode-picker input:focus-visible + span { outline: 2px solid var(--brand-wine); outline-offset: 3px; }
+  .explorer-scene { display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: "media tabs" "media reading"; grid-template-rows: auto 1fr; gap: 20px 32px; align-items: start; }
+  .scene-media { position: relative; min-width: 0; height: auto; min-height: 320px; aspect-ratio: 1; display: grid; align-items: end; grid-area: media; overflow: hidden; border-radius: 14px; background: #ece7df; isolation: isolate; }
+  .scene-image { position: absolute; inset: 0; opacity: 0; transition: opacity 260ms ease-out; }
+  .scene-image img { width: 100%; height: 100%; object-fit: cover; }
+  [data-stage="0"] [data-image="before"], [data-stage="1"][data-mode="individual"] [data-image="individual"], [data-stage="1"][data-mode="group"] [data-image="group"], [data-stage="2"] [data-image="after"] { opacity: 1; }
+  .scene-image::after { content: ''; position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, rgba(24,26,22,.7)); }
+  .scene-caption { position: absolute; bottom: 27px; left: 24px; right: 24px; color: white; display: none; }
+  .scene-caption span { display: block; font-size: .8rem; margin-bottom: 6px; color: #eee8e0; }
+  .scene-caption strong { font-family: var(--font-heading); font-size: 1.7rem; font-weight: 500; line-height: 1.1; display: block; }
+  [data-stage="0"] [data-caption="before"], [data-stage="1"] [data-caption="during"] { display: block; }
+  .scene-position { position: absolute; top: 16px; right: 16px; color: white; font-size: .8rem; font-variant-numeric: tabular-nums; padding: 6px 10px; border-radius: 99px; background: rgba(26,24,22,.65); }
+  .report-preview { display: none; position: relative; margin: 20px; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 8px 28px rgba(26,24,22,.15); }
+  [data-stage="2"] .report-preview { display: block; animation: report-arrives 260ms cubic-bezier(.16,1,.3,1); }
+  .report-label { font-size: .73rem; color: var(--brand-wine); font-weight: 700; }
+  .report-preview p { font-size: .95rem; margin-top: 8px; line-height: 1.5; }
+  .report-preview dl { display: flex; gap: 28px; padding: 12px 0; border-bottom: 1px solid var(--color-border); font-size: .78rem; }
+  .report-preview dd { font-weight: 700; font-size: .9rem; margin-top: 4px; }
+  .report-channel { display: block; font-size: .73rem; color: var(--color-text-muted); margin-top: 12px; }
+  .scene-reading { grid-area: reading; min-width: 0; }
+  .help-choosing { display: inline-block; padding: 14px 0; min-height: 44px; font-size: .88rem; text-decoration: underline; text-underline-offset: 4px; }
+  .moment-slider { grid-area: tabs; min-width: 0; --slider-thumb: 26px; }
+  .slider-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: .8rem; color: var(--color-text-muted); }
+  .slider-heading output { font-weight: 700; color: var(--brand-wine); font-size: .85rem; }
+  .slider-track-wrap { position: relative; height: 48px; }
+  [data-moment-range] { appearance: none; -webkit-appearance: none; position: relative; z-index: 1; display: block; width: 100%; height: 48px; margin: 0; background: transparent; cursor: ew-resize; touch-action: pan-y; border-radius: 8px; }
+  [data-moment-range]::-webkit-slider-runnable-track { height: 5px; border-radius: 99px; background: linear-gradient(to right, var(--brand-wine) var(--moment-progress, 0%), #D9D2CA var(--moment-progress, 0%)); }
+  [data-moment-range]::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: var(--slider-thumb); height: var(--slider-thumb); margin-top: -10.5px; border-radius: 50%; background: var(--color-surface); border: 6px solid var(--brand-wine); box-shadow: 0 2px 5px rgba(38,35,31,.16); }
+  [data-moment-range]::-moz-range-track { height: 5px; border-radius: 99px; background: #D9D2CA; }
+  [data-moment-range]::-moz-range-progress { height: 5px; border-radius: 99px; background: var(--brand-wine); }
+  [data-moment-range]::-moz-range-thumb { box-sizing: border-box; width: var(--slider-thumb); height: var(--slider-thumb); border-radius: 50%; background: var(--color-surface); border: 6px solid var(--brand-wine); box-shadow: 0 2px 5px rgba(38,35,31,.16); }
+  .slider-stops { position: absolute; inset: 0 calc(var(--slider-thumb) / 2); display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
+  .slider-stops i { width: 5px; height: 5px; border-radius: 50%; background: #A79B90; }
+  .slider-labels { display: flex; justify-content: space-between; gap: 8px; font-size: .85rem; color: var(--color-text-muted); }
+  .slider-labels span { flex: 1; }
+  .slider-labels span:nth-child(2) { text-align: center; }
+  .slider-labels span:last-child { text-align: right; }
+  .slider-labels .is-current { color: var(--color-text-title); font-weight: 700; }
+  #moment-slider-hint { font-size: .76rem; margin-top: 12px; color: var(--color-text-muted); }
+  .moment-content { min-height: 240px; }
+  .moment-content h3 { font-size: 2rem; line-height: 1.1; max-width: 16ch; }
+  .moment-content p { font-size: 1rem; line-height: 1.7; margin-top: 18px; }
+  .moment-content .moment-detail { font-size: .84rem; line-height: 1.6; margin-top: 20px; }
+  .explorer-bottom { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .explorer-bottom .mode-summary { font-size: .95rem; font-weight: 700; color: var(--color-text-title); }
+  .explorer-bottom .compatibility-note { font-size: .83rem; margin-top: 8px; }
+  .explorer-cta { flex-shrink: 0; }
+  .explorer-facts { display: flex; justify-content: space-between; gap: 20px; margin-top: 20px; }
+  .explorer-facts p, .explorer-facts a { font-size: .8rem; line-height: 1.6; }
+  .explorer-facts a { text-decoration: underline; text-underline-offset: 4px; }
+}
+@media (max-width: 699px) {
+  .explorer-scene { grid-template-columns: 1fr; grid-template-areas: "tabs" "media" "reading"; grid-template-rows: auto; gap: 18px; }
+  .scene-media { height: auto; min-height: 270px; aspect-ratio: 1.1; }
+  .scene-reading { padding: 0 4px; }
+  .moment-content { min-height: 225px; }
+  .moment-content h3 { font-size: 1.85rem; max-width: 20ch; }
+  .moment-content p { margin-top: 14px; }
+  .moment-content .moment-detail { margin-top: 14px; }
+  .explorer-bottom, .explorer-facts { flex-direction: column; align-items: stretch; gap: 12px; }
+  .explorer-bottom { margin-top: 14px; padding-top: 22px; }
+  .explorer-cta { margin-top: 6px; }
+}
+@keyframes report-arrives { from { transform: translateY(12px); opacity: .4; } to { transform: translateY(0); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .scene-image { transition: none; } [data-stage="2"] .report-preview { animation: none; } }
+</style>
