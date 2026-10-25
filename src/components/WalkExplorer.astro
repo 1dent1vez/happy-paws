@@ -33,10 +33,10 @@ const moments = [
           <div class="slider-stops" aria-hidden="true"><i></i><i></i><i></i></div>
           <input id="moment-range" type="range" min="0" max="2" step="1" value="0" aria-valuetext="Antes del paseo" aria-controls="moment-panel-0" aria-describedby="moment-slider-hint" data-moment-range />
         </div>
-        <div class="slider-labels" aria-hidden="true">
-          {moments.map((moment, index) => <span class:list={{ 'is-current': index === 0 }} data-moment-label={index}>{moment.label}</span>)}
+        <div class="slider-labels" role="group" aria-label="Elegir momento del paseo">
+          {moments.map((moment, index) => <button type="button" class:list={{ 'is-current': index === 0 }} data-moment-label={index} aria-pressed={index === 0} aria-controls={`moment-panel-${index}`}>{moment.label}</button>)}
         </div>
-        <p id="moment-slider-hint">Desliza para explorar los tres momentos.</p>
+        <p id="moment-slider-hint">Toca un momento o desliza para explorar.</p>
       </div>
 
       <div class="scene-media" aria-label="Momentos del paseo">
@@ -100,7 +100,10 @@ const moments = [
       slider.setAttribute('aria-controls', panels[index].id);
       root.style.setProperty('--moment-progress', `${index * 50}%`);
       panels.forEach((panel, i) => { panel.hidden = i !== index; });
-      labels.forEach((label, i) => label.classList.toggle('is-current', i === index));
+      labels.forEach((label, i) => {
+        label.classList.toggle('is-current', i === index);
+        label.setAttribute('aria-pressed', String(i === index));
+      });
       text('[data-moment-output]', stageNames[index]);
       // Inactive photographs do not appear as additional images to assistive technology.
       root.querySelectorAll<HTMLElement>('[data-image]').forEach((image) => {
@@ -111,6 +114,7 @@ const moments = [
       if (status) status.textContent = `${stageNames[index]}: ${panels[index].querySelector('h3')?.textContent}`;
     };
     slider.addEventListener('input', () => activate(Number(slider.value)));
+    labels.forEach((label, index) => label.addEventListener('click', () => activate(index)));
     root.querySelectorAll<HTMLInputElement>('[name="explorer-mode"]').forEach((input) => {
       input.addEventListener('change', () => {
         mode = input.value;
@@ -156,9 +160,11 @@ const moments = [
 
 <style>
 .walk-explorer { display: none; }
-@media (max-width: 1100px) {
+@media all {
   .walk-explorer.is-enhanced { display: block; padding: 48px 0 40px; }
-  :global([data-walk-experience-ready] .classic-experience) { display: none; }
+  :global([data-walk-experience-ready] .classic-experience .walks-section),
+  :global([data-walk-experience-ready] .classic-experience #reporte),
+  :global([data-walk-experience-ready] .classic-experience .care-section) { display: none; }
   .explorer-heading h2 { font-size: clamp(2.15rem, 5vw, 3.4rem); line-height: 1.07; letter-spacing: -.03em; }
   .explorer-heading h2 em { font-style: normal; color: var(--color-text-muted); }
   .explorer-heading > p { margin-top: 18px; font-size: 1rem; max-width: 45ch; }
@@ -194,18 +200,18 @@ const moments = [
   .slider-heading output { font-weight: 700; color: var(--brand-wine); font-size: .85rem; }
   .slider-track-wrap { position: relative; height: 48px; }
   [data-moment-range] { appearance: none; -webkit-appearance: none; position: relative; z-index: 1; display: block; width: 100%; height: 48px; margin: 0; background: transparent; cursor: ew-resize; touch-action: pan-y; border-radius: 8px; }
-  [data-moment-range]::-webkit-slider-runnable-track { height: 5px; border-radius: 99px; background: linear-gradient(to right, var(--brand-wine) var(--moment-progress, 0%), #D9D2CA var(--moment-progress, 0%)); }
+  [data-moment-range]::-webkit-slider-runnable-track { height: 5px; border-radius: 99px; background: linear-gradient(to right, var(--brand-wine) var(--moment-progress, 0%), var(--color-control-track) var(--moment-progress, 0%)); }
   [data-moment-range]::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: var(--slider-thumb); height: var(--slider-thumb); margin-top: -10.5px; border-radius: 50%; background: var(--color-surface); border: 6px solid var(--brand-wine); box-shadow: 0 2px 5px rgba(38,35,31,.16); }
-  [data-moment-range]::-moz-range-track { height: 5px; border-radius: 99px; background: #D9D2CA; }
+  [data-moment-range]::-moz-range-track { height: 5px; border-radius: 99px; background: var(--color-control-track); }
   [data-moment-range]::-moz-range-progress { height: 5px; border-radius: 99px; background: var(--brand-wine); }
   [data-moment-range]::-moz-range-thumb { box-sizing: border-box; width: var(--slider-thumb); height: var(--slider-thumb); border-radius: 50%; background: var(--color-surface); border: 6px solid var(--brand-wine); box-shadow: 0 2px 5px rgba(38,35,31,.16); }
   .slider-stops { position: absolute; inset: 0 calc(var(--slider-thumb) / 2); display: flex; align-items: center; justify-content: space-between; pointer-events: none; }
-  .slider-stops i { width: 5px; height: 5px; border-radius: 50%; background: #A79B90; }
+  .slider-stops i { width: 5px; height: 5px; border-radius: 50%; background: var(--color-control-track); }
   .slider-labels { display: flex; justify-content: space-between; gap: 8px; font-size: .85rem; color: var(--color-text-muted); }
-  .slider-labels span { flex: 1; }
-  .slider-labels span:nth-child(2) { text-align: center; }
-  .slider-labels span:last-child { text-align: right; }
-  .slider-labels .is-current { color: var(--color-text-title); font-weight: 700; }
+  .slider-labels button { flex: 1; min-height: 44px; border: 0; border-radius: 8px; background: transparent; color: inherit; font: inherit; cursor: pointer; padding: 8px; }
+  .slider-labels button:nth-child(2) { text-align: center; }
+  .slider-labels button:last-child { text-align: center; }
+  .slider-labels .is-current { color: var(--brand-cream); background: var(--brand-wine); font-weight: 700; }
   #moment-slider-hint { font-size: .76rem; margin-top: 12px; color: var(--color-text-muted); }
   .moment-content { min-height: 240px; }
   .moment-content h3 { font-size: 2rem; line-height: 1.1; max-width: 16ch; }
@@ -217,7 +223,7 @@ const moments = [
   .explorer-cta { flex-shrink: 0; }
   .explorer-facts { display: flex; justify-content: space-between; gap: 20px; margin-top: 20px; }
   .explorer-facts p, .explorer-facts a { font-size: .8rem; line-height: 1.6; }
-  .explorer-facts a { text-decoration: underline; text-underline-offset: 4px; }
+  .explorer-facts a { min-height: 44px; display: inline-flex; align-items: center; text-decoration: underline; text-underline-offset: 4px; }
 }
 @media (max-width: 699px) {
   .explorer-scene { grid-template-columns: 1fr; grid-template-areas: "tabs" "media" "reading"; grid-template-rows: auto; gap: 18px; }
@@ -233,4 +239,92 @@ const moments = [
 }
 @keyframes report-arrives { from { transform: translateY(12px); opacity: .4; } to { transform: translateY(0); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .scene-image { transition: none; } [data-stage="2"] .report-preview { animation: none; } }
+
+@media all {
+  .walk-explorer.is-enhanced { padding: 64px 0 44px; background: var(--brand-cream); }
+  .explorer-heading { display: grid; grid-template-columns: 1.3fr 1fr; align-items: end; gap: 32px; }
+  .explorer-heading h2 { color: var(--brand-wine); }
+  .explorer-heading h2 em { color: var(--brand-wine); font-style: italic; }
+  .explorer-heading > p { margin: 0; line-height: 1.7; }
+  .mode-picker { margin-block: 28px; }
+  .mode-picker input:checked + span { background: var(--brand-wine); border-color: var(--brand-wine); color: var(--brand-cream); }
+  .explorer-scene { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 28px; }
+  .scene-media { width: 100%; height: 100%; min-height: 440px; aspect-ratio: auto; border-radius: 16px; }
+  .scene-reading { background: var(--brand-wine); color: var(--brand-cream); padding: 28px; border-radius: 14px; align-self: stretch; }
+  .moment-content { min-height: 0; }
+  .moment-content h3, .moment-content p { color: var(--brand-cream); }
+  .moment-content h3 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+  .moment-content .moment-detail { padding-top: 18px; border-top: 1px solid #fcf4f040; font-size: .88rem; }
+  .explorer-bottom { margin-top: 28px; border-color: var(--color-primary-border); }
+  .explorer-cta { background: var(--brand-wine); }
+  .explorer-facts { border-top: 1px solid var(--color-primary-border); padding-top: 20px; margin-top: 8px; }
+  .scene-caption strong { font-size: clamp(1.8rem, 3.6vw, 2.6rem); max-width: 13ch; }
+}
+@media (max-width: 699px) {
+  .walk-explorer.is-enhanced { padding-top: 40px; }
+  .explorer-heading { display: block; }
+  .explorer-heading h2 { font-size: clamp(2.1rem, 8.3vw, 3rem); }
+  .explorer-heading > p { margin-top: 18px; }
+  .mode-picker { margin: 24px 0; }
+  .mode-picker label { flex: 1; }
+  .mode-picker span { justify-content: center; padding-inline: 12px; }
+  .explorer-scene { grid-template-columns: minmax(0, 1fr); grid-template-areas: "tabs" "media" "reading"; gap: 20px; }
+  .scene-media { height: auto; min-height: 0; aspect-ratio: 1.18; }
+  .scene-caption { left: 24px; bottom: 24px; }
+  .scene-caption strong { font-size: 2.3rem; }
+  .moment-slider { padding-inline: 4px; }
+  .scene-reading { padding: 28px 24px; }
+  .moment-content h3 { font-size: 2rem; }
+  .moment-content p { margin-top: 16px; }
+  .moment-content .moment-detail { margin-top: 20px; }
+  .explorer-bottom { margin-top: 24px; }
+  .explorer-bottom .compatibility-note { font-size: .9rem; line-height: 1.6; }
+  .help-choosing { font-size: .9rem; line-height: 1.6; padding-block: 18px; }
+  .explorer-facts p, .explorer-facts a { font-size: .88rem; }
+}
+@media (max-width: 699px) {
+  .walk-explorer.is-enhanced { background: #fff; padding-block: 28px 40px; border-top: 1px solid var(--color-border); }
+  .explorer-heading h2 { font-size: clamp(2rem, 8.5vw, 3rem); color: var(--color-text-title); }
+  .explorer-heading h2 em { color: var(--brand-wine); }
+  .explorer-heading > p { font-size: .95rem; }
+  .mode-picker { gap: 0; border-bottom: 1px solid var(--color-border-strong); padding: 0; margin: 24px 0; }
+  .mode-picker span { border: 0; border-radius: 0; background: transparent; padding: 12px 4px; }
+  .mode-picker input:checked + span { background: transparent; color: var(--brand-wine); box-shadow: inset 0 -3px var(--brand-wine); }
+  .explorer-scene { grid-template-areas: "media" "tabs" "reading"; gap: 0; }
+  .scene-media { border-radius: 4px; aspect-ratio: 1.12; }
+  .scene-caption { left: 20px; bottom: 24px; }
+  .scene-caption strong { font-size: 2rem; }
+  .moment-slider { padding: 12px 0 0; }
+  .slider-heading, .slider-track-wrap, #moment-slider-hint { display: none; }
+  .slider-labels { gap: 0; border-bottom: 1px solid var(--color-border); }
+  .slider-labels button { border-radius: 0; min-height: 48px; }
+  .slider-labels .is-current { background: transparent; color: var(--brand-wine); box-shadow: inset 0 -3px var(--brand-orange); }
+  .scene-reading { padding: 24px 0 0; background: transparent; border-radius: 0; }
+  .moment-content h3 { font-size: 1.85rem; color: var(--color-text-title); }
+  .moment-content p { color: var(--color-text-muted); }
+  .moment-content .moment-detail { border-top: 0; padding-top: 0; color: var(--brand-wine); }
+  .explorer-cta { border-radius: 12px; }
+  .explorer-bottom { margin-top: 24px; }
+}
+@media (min-width: 700px) {
+  .walk-explorer.is-enhanced { background: white; padding-block: 64px; border-top: 1px solid var(--color-border); }
+  .explorer-heading h2 { color: var(--color-text-title); }
+  .mode-picker { gap: 0; border-bottom: 1px solid var(--color-border); width: fit-content; }
+  .mode-picker span { min-width: 160px; justify-content: center; border: 0; border-radius: 0; }
+  .mode-picker input:checked + span { background: transparent; color: var(--brand-wine); box-shadow: inset 0 -3px var(--brand-wine); }
+  .explorer-scene { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); grid-template-areas: "media tabs" "media reading"; gap: 28px 64px; }
+  .scene-media { border-radius: 4px; min-height: 440px; }
+  .scene-reading { padding: 8px 0; background: transparent; border-radius: 0; }
+  .moment-content h3 { color: var(--color-text-title); font-size: clamp(2rem, 3.4vw, 3rem); }
+  .moment-content p { color: var(--color-text-muted); }
+  .moment-content .moment-detail { color: var(--brand-wine); border-top: 0; padding-top: 0; }
+  .slider-heading, .slider-track-wrap, #moment-slider-hint { display: none; }
+  .slider-labels { border-bottom: 1px solid var(--color-border); gap: 0; }
+  .slider-labels button { border-radius: 0; min-height: 52px; }
+  .slider-labels .is-current { background: transparent; color: var(--brand-wine); box-shadow: inset 0 -3px var(--brand-orange); }
+  .explorer-cta { border-radius: 12px; }
+}
+@media (min-width: 700px) and (max-width: 950px) {
+  .explorer-scene { gap: 24px 32px; }
+}
 </style>

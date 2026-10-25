@@ -10,21 +10,16 @@ import FAQAccordion from '../components/FAQAccordion.astro';
 import FaqSchema from '../components/FaqSchema.astro';
 import PostWalkReport from '../components/PostWalkReport.astro';
 import { Image } from 'astro:assets';
-import heroWalk from '../assets/hero-walk.jpg';
 import individualWalk from '../assets/individual-walk.jpg';
 import groupWalk from '../assets/group-walk.jpg';
+import careCheckin from '../assets/care-checkin.jpg';
 const pageTitle = 'Paseos de perros en Foresta, Metepec | Happy Paws';
 const pageDesc = 'Paseador de perros en Foresta Dream Lagoons, Metepec. Paseos individuales o grupales de 45 a 60 minutos, recogida en tu puerta y reporte por WhatsApp.';
 ---
 <BaseLayout title={pageTitle} description={pageDesc} currentPath="/">
   <section class="evolution-hero" id="inicio" data-page-hero>
     <div class="hero-media" aria-hidden="true">
-      <Image src={heroWalk} alt="" loading="eager" fetchpriority="high" widths={[640, 1024, 1600]} sizes="100vw" />
-      <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" poster="/images/hero-poster.jpg">
-        <source src="/images/hero-walk-mobile.webm" type="video/webm" media="(max-width: 767px)" />
-        <source src="/images/hero-walk.webm" type="video/webm" />
-        <source src="/images/hero-walk.mp4" type="video/mp4" />
-      </video>
+      <Image class="mobile-cover" src={individualWalk} alt="" widths={[400, 700, 1000]} sizes="(max-width: 699px) 100vw, 50vw" loading="eager" />
     </div>
     <div class="container hero-content">
       <h1>Paseos de perros<br />
@@ -61,6 +56,7 @@ const pageDesc = 'Paseador de perros en Foresta Dream Lagoons, Metepec. Paseos i
         <h2>La confianza empieza<br />antes del primer paseo.</h2>
 <p class="intro-lead">Conoce a quien acompañará a tu perro.</p></div>
       <div class="intro-copy">
+<Image class="intro-photo" src={careCheckin} alt="Perro preparado para salir a pasear" loading="lazy" widths={[400, 700, 1000]} sizes="(max-width: 699px) 100vw, 50vw" />
 <p>Conversa por WhatsApp con quien lo cuidará. Antes de salir, nos conocemos contigo y con él en tu puerta: hablamos de sus hábitos, de lo que disfruta y de lo que necesita para sentirse cómodo.</p>
 <p>Revisamos su arnés y acordamos contigo la modalidad y los horarios. Así puedes resolver tus dudas antes de la primera salida.</p>
 <WhatsAppButton text="Cuéntanos sobre tu perro" context="process" variant="outline" id="meet-cta" /></div>
@@ -168,6 +164,7 @@ const pageDesc = 'Paseador de perros en Foresta Dream Lagoons, Metepec. Paseos i
 </BaseLayout>
 
 <style>
+.hero-media .mobile-cover { display: none; }
 .walker-profile {
   display:flex;
   align-items:start;
@@ -253,6 +250,10 @@ const pageDesc = 'Paseador de perros en Foresta Dream Lagoons, Metepec. Paseos i
   margin-top:30px
 }
 .hero-secondary {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
   color:var(--brand-cream);
   text-decoration:underline;
   text-underline-offset:6px;
@@ -340,9 +341,11 @@ h2 {
   line-height:1.9
 }
 .details-link {
-  display:block;
   width:fit-content;
-  margin-top:18px;
+  margin-top:10px;
+  min-height:44px;
+  display:flex;
+  align-items:center;
   text-decoration:underline;
   text-underline-offset:4px;
   color:var(--color-primary-text);
@@ -419,6 +422,8 @@ h2 {
   padding:24px 0
 }
 .optional-planner summary {
+  min-height:44px;
+  align-content:center;
   cursor:pointer;
   font-weight:700;
   font-size:1.05rem
@@ -438,7 +443,7 @@ h2 {
   margin-top:32px;
   display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start;
   gap:24px;
   flex-wrap:wrap
 }
@@ -526,4 +531,140 @@ h2 {
 
 }
 
+/* Small screens get their own composition, in the existing brand palette. */
+@media (max-width: 1100px) {
+  .evolution-hero {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    min-height: 620px;
+    padding: 0;
+    background: var(--brand-cream);
+    color: var(--brand-wine);
+  }
+  .hero-media { position: absolute; inset: 0 0 0 48%; z-index: 0; }
+  .hero-media img, .hero-media video { object-position: 60% center; }
+  .hero-media:after { background: linear-gradient(90deg, var(--brand-cream), transparent 30%); }
+  .hero-content { position: relative; grid-column: 1; width: auto; margin: 0; padding: 56px 0 40px 32px; z-index: 1; }
+  .hero-content h1 { font-size: clamp(2.7rem, 5.3vw, 3.7rem); color: var(--brand-wine); line-height: 1.02; }
+  .hero-content h1 span { color: var(--brand-wine); }
+  .hero-content > p { color: var(--brand-wine); font-size: 1rem; line-height: 1.65; margin-top: 22px; }
+  .hero-actions { gap: 12px; margin-top: 24px; }
+  .hero-secondary { color: var(--brand-wine); }
+  .hero-content .hero-helper { font-size: .85rem; }
+  .hero-facts { color: var(--brand-wine); border-color: var(--color-primary-border); gap: 10px 20px; margin-top: 28px; font-size: .8rem; }
+  .hero-facts span { display: flex; align-items: center; gap: 8px; }
+  .hero-facts span:before { content: ''; width: 5px; height: 5px; flex-shrink: 0; background: var(--brand-orange); border-radius: 50%; }
+  #como-funciona { padding-block: 64px; }
+  .steps { gap: 28px; }
+  .steps li { position: relative; padding-top: 20px; border-color: var(--color-primary-border); }
+  .steps li:before { font-family: var(--font-heading); font-size: 2.75rem; line-height: 1; color: var(--brand-wine); margin-bottom: 20px; }
+  .closing { background: var(--brand-wine); }
+  .closing h2, .closing p { color: var(--brand-cream); }
+  .closing h2 { font-size: clamp(2.7rem, 5.5vw, 4rem); line-height: 1.06; }
+  .closing-layout { gap: 32px; grid-template-columns: 1.1fr 1fr; }
+  .closing :global(.btn-whatsapp) { background: var(--brand-orange); color: var(--color-on-orange); }
+  .closing :global(.btn-whatsapp:hover) { background: var(--brand-cream); color: var(--brand-wine); }
+}
+@media (max-width: 699px) {
+  .evolution-hero { display: flex; flex-direction: column; align-items: stretch; min-height: 0; }
+  .hero-media { position: relative; inset: auto; height: clamp(170px, 48vw, 260px); flex-shrink: 0; }
+  .hero-media img, .hero-media video { object-position: center 42%; }
+  .hero-media:after { background: linear-gradient(0deg, rgba(38,35,31,.2), transparent 55%); }
+  .hero-content { margin-top: -24px; padding: 26px 20px; border-radius: 16px 16px 0 0; background: var(--brand-cream); }
+  .hero-content h1 { font-size: clamp(2.15rem, 9.3vw, 3.5rem); max-width: 15ch; }
+  .hero-content > p { margin-top: 20px; }
+  .hero-actions { align-items: stretch; flex-direction: column; gap: 8px; }
+  .hero-actions :global(.btn) { width: 100%; }
+  .hero-secondary { justify-content: center; }
+  .hero-content .hero-helper { text-align: center; margin-top: 12px; }
+  .hero-facts { margin-top: 24px; padding-top: 20px; gap: 10px 18px; }
+  #como-funciona { padding-block: 52px; }
+  .steps { grid-template-columns: 1fr; gap: 0; }
+  .steps li { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 20px; padding: 24px 0; }
+  .steps li:before { grid-row: 1 / 3; margin: 0; font-size: 2.6rem; }
+  .steps h3 { font-size: 1.2rem; }
+  .steps p { grid-column: 2; line-height: 1.7; }
+  .optional-planner { margin-top: 16px; }
+  .closing-layout { grid-template-columns: 1fr; gap: 28px; }
+  .closing p { margin-top: 18px; }
+  .closing :global(.btn) { width: 100%; }
+}
+
+/* Keep the trust section reachable on every device. */
+.intro-photo { width: 100%; height: 240px; object-fit: cover; object-position: center 40%; border-radius: 14px; margin-bottom: 24px; }
+.introduction-layout > div:first-child { position: sticky; top: calc(var(--header-height) + 32px); }
+@media (min-width: 700px) and (max-width: 1100px) {
+  .introduction-layout { grid-template-columns: .9fr 1.1fr; gap: 36px; }
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .hero-content { padding-right: 16px; }
+}
+@media (max-width: 699px) {
+  .introduction { padding-block: 48px; }
+  .introduction-layout > div:first-child { position: static; }
+  .intro-photo { height: 200px; }
+  .hero-content > p { line-height: 1.6; margin-top: 16px; }
+  .hero-facts { display: grid; grid-template-columns: 1fr 1fr; font-size: .78rem; }
+  .hero-facts span:last-child { grid-column: 1 / -1; }
+  .intro-copy :global(.btn) { width: 100%; }
+}
+@media (max-width: 1100px) {
+  .hero-content :focus-visible { outline-color: var(--brand-wine); }
+}
+/* Mobile has an editorial sequence of its own; tablet stays unchanged. */
+@media (max-width: 699px) {
+  .evolution-hero { display: grid; grid-template-columns: minmax(0, 1fr); background: #fff; padding: 28px 20px 36px; gap: 0; }
+  .hero-content { display: contents; }
+  .evolution-hero > .hero-media, .hero-content > * { grid-column: 1; }
+  .hero-content h1 { grid-row: 1; font-size: clamp(3.3rem, 14vw, 5.2rem); line-height: .98; letter-spacing: -.04em; max-width: 11ch; margin: 0 0 22px; color: var(--color-text-title); }
+  .hero-content h1 span { display: block; font-family: var(--font-sans); font-size: .95rem; font-weight: 500; letter-spacing: 0; line-height: 1.5; margin-top: 14px; color: var(--brand-wine); }
+  .hero-media { grid-row: 2; position: relative; inset: auto; height: clamp(260px, 80vw, 420px); margin-left: 40px; border-radius: 80px 4px 4px 4px; overflow: hidden; }
+  .hero-media > img:not(.mobile-cover), .hero-media video { display: none; }
+  .hero-media .mobile-cover { display: block; object-position: center 45%; }
+  .hero-media:after { background: none; }
+  .hero-content .hero-helper { grid-row: 2; align-self: end; z-index: 2; position: relative; width: 170px; padding: 14px 16px; margin: 0 0 18px -4px; background: var(--brand-cream); color: var(--brand-wine); font-family: var(--font-heading); font-size: 1.35rem; line-height: 1.15; text-align: left; }
+  .hero-actions { grid-row: 3; margin-top: 22px; gap: 6px; }
+  .hero-actions :global(.btn) { border-radius: 12px; min-height: 54px; }
+  .hero-secondary { font-size: .9rem; }
+  .hero-content > p:not(.hero-helper) { grid-row: 4; font-size: .95rem; line-height: 1.7; color: var(--color-text-muted); margin-top: 14px; }
+  .hero-facts { grid-row: 5; margin-top: 22px; color: var(--color-text-muted); border-color: var(--color-border); }
+  .introduction { background: var(--brand-cream); }
+  .introduction h2 { font-size: 2.3rem; }
+  .intro-photo { border-radius: 4px; width: calc(100% - 36px); height: 240px; margin-left: 36px; }
+  #como-funciona { background: #fff; }
+  .steps li { grid-template-columns: 32px minmax(0, 1fr); gap: 0 16px; }
+  .steps li:before { font-size: 1.8rem; }
+  .closing { background: var(--brand-cream); }
+  .closing h2 { color: var(--brand-wine); font-size: 3rem; }
+  .closing p { color: var(--color-text-muted); }
+  .closing :global(.btn) { border-radius: 12px; background: var(--brand-wine); color: white; }
+}
+@media (min-width: 700px) {
+  .evolution-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; gap: 20px 64px; padding: 64px max(32px, calc((100vw - 1152px) / 2)) 72px; min-height: 0; align-items: start; background: white; }
+  .hero-content { display: contents; }
+  .hero-content > * { grid-column: 1; }
+  .hero-content h1 { grid-row: 1; color: var(--color-text-title); font-size: clamp(3.4rem, 6.8vw, 6rem); line-height: .98; letter-spacing: -.04em; max-width: 11ch; }
+  .hero-content h1 span { display: block; color: var(--brand-wine); font: 500 1.05rem/1.5 var(--font-sans); letter-spacing: 0; margin-top: 22px; }
+  .hero-content > p:not(.hero-helper) { grid-row: 2; color: var(--color-text-muted); font-size: 1rem; line-height: 1.75; margin: 0; max-width: 46ch; }
+  .hero-actions { grid-row: 3; margin: 4px 0 0; gap: 12px 24px; }
+  .hero-actions :global(.btn) { border-radius: 12px; min-height: 54px; padding-inline: 24px; }
+  .hero-secondary { color: var(--brand-wine); font-size: .95rem; }
+  .hero-facts { grid-row: 4; align-self: end; color: var(--color-text-muted); border-color: var(--color-border); margin-top: 4px; gap: 12px 20px; font-size: .8rem; }
+  .hero-media { grid-column: 2; grid-row: 1 / 5; position: relative; inset: auto; width: 100%; height: 100%; min-height: 520px; z-index: 0; border-radius: 120px 4px 4px 4px; }
+  .hero-media .mobile-cover { display: block; object-position: center 45%; }
+  .hero-media:after { background: none; }
+  .hero-content .hero-helper { grid-column: 2; grid-row: 4; align-self: end; position: relative; z-index: 1; width: 230px; margin: 0 0 24px -36px; padding: 24px; background: var(--brand-cream); color: var(--brand-wine); font-family: var(--font-heading); font-size: 1.8rem; line-height: 1.15; }
+  .hero-content :focus-visible { outline-color: var(--brand-wine); }
+  .introduction { background: var(--brand-cream); }
+  .intro-photo { border-radius: 4px; width: calc(100% - 36px); margin-left: 36px; height: 300px; }
+  .closing { background: var(--brand-cream); }
+  .closing h2 { color: var(--brand-wine); }
+  .closing p { color: var(--color-text-muted); }
+  .closing :global(.btn) { border-radius: 12px; background: var(--brand-wine); color: white; }
+}
+@media (min-width: 700px) and (max-width: 950px) {
+  .evolution-hero { gap: 20px 32px; padding: 40px 28px 48px; }
+  .hero-media { min-height: 560px; border-top-left-radius: 80px; }
+  .hero-content .hero-helper { width: 200px; font-size: 1.5rem; margin-left: -16px; }
+  .hero-actions :global(.btn) { white-space: normal; }
+}
 </style>

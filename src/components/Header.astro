@@ -74,6 +74,7 @@ import { siteConfig } from '../config/site';
   <div class="mobile-nav-drawer" id="mobile-nav" aria-hidden="true" inert>
     <nav class="mobile-nav-links" aria-label="Navegación móvil">
       <a href="/#paseos" class="mobile-link">Paseos y tarifas</a>
+      <a href="/#conocenos" class="mobile-link">Conócenos</a>
       <a href="/#como-funciona" class="mobile-link">Cómo Funciona</a>
       <a href="/#faq" class="mobile-link">Preguntas Frecuentes</a>
       <a
@@ -345,7 +346,8 @@ import { siteConfig } from '../config/site';
     }
 
     .mobile-nav-drawer.is-open {
-      max-height: 440px;
+      max-height: min(480px, calc(100dvh - var(--header-height)));
+      overflow-y: auto;
     }
 
     .mobile-nav-links {
@@ -405,5 +407,13 @@ import { siteConfig } from '../config/site';
 
   .w-full {
     width: 100%;
+  }
+@media (max-width: 480px) {
+    .header-insta-link { display: none; }
+    .brand-logo { min-width: 0; gap: 8px; }
+    .logo-img { width: 48px; height: auto; }
+    .location-badge { font-size: .58rem; letter-spacing: .02em; }
+    .header-action { margin-left: 12px; }
+    .header-container { height: 68px; }
   }
 </style>
