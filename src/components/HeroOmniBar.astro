@@ -310,7 +310,9 @@ const baseWaUrl =
 
     btnFecha && btnFecha.addEventListener('click', function(e) {
       e.stopPropagation();
+      refreshSelection();
       renderCal();
+      renderHours();
       toggle(popFecha, btnFecha, document.getElementById('seg-wrap-fecha'));
     });
 
@@ -536,6 +538,28 @@ const baseWaUrl =
       }
     }
 
+    // Revalidate dates and times when a long-lived tab is used again.
+    function refreshSelection() {
+      var now = new Date();
+      today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      if (calYear < today.getFullYear() || (calYear === today.getFullYear() && calMonth < today.getMonth())) {
+        calYear = today.getFullYear();
+        calMonth = today.getMonth();
+      }
+      if (selDate && selDate < today) {
+        selDate = null;
+        selHour = null;
+        if (valFecha) {
+          valFecha.textContent = 'Elige una fecha tentativa';
+          valFecha.classList.add('omni-ph');
+        }
+      } else if (selDate && selDate.getTime() === today.getTime() && selHour != null && selHour <= now.getHours()) {
+        selHour = null;
+        if (valFecha) valFecha.textContent = selDate.getDate() + ' ' + MONTHS[selDate.getMonth()] + ', ' + selDate.getFullYear();
+      }
+      syncCta();
+    }
+
     function pad(n) { return n < 10 ? '0' + n : String(n); }
 
     document.getElementById('cal-prev') && document.getElementById('cal-prev').addEventListener('click', function(e) {
@@ -588,6 +612,18 @@ const baseWaUrl =
     // hace es publicar la configuración elegida en data-hp-detail en el
     // momento de elegirla (syncCta), para que el listener delegado la lea.
 
+    if (btnCta) {
+      btnCta.addEventListener('focus', refreshSelection);
+      btnCta.addEventListener('click', refreshSelection);
+    }
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') {
+        refreshSelection();
+        renderCal();
+        renderHours();
+      }
+    });
+
     function syncCta() {
       if (!btnCta) return;
       var srvTxt  = selService  ? 'Paseo ' + selService : 'No especificado';
@@ -600,10 +636,8 @@ const baseWaUrl =
 
       btnCta.setAttribute('data-hp-detail', detail);
 
-      // Se reescribe el href solo si hay algo configurado; si no, se deja el
-      // genérico que ya traía el enlace.
-      var configurado = selService || selDate || selHour != null || petCount !== 1;
-      if (configurado) {
+      // Rebuild the URL even when an expired selection has just been cleared.
+      {
         var msg = 'Hola, quiero consultar disponibilidad en Foresta Dream Lagoons.\n' +
           '• Modalidad: ' + srvTxt + '\n' +
           '• Fecha tentativa: ' + dateTxt + '\n' +
@@ -612,6 +646,7 @@ const baseWaUrl =
         btnCta.setAttribute('href', 'https://wa.me/' + phoneRaw + '?text=' + encodeURIComponent(msg));
       }
     }
+    wrapper.closest('.optional-planner')?.classList.add('is-ready');
   }
 
   // Run after DOM is ready

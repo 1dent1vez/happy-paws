@@ -93,6 +93,15 @@ import { siteConfig } from '../config/site';
     </nav>
   </div>
 </header>
+<noscript>
+  <style is:inline>.mobile-menu-toggle { display: none !important; }</style>
+  <nav class="no-script-nav" aria-label="Navegación sin JavaScript">
+    <a href="/#paseos">Paseos</a>
+    <a href="/#conocenos">Conócenos</a>
+    <a href="/#como-funciona">Cómo funciona</a>
+    <a href="/#faq">Preguntas frecuentes</a>
+  </nav>
+</noscript>
 
 <script>
   const toggleBtn = document.getElementById('mobile-toggle');
@@ -158,6 +167,8 @@ import { siteConfig } from '../config/site';
 </script>
 
 <style>
+  .no-script-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:8px 24px; padding:12px 20px; border-bottom:1px solid var(--color-border); }
+  .no-script-nav a { min-height:44px; display:inline-flex; align-items:center; color:var(--brand-wine); text-decoration:underline; text-underline-offset:4px; }
   .site-header {
     position: sticky;
     top: 0;
