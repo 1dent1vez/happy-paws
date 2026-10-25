@@ -1,10 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import { getWhatsAppUrl } from '../config/site';
-import individualWalk from '../assets/individual-walk.jpg';
-import groupWalk from '../assets/group-walk.jpg';
+import individualWalk from '../assets/walk-harness.jpg';
+import groupWalk from '../assets/walk-pair.jpg';
 import reportMoment from '../assets/report-moment.jpg';
-import careCheckin from '../assets/care-checkin.jpg';
+import careCheckin from '../assets/walk-companion.jpg';
 
 const moments = [
   { label: 'Antes', title: 'Primero, nos conocemos.', description: 'En tu puerta, contigo y con él. Hablamos de sus hábitos, revisamos su arnés y resolvemos tus dudas antes de salir.', detail: 'Tú conoces a quien lo acompañará. Nosotros conocemos lo que él necesita.' },
@@ -40,9 +40,9 @@ const moments = [
       </div>
 
       <div class="scene-media" aria-label="Momentos del paseo">
-        <div class="scene-image" data-image="before"><Image src={careCheckin} alt="Perro antes de una salida" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
-        <div class="scene-image" data-image="individual"><Image src={individualWalk} alt="Perro explorando en un paseo individual" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
-        <div class="scene-image" data-image="group"><Image src={groupWalk} alt="Perros paseando acompañados" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
+        <div class="scene-image" data-image="before"><Image src={careCheckin} alt="Perro con arnés y correa en un sendero arbolado" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
+        <div class="scene-image" data-image="individual"><Image src={individualWalk} alt="Labrador con arnés caminando por el césped junto a una persona" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
+        <div class="scene-image" data-image="group"><Image src={groupWalk} alt="Dos perros con correa caminando juntos" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
         <div class="scene-image" data-image="after"><Image src={reportMoment} alt="Perro al aire libre, fotografía ilustrativa del reporte" loading="lazy" widths={[400, 700, 1000]} sizes="(min-width: 700px) 50vw, 100vw" /></div>
         <div class="scene-caption" data-caption="before"><span>El primer encuentro</span><strong>La confianza va primero.</strong></div>
         <div class="scene-caption" data-caption="during"><span>Dentro de Foresta</span><strong data-mode-caption>Su espacio. Sus pausas.</strong></div>

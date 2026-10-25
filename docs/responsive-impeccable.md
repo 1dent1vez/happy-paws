@@ -17,3 +17,9 @@ A petición del usuario, se reemplaza la composición móvil por una portada edi
 El usuario aprobó la dirección móvil y solicitó extenderla a tablet y escritorio. La portada usa ahora el retrato con frase superpuesta en todas las pantallas: secuencia vertical en móvil y dos columnas desde 700 px. Se elimina el video anterior de la portada. El explorador interactivo se habilita también en escritorio y conserva el contenido clásico como alternativa sin JavaScript. Los fondos blancos, botones de esquinas suaves, selección subrayada y cierre crema unifican la experiencia.
 
 Validación final: build satisfactorio, Astro check sin errores ni advertencias y cuatro pruebas SEO aprobadas. Revisión visual de la portada a 768 y 1440 px. Se retiró la página temporal de revisión.
+
+## Vista /paseos/
+
+Se rediseña la página de servicios con la dirección editorial aprobada: portada con retrato y anotación superpuesta, modalidades en secciones con fotografía y detalles nativos desplegables, proceso en dos columnas, requisitos sin tarjetas elevadas y cierre crema. En móvil, el orden pasa a título, fotografía, consulta y descripción, con modalidades apiladas. Se conserva el contenido de servicio y los enlaces de consulta.
+
+Validación: build aprobado, Astro check sin errores ni advertencias y cuatro pruebas SEO correctas. Revisión visual de portada a 390, 768 y 1440 px, comparación en escritorio y apertura del detalle individual. Página temporal de revisión retirada.
