@@ -4,68 +4,58 @@
    ========================================================================== */
 
 :root {
-  /* Brand Warm Orange Palette */
-  --color-primary: #EE5D1A;
-  --color-primary-hover: #D94B0B;
-  --color-primary-active: #BF3E05;
-  --color-primary-light: #FFF2EB;
-  --color-primary-subtle: #FFE4D6;
-  --color-primary-border: #FDC7AD;
+  /* Official palette supplied by the brand. */
+  --brand-cream: #FCF4F0;
+  --brand-pink: #FFD5FB;
+  --brand-blue: #C0D6FF;
+  --brand-orange: #F86C2F;
+  --brand-wine: #6D0101;
 
-  /* Surfaces & Backgrounds: Crisp, intentional modern palette */
+  /* Darker wine for small text on orange: official wine gives only 4.34:1. */
+  --color-on-orange: #500101;
+  /* Neutral canvas. Brand colors are reserved for actions and small accents. */
+  --color-primary: var(--brand-wine);
+  --color-primary-hover: #500101;
+  --color-primary-active: #400101;
+  --color-primary-light: #F7F2EF;
+  --color-primary-subtle: #F7F2EF;
+  --color-primary-border: #DCCBC5;
+  --color-primary-action: var(--brand-wine);
+  --color-primary-action-hover: #500101;
+  --color-primary-text: var(--brand-wine);
+
   --color-bg: #FFFFFF;
   --color-bg-alt: #F8F7F5;
   --color-surface: #FFFFFF;
-  --color-surface-hover: #FAFAF9;
+  --color-surface-hover: #FAF9F7;
   --color-surface-elevated: #FFFFFF;
-
-  /* Borders & Dividers */
   --color-border: #E8E2DB;
-  --color-border-subtle: #F2EDE8;
-  --color-border-strong: #D5CCC3;
-
-  /* Text & Typography (Charcoal spectrum) */
-  --color-text-title: #1C1917;
-  --color-text: #2B2724;
-  --color-text-muted: #5E5852;
-  /* #857D75 daba 4.05:1 sobre blanco, por debajo de AA (4.5). Este gris más
-     oscuro mantiene la jerarquía visual y llega a 5.64:1. */
-  --color-text-subtle: #6E665E;
+  --color-border-subtle: #F0ECE7;
+  --color-border-strong: #CEC5BC;
+  --color-control-track: #8C8176;
+  --color-text-title: #26231F;
+  --color-text: #34302C;
+  --color-text-muted: #625B54;
+  --color-text-subtle: #70675F;
   --color-text-inverse: #FFFFFF;
 
-  /* Functional Accents */
-  --color-success: #15803D;
-  --color-success-bg: #F0FDF4;
-  --color-success-border: #BBF7D0;
-  --color-info-bg: #EFF6FF;
-  --color-info-border: #BFDBFE;
-  --color-info-text: #1E40AF;
-  --color-whatsapp: #25D366;
-  --color-whatsapp-dark: #128C7E;
-  --color-whatsapp-bg: #E8F8EE;
+  --color-success: #475C45;
+  --color-success-bg: #F1F4EE;
+  --color-success-border: #D8E0D2;
+  --color-info-bg: #F4F5F7;
+  --color-info-border: #DDE0E6;
+  --color-info-text: #414B5B;
+  --color-whatsapp: var(--brand-wine);
+  --color-whatsapp-dark: #500101;
+  --color-whatsapp-bg: #F7F2EF;
+  --color-whatsapp-strong: var(--brand-wine);
+  --color-whatsapp-accessible: var(--brand-wine);
+  --color-whatsapp-deep: #500101;
 
-  /* Verdes accesibles para fondos con texto blanco.
-     #25D366 con blanco da 1.98:1 (FALLA WCAG) y #128C7E daba 4.14:1, aún por
-     debajo de AA (4.5). #0F7D70 llega a 5.01:1 manteniendo la lectura verde
-     WhatsApp; el hover sigue en #075E54 (7.67:1).
-     --color-whatsapp-strong es el verde de acción del sitio. */
-  --color-whatsapp-strong: #0F7D70;
-  --color-whatsapp-accessible: #157F3D;
-  --color-whatsapp-deep: #075E54;
-
-  /* Naranja de marca para TEXTO pequeño y fondos de botón con texto blanco.
-     #EE5D1A falla AA en casi todos sus usos: 3.38:1 con blanco encima y 3.16:1
-     como texto sobre el fondo del sitio. #C2410C pasa en todos los contextos
-     (5.18 blanco/blanco, 4.85 sobre el fondo, 4.72 sobre el badge claro). El
-     naranja de marca se conserva para elementos grandes y decorativos, donde
-     basta el umbral AA-large de 3:1. */
-  --color-primary-action: #C2410C;
-  --color-primary-action-hover: #A33806;
-  --color-primary-text: #C2410C;
-
-  /* Typography: Outfit for distinct, modern, friendly editorial voice */
-  --font-sans: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Display: expressive serif. Reading and controls: clear contemporary sans. */
+  --font-sans: 'Manrope', 'Segoe UI', sans-serif;
+  --font-heading: 'Fraunces', Georgia, serif;
+  --font-label: var(--font-sans);
 
   /* Spacing Scale */
   --space-1: 0.25rem;  /* 4px */
@@ -152,8 +142,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   color: var(--color-text-title);
   line-height: 1.25;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-optical-sizing: auto;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 h1 {
@@ -192,8 +184,8 @@ p.lead {
 
 /* Browser Surfaces Theming (Impeccable craft floor) */
 ::selection {
-  background-color: #FFE4D6;
-  color: #7C2D12;
+  background-color: #EEE6E0;
+  color: var(--brand-wine);
 }
 
 input, textarea, select {
@@ -224,6 +216,11 @@ input, textarea, select {
 :focus-visible {
   outline: 2px solid var(--color-primary-action);
   outline-offset: 3px;
+}
+
+/* Keep keyboard focus legible over the photographic hero and dark footer. */
+:where([data-page-hero], .site-footer) :focus-visible {
+  outline-color: var(--brand-cream);
 }
 
 /* Motion preference.
@@ -344,9 +341,7 @@ div[id] {
 
 .badge-orange {
   background-color: var(--color-primary-light);
-  /* #EE5D1A sobre #FFF2EB daba 3.08:1 (solo AA-large). #A33806 llega a 6.13:1
-     y conserva la lectura naranja de la marca. */
-  color: #A33806;
+  color: var(--brand-wine);
   border: 1px solid var(--color-primary-border);
 }
 
@@ -370,30 +365,28 @@ div[id] {
   gap: var(--space-3);
   padding: 0.85rem 1.75rem;
   border-radius: var(--radius-full);
+  min-height: 44px;
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.25;
   cursor: pointer;
-  transition: all var(--transition-normal);
+  transition: background-color var(--transition-normal), color var(--transition-normal), border-color var(--transition-normal), transform var(--transition-normal), box-shadow var(--transition-normal);
   text-align: center;
   border: 2px solid transparent;
   white-space: nowrap;
 }
 
 .btn-primary {
-  /* El naranja de marca (#EE5D1A) con texto blanco da 3.38:1: FALLA AA. El
-     sitio entero convierte por estos botones, así que se usa el naranja de
-     acción #C2410C (5.18:1) en el fondo y se reserva el naranja de marca para
-     acentos grandes, donde el umbral AA-large de 3:1 sí se cumple. */
-  background-color: var(--color-primary-action);
+  background-color: var(--brand-wine);
   color: var(--color-text-inverse);
-  box-shadow: var(--shadow-orange);
+  box-shadow: none;
 }
 
 .btn-primary:hover {
   background-color: var(--color-primary-action-hover);
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px -4px rgba(194, 65, 12, 0.45);
+  box-shadow: none;
+  color: var(--brand-cream);
 }
 
 .btn-primary:active {
@@ -411,30 +404,28 @@ div[id] {
 .btn-secondary:hover {
   background-color: var(--color-primary-light);
   border-color: var(--color-primary-border);
-  /* #EE5D1A sobre #FFF2EB da 3.03:1 (FALLA AA para texto de 1rem). */
   color: var(--color-primary-text);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
 .btn-whatsapp {
-  background-color: var(--color-whatsapp-strong);
-  color: #FFFFFF;
-  box-shadow: 0 6px 16px -2px rgba(15, 125, 112, 0.4);
+  background-color: var(--brand-wine);
+  color: var(--color-text-inverse);
+  box-shadow: none;
 }
 
 .btn-whatsapp:hover {
   background-color: var(--color-whatsapp-deep);
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px -2px rgba(7, 94, 84, 0.5);
+  box-shadow: none;
   color: #FFFFFF;
 }
 
 .btn-outline {
   background: transparent;
-  /* Texto de 1rem sobre blanco: el naranja de marca da 3.38:1 (FALLA AA). */
-  color: var(--color-primary-text);
-  border-color: var(--color-primary-action);
+  color: var(--color-text-title);
+  border-color: var(--color-border-strong);
 }
 
 .btn-outline:hover {
@@ -520,10 +511,8 @@ div[id] {
 
 /* Floating WhatsApp Mobile Bar */
 
-/* Mientras el usuario esta en el hero, la omnibar ya ofrece el CTA: mostrar
-   tambien el boton flotante pone dos llamadas a la accion compitiendo. Se
-   oculta y aparece al entrar de lleno en la seccion siguiente (lo controla
-   el IntersectionObserver de BaseLayout). */
+/* The floating CTA is hidden while the page hero is visible. BaseLayout
+   synchronizes visibility, focusability and restored scroll positions. */
 .floating-whatsapp {
   position: fixed;
   bottom: 20px;
@@ -532,11 +521,11 @@ div[id] {
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: var(--color-whatsapp-strong);
-  color: #FFFFFF;
+  background-color: var(--brand-wine);
+  color: var(--color-text-inverse);
   padding: 12px 20px;
   border-radius: var(--radius-full);
-  box-shadow: 0 8px 24px rgba(15, 125, 112, 0.45);
+  box-shadow: 0 8px 24px rgba(109, 1, 1, 0.2);
   font-weight: 600;
   font-size: 0.95rem;
   transition:
@@ -562,7 +551,7 @@ div[id] {
 .floating-whatsapp.is-visible:hover {
   background-color: var(--color-whatsapp-deep);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(7, 94, 84, 0.55);
+  box-shadow: 0 12px 28px rgba(109, 1, 1, 0.25);
   color: #FFFFFF;
 }
 
@@ -575,4 +564,26 @@ div[id] {
     border-radius: var(--radius-lg);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
+}
+
+/* Utility roles stay sans serif so the display face remains intentional. */
+.btn, .badge, nav, summary, .brand-name, .footer-brand-name,
+.footer-heading { font-family: var(--font-label); }
+.btn { font-weight: 700; }
+.btn-primary:active { color: var(--brand-cream); }
+
+@media (max-width: 640px) {
+  .site-footer { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .optional-planner { scroll-margin-bottom: 90px; }
+}
+
+/* Touch and narrow-screen foundations shared by all routes. */
+@media (max-width: 480px) {
+  :root { --header-height: 68px; }
+}
+@media (hover: none) {
+  .card:hover, .btn:hover { transform: none; }
+}
+@media (max-width: 699px) {
+  .container { padding-inline: 20px; }
 }

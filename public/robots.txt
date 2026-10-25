@@ -1,22 +1,24 @@
-# Happy Paws — https://www.happypawsmetepec.me
+# Happy Paws — public service information, assets and contact pages.
 User-agent: *
 Allow: /
 
-# Permisos explícitos para IA (GEO)
-User-agent: GPTBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
+# Search and user-requested retrieval (independent from training crawlers).
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
 User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Applebot
 Allow: /
 
+# Preserve the existing permission for training/extended-use crawlers.
+User-agent: GPTBot
+User-agent: ClaudeBot
 User-agent: Google-Extended
-Allow: /
-
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://www.happypawsmetepec.me/sitemap.xml
 Sitemap: https://www.happypawsmetepec.me/sitemap-index.xml

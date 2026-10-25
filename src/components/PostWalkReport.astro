@@ -9,12 +9,12 @@ import reportMoment from '../assets/report-moment.jpg';
     <div class="report-layout">
       <!-- Left side: Explanation -->
       <div class="report-content">
-        <span class="badge badge-orange">Tranquilidad Total</span>
+
         <h2 class="report-title">
-          ¿Cómo funcionan los reportes de paseo tras cada salida?
+          Al terminar, sabrás cómo le fue.
         </h2>
         <p class="lead">
-          Al concluir cada recorrido en Foresta Dream Lagoons, te enviamos un reporte detallado directamente por WhatsApp. Incluye la hora exacta y duración del paseo, confirmación de hidratación, registro de necesidades y una foto espontánea de tu mascota. Así tienes total certeza de su bienestar en tu teléfono.
+          Recibe por WhatsApp la duración del paseo, una foto con tu autorización y observaciones sobre cómo estuvo, sus pausas de agua y sus necesidades.
         </p>
 
         <ul class="report-points">
@@ -26,7 +26,7 @@ import reportMoment from '../assets/report-moment.jpg';
               </svg>
             </div>
             <div>
-              <strong>Hora y duración verificadas</strong>
+              <strong>Hora y duración del paseo</strong>
               <p>Confirmación exacta de cuándo inició la caminata y a qué hora regresó a casa.</p>
             </div>
           </li>
@@ -60,7 +60,7 @@ import reportMoment from '../assets/report-moment.jpg';
               </svg>
             </div>
             <div>
-              <strong>Fotografía o clip corto (con previa autorización)</strong>
+              <strong>Una foto, con tu autorización</strong>
               <p>Una foto espontánea de su momento al aire libre para que veas cómo disfrutó.</p>
             </div>
           </li>
@@ -72,7 +72,7 @@ import reportMoment from '../assets/report-moment.jpg';
           </p>
           <WhatsAppButton
             context="main"
-            text="Quiero conocer el servicio"
+            text="Consultar horarios y tarifas"
             variant="whatsapp"
             size="md"
           />
@@ -94,7 +94,7 @@ import reportMoment from '../assets/report-moment.jpg';
               <div class="chat-info">
                 <span class="chat-name">Happy Paws • Foresta</span>
                 <span class="chat-status">
-                  <span class="online-dot" aria-hidden="true"></span> en línea
+                  <span class="online-dot" aria-hidden="true"></span> Reporte por WhatsApp
                 </span>
               </div>
             </div>
@@ -110,8 +110,8 @@ import reportMoment from '../assets/report-moment.jpg';
           </div>
 
           <div class="chat-bubble">
-            <div class="bubble-tag">REPORTE DE PASEO</div>
-            
+            <div class="bubble-tag">EJEMPLO DE REPORTE</div>
+
             <div class="bubble-image">
               <Image
                 src={reportMoment}
@@ -120,7 +120,7 @@ import reportMoment from '../assets/report-moment.jpg';
                 widths={[320, 480, 640, 800]}
                 sizes="(max-width: 480px) min(calc(100vw - 80px), 330px), 330px"
               />
-              <span class="photo-auth-note">Foto enviada con autorización previa</span>
+              <span class="photo-auth-note">Ejemplo ilustrativo · foto con autorización</span>
             </div>
 
             <div class="bubble-details">

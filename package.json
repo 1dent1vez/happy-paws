@@ -10,7 +10,9 @@
     "build": "astro build",
     "postbuild": "node -e \"const fs = require('fs'); if (fs.existsSync('dist/sitemap-index.xml')) fs.copyFileSync('dist/sitemap-index.xml', 'dist/sitemap.xml');\"",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test:seo": "python3 scripts/check-seo.py",
+    "test:production": "python3 scripts/check-production.py && node scripts/check-scheduling.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

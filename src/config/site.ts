@@ -91,8 +91,8 @@ if (!isConfigured) {
 export const siteConfig: SiteConfig = {
   name: 'Happy Paws',
   legalName: 'Happy Paws Paseos Residenciales',
-  tagline: 'Paseos caninos dedicados en Foresta Dream Lagoons',
-  description: 'Servicio de paseo y bienestar canino exclusivo para residentes de Foresta Dream Lagoons. Cuidado atento, exploración a su ritmo y reporte directo en tu teléfono.',
+  tagline: 'Paseos de perros en Foresta Dream Lagoons, Metepec',
+  description: 'Paseos de perros exclusivamente en Foresta Dream Lagoons, Metepec, Estado de México. Atención individual o en grupos de hasta 4 perros por paseador, con recogida en tu puerta y reporte por WhatsApp.',
   url: 'https://www.happypawsmetepec.me',
   locale: 'es-MX',
   coverage: {
@@ -117,7 +117,7 @@ export const siteConfig: SiteConfig = {
     phoneFormatted: envPhoneDisplay || (isConfigured ? rawPhone : '+52 55 0000 0000 (Pendiente de configurar)'),
     isConfigured,
     messages: {
-      main: 'Hola, quiero conocer los paseos de Happy Paws en Foresta Dream Lagoons y consultar disponibilidad.',
+      main: 'Hola, quiero consultar horarios y tarifas para pasear a mi perro en Foresta Dream Lagoons. Su edad es: __. Se lleva con otros perros: __. Los horarios que necesito son: __.',
       floating: 'Hola, quiero consultar la disponibilidad para pasear a mi perro en Foresta Dream Lagoons.',
       individual: 'Hola, me interesa el paseo individual para mi perro en Foresta. Me comparten tarifas y funcionamiento?',
       group: 'Hola, quiero información sobre los paseos grupales y cómo evalúan la compatibilidad entre perros en Foresta.',

@@ -1,0 +1,26 @@
+---
+import { testimonials } from '../config/trust';
+---
+{testimonials.length > 0 && (
+  <section class="section-wrapper family-voices" aria-labelledby="family-voices-title">
+    <div class="container">
+      <h2 id="family-voices-title">Así lo viven las familias de Foresta.</h2>
+      <div class="voices">
+        {testimonials.map(({ quote, attribution }) => (
+          <figure>
+            <blockquote><p>“{quote}”</p></blockquote>
+            <figcaption>{attribution}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+<style>
+  .family-voices { background: var(--color-bg); }
+  h2 { font-size: clamp(2rem, 3.6vw, 3.1rem); line-height: 1.15; letter-spacing: -.03em; }
+  .voices { display: flex; flex-wrap: wrap; gap: 40px; margin-top: 36px; }
+  figure { flex: 1 1 280px; margin: 0; max-width: 65ch; }
+  blockquote { margin: 0; font-size: 1.2rem; line-height: 1.8; }
+  figcaption { margin-top: 18px; color: var(--color-text-muted); }
+</style>

@@ -14,14 +14,22 @@ export interface FAQItem {
 
 export const faqs: FAQItem[] = [
   {
+    question: '¿Cuánto cuesta un paseo de perros en Foresta y qué incluye?',
+    answer: 'La tarifa depende de la modalidad y de cuántos paseos necesitas por semana. Te compartimos por WhatsApp las opciones por sesión o paquete mensual. Incluyen recogida y regreso en tu puerta, recorrido dentro de Foresta, pausas de agua y reporte al terminar; la foto se envía con tu autorización.'
+  },
+  {
+    question: '¿Tengo que elegir modalidad antes de escribirles?',
+    answer: 'No. Cuéntanos la edad de tu perro, cómo se lleva con otros perros y los horarios que necesitas. Te orientamos entre atención individual y grupo pequeño. Antes de integrarlo a un grupo revisamos su compatibilidad.'
+  },
+  {
     question: '¿Dónde opera Happy Paws en Metepec?',
     answer:
-      'Operamos de forma exclusiva dentro del fraccionamiento residencial Foresta Dream Lagoons en Metepec, Estado de México. No realizamos traslados en jaulas ni salimos a avenidas de alto tráfico, garantizando paseos 100% seguros y tranquilos dentro de las áreas verdes del complejo.'
+      'Operamos de forma exclusiva dentro del fraccionamiento residencial Foresta Dream Lagoons en Metepec, Estado de México. Los recorridos se realizan dentro del fraccionamiento y sus áreas verdes, sin traslados en jaulas ni salidas a avenidas de alto tráfico.'
   },
   {
     question: '¿Cómo funcionan los reportes de paseo tras cada salida?',
     answer:
-      'Al concluir cada caminata, recibes un reporte directo en tu WhatsApp con la hora exacta de inicio y entrega, duración del recorrido, registro de hidratación y necesidades fisiológicas, además de una foto espontánea de tu perro.'
+      'Al concluir cada caminata, recibes un reporte directo en tu WhatsApp con la hora exacta de inicio y entrega, duración del recorrido, registro de hidratación y necesidades fisiológicas, además de una foto de tu perro con tu autorización.'
   },
   {
     question: '¿Cuánto tiempo dura cada paseo?',
@@ -36,7 +44,7 @@ export const faqs: FAQItem[] = [
   {
     question: '¿Cómo eligen entre paseo individual o grupal?',
     answer:
-      'En la charla inicial de conocimiento evaluamos la personalidad de tu mascota. Si es tímido, de edad avanzada o prefiere no convivir con otros perros, recomendamos paseo individual. Si es sociable y equilibrado, puede integrarse a un grupo pequeño de máximo 3 a 4 perros con temperamentos compatibles.'
+      'En la charla inicial de conocimiento evaluamos la personalidad de tu mascota. Si es tímido, de edad avanzada o prefiere no convivir con otros perros, recomendamos paseo individual. Si es sociable y equilibrado, puede integrarse a un grupo pequeño de hasta 4 perros por paseador con temperamentos compatibles.'
   },
   {
     question: '¿Qué información solicitan antes del primer paseo?',

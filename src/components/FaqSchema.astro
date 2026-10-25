@@ -1,13 +1,8 @@
 ---
 import { faqs } from '../config/faqs';
 
-/**
- * Schema FAQPage.
- *
- * Habilita rich results en Google para las 7 preguntas que el acordeón ya
- * renderiza. Antes no existía: el contenido estaba visible para el usuario
- * pero era invisible para el rastreador como dato estructurado.
- */
+/** Same questions and answers as the visible accordion. This markup does not
+ * guarantee rich results or inclusion in AI answers. */
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',

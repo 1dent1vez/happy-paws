@@ -5,23 +5,25 @@ import FAQAccordion from '../components/FAQAccordion.astro';
 import FaqSchema from '../components/FaqSchema.astro';
 import { Image } from 'astro:assets';
 import careCheckin from '../assets/care-checkin.jpg';
+import individualWalk from '../assets/walk-individual.jpg';
+import groupWalk from '../assets/walk-terriers.jpg';
+import restMoment from '../assets/walk-rest.jpg';
 
-const pageTitle = "Paseos de Perros en Foresta Dream Lagoons | Happy Paws Metepec";
+const pageTitle = "Paseo individual y grupal en Foresta | Happy Paws Metepec";
 const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lagoons, Metepec. Rutas seguras, estimulación olfativa y reporte detallado con fotos en WhatsApp.";
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} currentPath="/paseos/">
   <!-- ================= 1. HERO PASEOS ================= -->
-  <section class="page-hero">
+  <section class="page-hero" data-page-hero>
     <div class="container page-hero-container">
       <div class="page-hero-text">
-        <span class="badge badge-orange">Exclusivo en Foresta Dream Lagoons</span>
         <h1 class="page-hero-title">
-          Paseos que se adaptan a tu perro, <br />
-          <span class="text-highlight">no al revés.</span>
+          Paseos a<br />su ritmo.<br />
+          <span class="text-highlight">en Foresta Dream Lagoons.</span>
         </h1>
         <p class="lead">
-          Conoce a fondo cómo cuidamos a tu mascota en Foresta Dream Lagoons: desde la primera charla de conocimiento hasta el reporte que recibes al devolverlo tranquilo en tu puerta.
+          Conoce las opciones para su paseo dentro de Foresta: atención individual o compañía en un grupo pequeño. Te ayudamos a elegir y te contamos cómo le fue al regresar.
         </p>
 
         <div class="page-hero-ctas">
@@ -41,12 +43,13 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
       <div class="page-hero-media">
         <Image
           src={careCheckin}
-          alt="Cuidador de Happy Paws atendiendo a un perro con paciencia antes del paseo"
+          alt="Perro acompañado antes de salir a pasear"
           class="page-hero-img"
           loading="eager"
           widths={[400, 600, 768, 1024, 1200]}
-          sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 992px) calc(100vw - 48px), 480px"
+          sizes="(max-width: 699px) 90vw, 50vw"
         />
+        <p class="hero-photo-note">De 45 a 60 minutos.<br />Dentro de Foresta.</p>
       </div>
     </div>
   </section>
@@ -55,22 +58,18 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   <section class="section-wrapper section-surface" id="comparativa">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-orange">Modalidades de Paseo</span>
-        <h2>¿Paseo individual o paseo grupal para tu perro?</h2>
+        <h2>¿Paseo individual o grupal para tu perro?</h2>
         <p>
-          Evaluamos el temperamento, edad y nivel de actividad de tu mascota para sugerir la modalidad ideal. El paseo individual garantiza ritmo propio y atención exclusiva, mientras que el grupo reducido fomenta la convivencia armónica entre compañeros compatibles.
+          No necesitas decidir antes de escribirnos. Hablamos de su edad, energía y cómo se siente con otros perros para recomendarte una opción.
         </p>
       </div>
 
       <div class="modalities-grid">
         <!-- MODALIDAD INDIVIDUAL -->
-        <div class="modality-detail-card" id="individual">
+        <article class="modality-detail-card" id="individual">
+          <Image class="modality-photo" src={individualWalk} alt="Perro pequeño caminando con correa sobre el césped" loading="lazy" widths={[400,700,1000]} sizes="(max-width: 699px) 100vw, 45vw" />
           <div class="modality-header">
-            <div class="modality-top-row">
-              <span class="modality-tag tag-individual">Atención 1 a 1</span>
-              <span class="modality-subtag">100% Dedicado</span>
-            </div>
-            <h3 class="modality-title">Paseo Individual Exclusivo</h3>
+            <h3 class="modality-title">Individual: toda la atención para él</h3>
             <p class="modality-subtitle">Atención dedicada, ritmo sereno y exploración a su medida.</p>
           </div>
 
@@ -79,15 +78,15 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
               Pensado para perros que disfrutan caminar a su propio compás, aquellos que se sobreestimulan fácilmente con otros canes o perritos en etapas especiales de vida.
             </p>
 
-            <div class="modality-points">
-              <h4>¿Cómo funciona y qué incluye?</h4>
+            <details class="modality-points">
+              <summary>¿Cómo funciona y qué incluye?</summary>
               <ul class="points-list">
                 <li class="point-item">
                   <span class="point-icon" aria-hidden="true">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
                   <div class="point-content">
-                    <strong>Atención 100% enfocada:</strong> El paseador está exclusivamente pendiente de las señales corporales y bienestar de tu perro.
+                    <strong>Atención exclusiva:</strong> El paseador está exclusivamente pendiente de las señales corporales y bienestar de tu perro.
                   </div>
                 </li>
                 <li class="point-item">
@@ -111,7 +110,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
                   <div class="point-content">
-                    <strong>Sin contacto forzado:</strong> Evitamos cruces incómodos con otros perros para mantenerlo siempre en calma.
+                    <strong>Sin contacto forzado:</strong> Evitamos cruces incómodos con otros perros respetando su espacio.
                   </div>
                 </li>
                 <li class="point-item">
@@ -123,7 +122,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                   </div>
                 </li>
               </ul>
-            </div>
+            </details>
 
             <div class="modality-profile">
               <div class="profile-header">
@@ -132,7 +131,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                   <line x1="12" y1="16" x2="12" y2="12"></line>
                   <line x1="12" y1="8" x2="12.01" y2="8"></line>
                 </svg>
-                <span class="profile-label">Perfil Recomendado</span>
+                <span class="profile-label">¿Para quién es?</span>
               </div>
               <p>Perros tímidos, reactivos a la correa, adultos mayores (senior), cachorros en proceso de aprendizaje o familias que buscan atención exclusiva.</p>
             </div>
@@ -140,14 +139,14 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
             <div class="modality-pricing-box">
               <div class="pricing-header">
                 <span class="pricing-label">Tarifa y horarios</span>
-                <span class="pricing-badge">Respuesta &lt;15 min</span>
+                <span class="pricing-badge">Consulta por WhatsApp</span>
               </div>
               <p class="pricing-text">
-                La tarifa por sesión o paquete mensual se cotiza directamente por WhatsApp según tu frecuencia requerida en Foresta.
+                La tarifa depende de la modalidad y de cuántos paseos necesitas por semana. Te compartimos por WhatsApp las opciones por sesión o paquete mensual y sus horarios disponibles.
               </p>
               <WhatsAppButton
                 context="individual"
-                text="Cotizar Paseo Individual"
+                text="Consultar paseo individual"
                 variant="whatsapp"
                 size="md"
                 className="w-full"
@@ -155,20 +154,14 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
               />
             </div>
           </div>
-        </div>
+        </article>
 
         <!-- MODALIDAD GRUPAL -->
-        <div class="modality-detail-card modality-detail-featured" id="grupal">
+        <article class="modality-detail-card modality-detail-featured" id="grupal">
+          <Image class="modality-photo" src={groupWalk} alt="Dos perros con correa compartiendo una caminata al atardecer" loading="lazy" widths={[400,700,1000]} sizes="(max-width: 699px) 100vw, 45vw" />
           <div class="modality-header">
-            <div class="modality-top-row">
-              <span class="modality-tag tag-group">Grupos Pequeños</span>
-              <span class="featured-badge-pill">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                Más Solicitado
-              </span>
-            </div>
-            <h3 class="modality-title">Paseo Grupal Controlado</h3>
-            <p class="modality-subtitle">Socialización equilibrada en manadas reducidas y compatibles.</p>
+            <h3 class="modality-title">Grupal: compañía en un grupo pequeño</h3>
+            <p class="modality-subtitle">Caminatas acompañadas con perros compatibles.</p>
           </div>
 
           <div class="modality-body">
@@ -176,15 +169,15 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
               Una salida dinámica y divertida para perros con ganas de convivir. Cuidamos rigurosamente que todos los integrantes del grupo se lleven bien y tengan energías afines.
             </p>
 
-            <div class="modality-points">
-              <h4>¿Cómo funciona y qué incluye?</h4>
+            <details class="modality-points">
+              <summary>¿Cómo funciona y qué incluye?</summary>
               <ul class="points-list">
                 <li class="point-item">
                   <span class="point-icon" aria-hidden="true">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
                   <div class="point-content">
-                    <strong>Máximo 3 a 4 perros por paseador:</strong> Cero saturación. Mantenemos el control visual y físico en cada segundo de la caminata.
+                    <strong>Hasta 4 perros por paseador:</strong> Formamos grupos pequeños y observamos cómo se siente cada perro durante el recorrido.
                   </div>
                 </li>
                 <li class="point-item">
@@ -200,7 +193,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
                   <div class="point-content">
-                    <strong>Correas desenredadas y manejo seguro:</strong> Caminata coordinada en paralelo sin permitir tirones ni juegos bruscos con correas puestas.
+                    <strong>Correas desenredadas y manejo seguro:</strong> Caminata coordinada en paralelo evitando juegos bruscos con las correas puestas.
                   </div>
                 </li>
                 <li class="point-item">
@@ -220,7 +213,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                   </div>
                 </li>
               </ul>
-            </div>
+            </details>
 
             <div class="modality-profile">
               <div class="profile-header">
@@ -229,7 +222,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
                   <line x1="12" y1="16" x2="12" y2="12"></line>
                   <line x1="12" y1="8" x2="12.01" y2="8"></line>
                 </svg>
-                <span class="profile-label">Perfil Recomendado</span>
+                <span class="profile-label">¿Para quién es?</span>
               </div>
               <p>Perros sociables, activos, equilibrados y con gusto por convivir y pasear al lado de otros amigos caninos.</p>
             </div>
@@ -237,14 +230,14 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
             <div class="modality-pricing-box">
               <div class="pricing-header">
                 <span class="pricing-label">Tarifa y horarios</span>
-                <span class="pricing-badge">Cupos Limitados</span>
+                <span class="pricing-badge">Según compatibilidad</span>
               </div>
               <p class="pricing-text">
                 Disponibilidad y cupos sujetos a compatibilidad de grupo en Foresta Dream Lagoons. Consúltanos por WhatsApp.
               </p>
               <WhatsAppButton
                 context="group"
-                text="Consultar Disponibilidad Grupal"
+                text="Consultar paseo grupal"
                 variant="primary"
                 size="md"
                 className="w-full"
@@ -252,7 +245,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
               />
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -261,10 +254,9 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   <section class="section-wrapper" id="proceso">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-orange">Flujo Operativo</span>
-        <h2>¿Cómo es el protocolo de paseo desde la salida hasta la entrega?</h2>
+        <h2>De tu puerta al paseo, y de vuelta contigo.</h2>
         <p>
-          Nuestro proceso asegura total orden y bienestar: consulta previa, preparación en tu puerta, caminata enriquecida con pausas de olfato en Foresta y reporte inmediato con fotos en tu WhatsApp.
+          Acordamos los detalles contigo, revisamos su arnés antes de salir y caminamos dentro de Foresta. Al regresar, te enviamos su reporte por WhatsApp.
         </p>
       </div>
 
@@ -274,8 +266,7 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
           <div class="timeline-dot">1</div>
           <div class="timeline-card">
             <div class="timeline-card-header">
-              <span class="timeline-step-badge">Paso 1: Consulta Inicial</span>
-              <span class="timeline-time-badge">~10 min vía chat</span>
+              <span class="timeline-time-badge">Por WhatsApp</span>
             </div>
             <h3>Evaluación y Conocimiento del Perro</h3>
             <p>
@@ -289,7 +280,6 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
           <div class="timeline-dot">2</div>
           <div class="timeline-card">
             <div class="timeline-card-header">
-              <span class="timeline-step-badge">Paso 2: Día del Paseo</span>
               <span class="timeline-time-badge">Puntual en puerta</span>
             </div>
             <h3>Llegada Puntual y Preparación</h3>
@@ -304,7 +294,6 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
           <div class="timeline-dot">3</div>
           <div class="timeline-card">
             <div class="timeline-card-header">
-              <span class="timeline-step-badge">Paso 3: El Recorrido</span>
               <span class="timeline-time-badge">45 a 60 min</span>
             </div>
             <h3>Caminata Activa, Olfato e Hidratación</h3>
@@ -319,7 +308,6 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
           <div class="timeline-dot">4</div>
           <div class="timeline-card">
             <div class="timeline-card-header">
-              <span class="timeline-step-badge">Paso 4: Entrega</span>
               <span class="timeline-time-badge">Reporte inmediato</span>
             </div>
             <h3>Regreso Seguro y Reporte Completo</h3>
@@ -338,10 +326,9 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
       <div class="grid-2 requirements-grid">
         <!-- Requisitos Previos -->
         <div class="card req-card">
-          <span class="badge badge-orange">Antes del Primer Paseo</span>
           <h3 class="req-title">¿Qué información y equipo solicitamos antes del primer paseo?</h3>
           <p class="req-intro">
-            Para garantizar paseos seguros y sin riesgos en Foresta solicitamos carnet de vacunación vigente, pechera o arnés ergonómico y datos de emergencia antes de la primera salida:
+            Antes de la primera salida revisamos contigo su cartilla de vacunación, el ajuste del arnés y los datos de contacto para una emergencia:
           </p>
 
           <ul class="req-list">
@@ -396,14 +383,14 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
           <div class="req-card-footer">
             <span class="req-footer-highlight">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-              Todo se revisa en la charla previa de 15 min en tu domicilio
+              Lo revisamos contigo antes de la primera salida
             </span>
           </div>
         </div>
 
         <!-- Protocolo de Seguridad y Clima -->
         <div class="card req-card">
-          <span class="badge badge-success">Protocolo de Bienestar</span>
+          <Image class="care-photo" src={restMoment} alt="Dos perros descansando juntos a la sombra en un camino" loading="lazy" widths={[400,700,1000]} sizes="(max-width: 699px) 100vw, 50vw" />
           <h3 class="req-title">Seguridad y Adaptación Climática</h3>
           <p class="req-intro">
             Las condiciones ambientales cambian y la integridad física de tu mascota es lo primero:
@@ -454,10 +441,9 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
   <section class="section-wrapper section-surface" id="faq">
     <div class="container">
       <div class="section-header">
-        <span class="badge badge-orange">Dudas Comunes</span>
         <h2>¿Cuáles son las dudas más frecuentes sobre los paseos?</h2>
         <p>
-          Respondemos con claridad cómo coordinamos horarios, qué pasa ante lluvia y cómo recibirás las actualizaciones de tu mascota directamente en tu teléfono.
+          Respondemos con claridad cómo coordinamos horarios, qué pasa ante lluvia y cómo recibirás el reporte de tu perro por WhatsApp.
         </p>
       </div>
 
@@ -481,17 +467,16 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
     <div class="container">
       <div class="final-cta-card">
         <div class="cta-inner-content">
-          <span class="badge badge-orange">Atención Vecinal</span>
           <h2 class="final-cta-title">
-            Hablemos sobre el paseo ideal para tu perro en Foresta
+            Empecemos por conocer a tu perro.
           </h2>
           <p class="final-cta-desc">
-            Escríbenos directamente por WhatsApp. Te compartimos disponibilidad, resolvemos cualquier duda y agendamos una primera salida sin complicaciones.
+            Cuéntanos su edad, cómo suele llevarse con otros perros y qué horarios necesitas. Te compartimos opciones y tarifas antes de coordinar su primera salida.
           </p>
           <div class="cta-buttons-wrap">
             <WhatsAppButton
               context="paseosPage"
-              text="Escribir por WhatsApp a Happy Paws"
+              text="Consultar horarios y tarifas"
               variant="primary"
               size="lg"
               id="paseos-final-cta"
@@ -507,595 +492,118 @@ const pageDesc = "Paseos individuales y en grupos reducidos en Foresta Dream Lag
 </BaseLayout>
 
 <style>
-  /* PAGE HERO */
-  .page-hero {
-    padding-top: var(--space-12);
-    padding-bottom: var(--space-16);
-    background: linear-gradient(180deg, #FAF7F2 0%, #FFF5EB 100%);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .page-hero-container {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: var(--space-10);
-    align-items: center;
-  }
-
-  .page-hero-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-  }
-
-  .page-hero-title {
-    font-size: clamp(2.2rem, 3.8vw, 3.2rem);
-    color: var(--color-text-title);
-  }
-
-  .text-highlight {
-    /* Forma parte de un h1 (texto grande): el umbral AA-large de 3:1 sí lo
-       cubre, así que aquí se conserva el naranja de marca. */
-    color: var(--color-primary);
-  }
-
-  .page-hero-ctas {
-    display: flex;
-    gap: var(--space-4);
-    flex-wrap: wrap;
-    margin-top: var(--space-2);
-  }
-
-  .page-hero-media {
-    position: relative;
-  }
-
-  .page-hero-img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    object-position: center 35%;
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
-    border: 4px solid #fff;
-  }
-
-  /* MODALITIES GRID */
-  .modalities-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
-  }
-
-  .modality-detail-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-8);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
-  }
-
-  .modality-detail-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px -8px rgba(28, 25, 23, 0.1);
-  }
-
-  .modality-detail-featured {
-    border: 1.5px solid var(--color-primary-action);
-    background: #FFFDFB;
-    box-shadow: 0 12px 32px -8px rgba(194, 65, 12, 0.12), var(--shadow-sm);
-  }
-
-  .modality-header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    border-bottom: 1px solid var(--color-border-subtle);
-    padding-bottom: var(--space-4);
-  }
-
-  .modality-top-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-2);
-  }
-
-  .modality-subtag {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--color-text-subtle);
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    padding: 3px 10px;
-    border-radius: var(--radius-full);
-  }
-
-  .featured-badge-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.725rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    background: var(--color-primary-light);
-    color: var(--color-primary-action);
-    border: 1px solid var(--color-primary-border);
-    padding: 3px 10px;
-    border-radius: var(--radius-full);
-  }
-
-  .modality-tag {
-    align-self: flex-start;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: var(--radius-full);
-    letter-spacing: 0.04em;
-  }
-
-  .tag-individual {
-    background: #FFF0E6;
-    color: var(--color-primary-text);
-  }
-
-  .tag-group {
-    background: #F0FDF4;
-    color: #15803D;
-  }
-
-  .modality-title {
-    font-size: 1.6rem;
-    color: var(--color-text-title);
-  }
-
-  .modality-subtitle {
-    font-size: 0.95rem;
-    color: var(--color-primary-text);
-    font-weight: 600;
-  }
-
-  .modality-body {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-    flex-grow: 1;
-  }
-
-  .modality-intro {
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-    max-width: 52ch;
-  }
-
-  .modality-points h4 {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text-title);
-    margin-bottom: var(--space-3);
-  }
-
-  .points-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .point-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  .point-icon {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background-color: var(--color-primary-light);
-    color: var(--color-primary-action);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .point-content {
-    color: var(--color-text);
-    flex-grow: 1;
-    max-width: 52ch;
-  }
-
-  .modality-profile {
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--color-border-subtle);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .profile-icon {
-    color: var(--color-primary-action);
-    flex-shrink: 0;
-  }
-
-  .profile-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text-title);
-  }
-
-  .modality-profile p {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    line-height: 1.5;
-    margin: 0;
-    max-width: 52ch;
-  }
-
-  .modality-pricing-box {
-    margin-top: auto;
-    padding-top: var(--space-5);
-    border-top: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .pricing-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-2);
-  }
-
-  .pricing-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--color-text-title);
-  }
-
-  .pricing-badge {
-    font-size: 0.725rem;
-    font-weight: 700;
-    color: #15803D;
-    background-color: #F0FDF4;
-    border: 1px solid #BBF7D0;
-    padding: 2px 8px;
-    border-radius: var(--radius-full);
-  }
-
-  .pricing-text {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    line-height: 1.45;
-    max-width: 52ch;
-  }
-
-  /* TIMELINE CONTAINER */
-  .timeline-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-    max-width: 860px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .timeline-item {
-    display: flex;
-    gap: var(--space-6);
-    align-items: flex-start;
-  }
-
-  .timeline-dot {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: var(--color-primary-action);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .timeline-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-6) var(--space-8);
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
-  }
-
-  .timeline-card:hover {
-    transform: translateX(4px);
-    border-color: var(--color-primary-border);
-    box-shadow: var(--shadow-md);
-  }
-
-  .timeline-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-3);
-  }
-
-  .timeline-step-badge {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--color-primary-text);
-    letter-spacing: 0.05em;
-  }
-
-  .timeline-time-badge {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--color-text-subtle);
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    padding: 2px 10px;
-    border-radius: var(--radius-full);
-  }
-
-  .timeline-card h3 {
-    font-size: 1.25rem;
-    color: var(--color-text-title);
-  }
-
-  .timeline-card p {
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-    max-width: 52ch;
-  }
-
-  /* REQUIREMENTS & SAFETY */
-  .requirements-grid {
-    align-items: stretch;
-  }
-
-  .req-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .req-card-footer {
-    padding-top: var(--space-4);
-    border-top: 1px dashed var(--color-border-subtle);
-    margin-top: auto;
-  }
-
-  .req-footer-highlight {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-text-title);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .req-footer-highlight svg {
-    color: var(--color-primary-action);
-    flex-shrink: 0;
-  }
-
-  .req-title {
-    font-size: 1.4rem;
-    color: var(--color-text-title);
-  }
-
-  .req-intro {
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
-  }
-
-  .req-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    margin-top: var(--space-2);
-  }
-
-  .req-list li {
-    display: flex;
-    gap: var(--space-4);
-    align-items: flex-start;
-  }
-
-  .req-icon-box {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
-    background-color: var(--color-primary-light);
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .req-list strong {
-    display: block;
-    color: var(--color-text-title);
-    font-size: 0.95rem;
-  }
-
-  .req-list p {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    margin: 0;
-    max-width: 48ch;
-  }
-
-  .safety-points-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .safety-item {
-    padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--color-border-subtle);
-  }
-
-  .safety-item:last-child {
-    padding-bottom: 0;
-    border-bottom: none;
-  }
-
-  .safety-item h4 {
-    font-size: 0.95rem;
-    color: var(--color-text-title);
-    margin-bottom: var(--space-1);
-  }
-
-  .safety-item p {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    line-height: 1.5;
-    margin: 0;
-    max-width: 48ch;
-  }
-
-  /* FAQ HELP */
-  .faq-extra-help {
-    margin-top: var(--space-8);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-3);
-  }
-
-  .faq-extra-help p {
-    font-size: 1rem;
-    color: var(--color-text);
-  }
-
-  /* FINAL CTA */
-  .final-cta-section {
-    padding-bottom: var(--space-20);
-  }
-
-  .final-cta-card {
-    background: linear-gradient(135deg, #FFF6EE 0%, #FFE9D9 100%);
-    border: 2px solid var(--color-primary-border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-16) var(--space-8);
-    text-align: center;
-    box-shadow: var(--shadow-lg);
-  }
-
-  .cta-inner-content {
-    max-width: 760px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-5);
-  }
-
-  .final-cta-title {
-    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-    color: var(--color-text-title);
-  }
-
-  .final-cta-desc {
-    font-size: 1.15rem;
-    color: var(--color-text);
-    line-height: 1.6;
-  }
-
-  .cta-buttons-wrap {
-    display: flex;
-    gap: var(--space-4);
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: var(--space-3);
-  }
-
-  .w-full {
-    width: 100%;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 992px) {
-    .page-hero-container {
-      grid-template-columns: 1fr;
-    }
-    .page-hero-img {
-      height: 380px;
-      object-position: center 35%;
-    }
-    .modalities-grid {
-      grid-template-columns: 1fr;
-    }
-    .requirements-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .page-hero-img {
-      height: 240px;
-      object-position: center 35%;
-    }
-    .page-hero-ctas {
-      flex-direction: column;
-      width: 100%;
-    }
-    .page-hero-ctas .btn {
-      width: 100%;
-    }
-    .timeline-item {
-      gap: var(--space-3);
-    }
-    .timeline-dot {
-      width: 36px;
-      height: 36px;
-      font-size: 0.95rem;
-    }
-    .timeline-card {
-      padding: var(--space-4);
-    }
-    .cta-buttons-wrap {
-      flex-direction: column;
-      width: 100%;
-    }
-    .cta-buttons-wrap .btn {
-      width: 100%;
-    }
+  .care-photo { width: 100%; height: 240px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; }
+  .page-hero { padding: 56px 0 64px; background: white; }
+  .page-hero-container { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; align-items: center; }
+  .page-hero-text { display: flex; flex-direction: column; gap: 24px; }
+  .page-hero-title { font-size: clamp(3.8rem,6.8vw,6rem); line-height: .98; letter-spacing: -.04em; }
+  .text-highlight { display: block; color: var(--brand-wine); font: 500 1rem/1.5 var(--font-sans); letter-spacing: 0; margin-top: 24px; }
+  .page-hero-text .lead { font-size: 1.05rem; line-height: 1.75; max-width: 44ch; }
+  .page-hero-ctas { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 24px; }
+  .page-hero :global(.btn-primary) { background: var(--brand-orange); color: var(--color-on-orange); }
+  .page-hero :global(.btn-primary:hover) { background: var(--brand-cream); color: var(--brand-wine); }
+  :global(.page-hero .btn) { border-radius: 12px; white-space: normal; }
+  .page-hero-ctas > a { padding: 12px 0; border: 0; border-radius: 0; background: none; box-shadow: none; color: var(--brand-wine); font-size: 1rem; text-decoration: underline; text-underline-offset: 6px; }
+  .page-hero-media { position: relative; padding-bottom: 24px; }
+  .page-hero-img { width: 100%; height: 560px; object-fit: cover; object-position: center 45%; border-radius: 120px 4px 4px 4px; }
+  .hero-photo-note { position: absolute; bottom: 0; left: -32px; padding: 24px; background: var(--brand-cream); color: var(--brand-wine); font: 500 1.7rem/1.2 var(--font-heading); }
+  .page-hero :focus-visible { outline-color: var(--brand-wine); }
+  .section-header { text-align: left; max-width: 760px; margin: 0 0 48px; }
+  .section-header p { margin: 20px 0 0; }
+  h2 { font-size: clamp(2.2rem,4vw,3.4rem); line-height: 1.1; }
+  #comparativa { border-top: 1px solid var(--color-border); }
+  .modalities-grid { display: flex; flex-direction: column; gap: 64px; }
+  .modality-detail-card { scroll-margin-top: calc(var(--header-height) + 24px); display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); grid-template-rows: auto 1fr; gap: 24px 64px; align-items: start; min-width: 0; }
+  .modality-header { grid-column: 1; grid-row: 1; }
+  .modality-title { font-size: clamp(2rem,3.2vw,2.8rem); line-height: 1.1; }
+  .modality-subtitle { color: var(--brand-wine); margin-top: 16px; font-size: 1rem; }
+  .modality-photo { grid-column: 1; grid-row: 2; width: 100%; height: 360px; object-fit: cover; object-position: center 45%; border-radius: 4px; }
+  .modality-body { grid-column: 2; grid-row: 1 / 3; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .modality-detail-featured { border-top: 1px solid var(--color-border); padding-top: 64px; }
+  .modality-intro { font-size: 1rem; line-height: 1.75; }
+  .modality-points { border-block: 1px solid var(--color-border); }
+  .modality-points summary { cursor: pointer; font-weight: 700; min-height: 64px; padding: 18px 0; align-content: center; color: var(--brand-wine); }
+  .points-list { display: flex; flex-direction: column; gap: 16px; list-style: none; padding: 4px 0 24px; }
+  .point-item { display: flex; gap: 12px; line-height: 1.7; font-size: .95rem; }
+  .point-icon { flex: 0 0 20px; color: var(--brand-wine); padding-top: 6px; }
+  .point-content { min-width: 0; }
+  .profile-header { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-bottom: 8px; }
+  .profile-icon { color: var(--brand-wine); }
+  .modality-profile p { font-size: .95rem; line-height: 1.7; }
+  .modality-pricing-box { padding-top: 24px; border-top: 1px solid var(--color-border); }
+  .pricing-header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; }
+  .pricing-label { font-weight: 700; }
+  .pricing-badge { font-size: .8rem; color: var(--brand-wine); }
+  .pricing-text { font-size: .9rem; line-height: 1.7; margin: 12px 0 20px; }
+  .modality-pricing-box :global(.btn), .cta-buttons-wrap :global(.btn) { border-radius: 12px; white-space: normal; }
+  #proceso { background: var(--brand-cream); }
+  .timeline-container { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 40px 64px; }
+  .timeline-item { display: flex; gap: 20px; padding-top: 24px; border-top: 1px solid var(--color-primary-border); }
+  .timeline-dot { flex: 0 0 32px; font: 500 2.5rem/1 var(--font-heading); color: var(--brand-wine); }
+  .timeline-card { min-width: 0; }
+  .timeline-card-header { margin-bottom: 12px; }
+  .timeline-time-badge { color: var(--brand-wine); font-size: .85rem; }
+  .timeline-card h3 { font-size: 1.45rem; margin-bottom: 14px; }
+  .timeline-card p { font-size: .95rem; line-height: 1.75; }
+  #requisitos { background: white; }
+  .requirements-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 64px; }
+  .req-card { padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; display: flex; flex-direction: column; gap: 20px; }
+  .req-card:hover { transform: none; box-shadow: none; }
+  .req-title { font-size: 1.9rem; line-height: 1.2; }
+  .req-intro { font-size: 1rem; }
+  .req-list { list-style: none; display: flex; flex-direction: column; gap: 24px; }
+  .req-list li { display: flex; gap: 16px; }
+  .req-icon-box { color: var(--brand-wine); flex: 0 0 24px; padding-top: 3px; }
+  .req-list strong { display: block; margin-bottom: 6px; }
+  .req-list p, .safety-item p { font-size: .95rem; line-height: 1.7; }
+  .safety-item { padding-block: 20px; border-bottom: 1px solid var(--color-border); }
+  .safety-item:first-child { padding-top: 0; }
+  .safety-item h4 { margin-bottom: 8px; font: 700 1rem/1.4 var(--font-sans); }
+  .req-card-footer { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--color-border); }
+  .req-footer-highlight { display: flex; gap: 10px; font-size: .85rem; color: var(--brand-wine); }
+  .req-footer-highlight svg { flex-shrink: 0; margin-top: 4px; }
+  #faq { background: var(--color-bg-alt); }
+  .faq-extra-help { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-top: 32px; }
+  .final-cta-section { background: var(--brand-cream); }
+  .final-cta-card { padding: 0; }
+  .cta-inner-content { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 64px; align-items: start; }
+  .final-cta-title { grid-row: 1 / 3; font-size: clamp(2.8rem,4.5vw,4rem); line-height: 1.05; color: var(--brand-wine); }
+  .final-cta-desc { font-size: 1rem; line-height: 1.75; }
+  .cta-buttons-wrap { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .cta-buttons-wrap > a { padding-inline: 0; background: none; border: 0; box-shadow: none; text-decoration: underline; text-underline-offset: 5px; font-size: .9rem; }
+  @media (min-width: 700px) and (max-width: 1000px) {
+    .page-hero-container, .modality-detail-card, .requirements-grid, .cta-inner-content { gap: 24px 32px; }
+    .page-hero-title { font-size: 3.8rem; }
+    .page-hero-img { height: 540px; border-top-left-radius: 80px; }
+    .hero-photo-note { left: -16px; font-size: 1.4rem; padding: 20px; }
+    .timeline-container { gap: 32px; }
+  }
+  @media (max-width: 699px) {
+    .page-hero { padding: 28px 0 40px; }
+    .page-hero-container { grid-template-columns: minmax(0,1fr); gap: 0; }
+    .page-hero-text { display: contents; }
+    .page-hero-title { grid-row: 1; font-size: clamp(3.3rem,14vw,5.2rem); margin-bottom: 28px; }
+    .text-highlight { font-size: .95rem; margin-top: 18px; }
+    .page-hero-media { grid-row: 2; margin-left: 36px; padding-bottom: 16px; }
+    .page-hero-img { height: clamp(280px,80vw,420px); border-top-left-radius: 80px; }
+    .hero-photo-note { left: -36px; bottom: 0; padding: 16px; font-size: 1.35rem; }
+    .page-hero-ctas { grid-row: 3; margin-top: 24px; flex-direction: column; align-items: stretch; gap: 4px; }
+    .page-hero-ctas > a { text-align: center; }
+    .page-hero-text .lead { grid-row: 4; margin-top: 16px; font-size: .95rem; }
+    .section-header { margin-bottom: 32px; }
+    .section-header p { font-size: 1rem; }
+    .modalities-grid { gap: 40px; }
+    .modality-detail-card { grid-template-columns: minmax(0,1fr); gap: 24px; }
+    .modality-header { grid-column: 1; grid-row: 1; }
+    .modality-photo { grid-column: 1; grid-row: 2; height: 300px; }
+    .modality-body { grid-column: 1; grid-row: 3; gap: 20px; }
+    .modality-detail-featured { padding-top: 40px; }
+    .modality-pricing-box :global(.btn) { width: 100%; }
+    .timeline-container, .requirements-grid, .cta-inner-content { grid-template-columns: minmax(0,1fr); gap: 32px; }
+    .timeline-dot { font-size: 2rem; flex-basis: 24px; }
+    .timeline-item { gap: 16px; }
+    .requirements-grid { gap: 48px; }
+    .final-cta-title { grid-row: auto; }
+    .cta-buttons-wrap { flex-direction: column; align-items: stretch; }
   }
 </style>
