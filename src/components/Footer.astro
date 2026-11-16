@@ -121,6 +121,16 @@ import WhatsAppButton from './WhatsAppButton.astro';
         <a href="/terminos-del-servicio/">Términos del Servicio</a>
       </div>
     </div>
+    <div class="footer-credit">
+      <span>Hecho por</span>{' '}
+      <a
+        href="https://brilinr.dpdns.org/servicios/landing-page/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-credit-link"
+        aria-label="Brilint (se abre en una pestaña nueva)"
+      >Brilint</a>
+    </div>
   </div>
 </footer>
 
@@ -379,6 +389,41 @@ import WhatsAppButton from './WhatsAppButton.astro';
     color: #C9BEB1;
   }
 
+  .footer-credit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.25em;
+    margin-top: 16px;
+    /* Keep the signature clear of the existing floating WhatsApp CTA. */
+    margin-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    color: #A5A8B1;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  .footer-credit-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: #D4FF24;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .footer-credit-link:hover,
+  .footer-credit-link:focus {
+    color: #D4FF24;
+    text-decoration: underline;
+  }
+
+  .footer-credit-link:focus-visible {
+    outline: 2px solid #D4FF24;
+    outline-offset: 3px;
+  }
+
   @media (max-width: 992px) {
     .footer-grid {
       grid-template-columns: 1fr 1fr;
@@ -394,6 +439,9 @@ import WhatsAppButton from './WhatsAppButton.astro';
     .footer-bottom {
       flex-direction: column;
       text-align: center;
+    }
+    .footer-credit {
+      justify-content: center;
     }
   }
 </style>

@@ -1,8 +1,10 @@
 """Check the built site's internal navigation, assets and accessibility references."""
 from collections import Counter
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
+import re
 import unittest
 
 DIST = Path(__file__).resolve().parents[1] / 'dist'
@@ -26,6 +28,21 @@ class ProductionChecks(unittest.TestCase):
     def setUpClass(cls):
         cls.pages = {p: Document(p) for p in DIST.rglob('*.html')}
         assert cls.pages, 'Run npm run build first'
+
+    def test_footer_author_credit(self):
+        for path, page in self.pages.items():
+            with self.subTest(page=path.relative_to(DIST)):
+                credits = re.findall(r'<div\b[^>]*\bclass="footer-credit"[^>]*>(.*?)</div>', path.read_text(), re.S)
+                self.assertEqual(len(credits), 1, 'Expected one footer author credit')
+                self.assertEqual(' '.join(unescape(re.sub(r'<[^>]+>', '', credits[0])).split()), 'Hecho por Brilint')
+                links = [attrs for tag, attrs in page.nodes if tag == 'a' and attrs.get('class') == 'footer-credit-link']
+                self.assertEqual(len(links), 1)
+                self.assertEqual(links[0].get('href'), 'https://brilinr.dpdns.org/servicios/landing-page/')
+                self.assertEqual(links[0].get('target'), '_blank')
+                self.assertEqual(set(links[0].get('rel', '').split()), {'noopener', 'noreferrer'})
+                self.assertEqual(links[0].get('aria-label'), 'Brilint (se abre en una pestaña nueva)')
+                link_text = re.findall(r'<a\b[^>]*>(.*?)</a>', credits[0], re.S)
+                self.assertEqual([text.strip() for text in link_text], ['Brilint'])
 
     def test_unique_ids_and_aria_targets(self):
         for path, page in self.pages.items():
