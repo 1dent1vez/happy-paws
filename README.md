@@ -1,76 +1,108 @@
-# Happy Paws — Website V1
+# Happy Paws
 
-Sitio web oficial de **Happy Paws**, marca local de paseos caninos prémium en comunidades residenciales. Diseñado para generar confianza en papás perrunos y convertir visitas en conversaciones directas a través de WhatsApp.
+Sitio web para un servicio local de paseos caninos en Foresta Dream Lagoons, Metepec, desarrollado como **proyecto freelance remunerado para un cliente real**.
 
----
+El proyecto presenta las modalidades de paseo, el proceso de atención y los cuidados del servicio en una experiencia responsive, con consultas directas por WhatsApp. Forma parte de mi portafolio de diseño y desarrollo web.
 
-## 🌟 Características
+## Vista previa móvil
 
-- **Rutas públicas:**
-  - `/`: Landing principal de Happy Paws (propuesta de valor, modalidades, beneficios, proceso en 4 pasos, pilares de confianza y reporte post-paseo ilustrado).
-  - `/paseos`: Landing especializada (comparativa individual vs. grupal, protocolo paso a paso, información y requisitos previos, seguridad climática y preguntas frecuentes).
-- **Canal de conversión:** Enlaces a WhatsApp centralizados en `src/config/site.ts` con número internacional y mensajes prellenados contextuales.
-- **Identidad visual:** Naranja cálido (`#EE5D1A`), fondos crema (`#FAF7F2`), texto carbón (`#1C1917`), fotografías reales y tipografía moderna (`Plus Jakarta Sans`).
-- **SEO & Rendimiento:** Generación estática con Astro 7, metadatos Open Graph, Twitter Cards, Schema.org `LocalBusiness` y `@astrojs/sitemap`.
+<table>
+  <tr>
+    <th>Inicio</th>
+    <th>Explorador de paseos</th>
+    <th>Detalles del servicio</th>
+  </tr>
+  <tr>
+    <td><a href="docs/screenshots/mobile-inicio.png"><img src="docs/screenshots/mobile-inicio.png" width="250" alt="Vista móvil de la portada de Happy Paws con fotografía de un perro y contacto por WhatsApp"></a></td>
+    <td><a href="docs/screenshots/mobile-explorador.png"><img src="docs/screenshots/mobile-explorador.png" width="250" alt="Vista móvil del explorador de paseos individuales y grupales con sus momentos antes, durante y después"></a></td>
+    <td><a href="docs/screenshots/mobile-paseos.png"><img src="docs/screenshots/mobile-paseos.png" width="250" alt="Vista móvil de la página de paseos con duración del servicio y consulta de disponibilidad"></a></td>
+  </tr>
+</table>
 
----
+Capturas reales del sitio a 390 px de ancho. Haz clic en cada imagen para verla en detalle.
 
-## 🚀 Comandos de Desarrollo y Operación
+## Vista previa desktop
 
-Todos los comandos se ejecutan desde la raíz del proyecto:
+### Inicio
 
-```bash
-# Instalar dependencias
-npm install
+[![Vista de escritorio de la portada de Happy Paws con diseño editorial, fotografía y contacto por WhatsApp](docs/screenshots/desktop-inicio.png)](docs/screenshots/desktop-inicio.png)
 
-# Iniciar servidor de desarrollo en modo background (regla de entorno)
-npx astro dev --background
+<details>
+  <summary>Ver detalles del servicio en desktop</summary>
 
-# Consultar estado del servidor en background
-npx astro dev status
+[![Vista de escritorio de la página de paseos de Happy Paws con presentación del servicio en Foresta Dream Lagoons](docs/screenshots/desktop-paseos.png)](docs/screenshots/desktop-paseos.png)
 
-# Ver logs del servidor
-npx astro dev logs
+</details>
 
-# Detener el servidor
-npx astro dev stop
+Capturas reales del sitio a 1440 px de ancho. Haz clic en cada imagen para verla en detalle.
 
-# Validar tipos TypeScript y componentes Astro
+## Funcionalidades
+
+- Página principal y página de servicio con paseos individuales y grupales.
+- Diseño editorial responsive con fotografías e imágenes optimizadas.
+- Explorador interactivo de modalidades y momentos del paseo: antes, durante y después.
+- Contacto directo por WhatsApp con mensajes prellenados según la consulta.
+- Selector de modalidad, fecha y hora tentativas para preparar la consulta; la reserva se confirma por WhatsApp.
+- Preguntas frecuentes, ejemplo ilustrativo del reporte post-paseo y páginas legales.
+- SEO local con metadatos sociales, datos estructurados y sitemap.
+- Tipografías alojadas localmente y navegación accesible.
+
+## Tecnologías
+
+- **Astro 7** para la generación del sitio estático y la optimización de imágenes.
+- **TypeScript**, JavaScript, HTML y CSS para la implementación.
+- **Fraunces y Manrope** alojadas localmente para la tipografía. Consulta la [guía de identidad visual](docs/identidad-visual.md) para la paleta, los tokens y las licencias.
+- **@astrojs/sitemap** para la generación del mapa del sitio.
+- **Python unittest y Node.js Test Runner** para las pruebas automatizadas.
+
+## Desarrollo local
+
+Requiere **Node.js 22.12 o posterior** y **Python 3** para las pruebas de producción y SEO.
+
+```sh
+npm ci
+cp .env.example .env
+```
+
+Configura el número real de WhatsApp en `.env` antes de iniciar el sitio; el número de ejemplo no permite arrancar ni compilar.
+
+```sh
+npm run dev -- --background
+```
+
+Para gestionar el servidor en segundo plano: `npx astro dev status`, `npx astro dev logs` y `npx astro dev stop`.
+
+## Verificación y compilación
+
+```sh
 npx astro check
-
-# Compilar para producción (carpeta dist/)
 npm run build
-
-# Previsualizar el bundle de producción
+npm run test:production
+npm run test:seo
 npm run preview
 ```
 
----
+Las pruebas revisan la navegación interna, los recursos, las referencias de accesibilidad, los enlaces de WhatsApp, las selecciones de fecha y hora y el SEO del sitio compilado. La compilación genera el sitio estático en `dist/`.
 
-## ⚙️ Configuración de WhatsApp y Variables de Entorno
+## Configuración
 
-El archivo `.env.example` incluye las variables necesarias:
+- `PUBLIC_WHATSAPP_PHONE`: número de contacto obligatorio, en formato internacional y solo dígitos. El sitio rechaza la ausencia de esta variable y el valor de ejemplo.
+- `PUBLIC_WHATSAPP_PHONE_DISPLAY`: texto opcional para mostrar el número de contacto.
+- `src/config/site.ts`: información del negocio, cobertura, horarios y mensajes de WhatsApp.
+- `astro.config.mjs` y `src/config/site.ts`: dominio del sitio; mantén ambos valores alineados al cambiarlo.
 
-```env
-PUBLIC_WHATSAPP_PHONE=525500000000
-PUBLIC_WHATSAPP_PHONE_DISPLAY=+52 55 0000 0000
+## Estructura
+
+```text
+src/
+  assets/       Fotografías optimizadas por Astro
+  components/   Componentes reutilizables e interacciones
+  config/       Datos del negocio, preguntas frecuentes y confianza
+  layouts/      Plantilla base y metadatos
+  lib/          Utilidades de seguimiento de eventos
+  pages/        Inicio, paseos, páginas legales y página 404
+  styles/       Tokens de diseño y estilos compartidos
+public/         Imágenes, fuentes, licencias y archivos estáticos
+scripts/        Pruebas de producción, agenda y SEO
+docs/           Guía de identidad visual y capturas del sitio
 ```
-
-1. Para configurar tu número real de producción, copia `.env.example` a `.env`:
-   ```bash
-   cp .env.example .env
-   ```
-2. Asigna tu número internacional (solo dígitos) en `PUBLIC_WHATSAPP_PHONE`.
-3. Al compilar o reiniciar, el banner de modo demostración se ocultará automáticamente y todos los botones redirigirán a tu línea oficial.
-
----
-
-## 📁 Estructura del Código
-
-- `src/config/site.ts`: Parámetros de marca, zonas de cobertura, horarios y mensajes de WhatsApp.
-- `src/styles/global.css`: Tokens de diseño CSS, reset y componentes utilitarios.
-- `src/components/`: Componentes reutilizables (Header, Footer, WhatsAppButton, ServiceCard, TrustSection, PostWalkReport, FAQAccordion).
-- `src/layouts/BaseLayout.astro`: Layout base accesible con SEO y meta tags.
-- `src/pages/index.astro`: Landing principal.
-- `src/pages/paseos.astro`: Landing de servicio y comparativa de paseos.
-- `public/images/`: Fotografías locales de paseos y cuidados caninos.
