@@ -57,7 +57,7 @@ Capturas reales del sitio a 1440 px de ancho. Haz clic en cada imagen para verla
 
 ## Desarrollo local
 
-Requiere **Node.js 22.12 o posterior** y **Python 3** para las pruebas de producción y SEO.
+Requiere **Node.js 22.23.4 o posterior** y **Python 3** para las pruebas de producción y SEO.
 
 ```sh
 npm ci
