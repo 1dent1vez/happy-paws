@@ -51,7 +51,7 @@ Capturas reales del sitio a 1440 px de ancho. Haz clic en cada imagen para verla
 
 - **Astro 7** para la generación del sitio estático y la optimización de imágenes.
 - **TypeScript**, JavaScript, HTML y CSS para la implementación.
-- **Fraunces y Manrope** alojadas localmente para la tipografía. Consulta la [guía de identidad visual](docs/identidad-visual.md) para la paleta, los tokens y las licencias.
+- **Fraunces y Manrope** alojadas localmente para la tipografía, con licencias [SIL OFL de Fraunces](public/fonts/fraunces-OFL.txt) y [Manrope](public/fonts/manrope-OFL.txt).
 - **@astrojs/sitemap** para la generación del mapa del sitio.
 - **Python unittest y Node.js Test Runner** para las pruebas automatizadas.
 
@@ -104,5 +104,5 @@ src/
   styles/       Tokens de diseño y estilos compartidos
 public/         Imágenes, fuentes, licencias y archivos estáticos
 scripts/        Pruebas de producción, agenda y SEO
-docs/           Guía de identidad visual y capturas del sitio
+docs/screenshots/  Capturas del sitio para el README
 ```

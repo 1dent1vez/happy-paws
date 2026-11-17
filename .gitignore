@@ -25,6 +25,7 @@ pnpm-debug.log*
 .idea/
 .vercel
 .env*
+!.env.example
 
 # Impeccable binary downloads
 **/scripts/bin/**
@@ -38,3 +39,18 @@ pnpm-debug.log*
 .hermes/
 .kiro/
 .opencode/
+
+# Local agent tooling and editor settings
+/.agents/
+/.vscode/
+/AGENTS.md
+/CLAUDE.md
+
+# Internal design notes, audits and historical previews
+/AUDITORIA-PRODUCCION.md
+/docs/*
+!/docs/screenshots/
+/scripts/audit-crawl.py
+/scripts/fetch-brand-fonts.py
+/scripts/fetch-fonts.py
+/scripts/make-og-cover.py
